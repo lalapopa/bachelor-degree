@@ -1,0 +1,254 @@
+\documentclass[bachelor,subf,14pt, substylefile = spbu.rtx]{disser}
+\usepackage{pdfpages}
+
+\usepackage{hyperref}
+\usepackage[
+a4paper, mag=1000, includefoot,
+left=1cm, right=1cm, top=2cm, bottom=2cm, headsep=1cm, footskip=1cm
+]{geometry}
+
+% Русский пакет
+\usepackage[warn]{mathtext}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{multirow} % Таблицы
+\usepackage{upgreek } % upgamma 
+\usepackage{longtable}
+\usepackage{amsmath} %% \text 
+\usepackage{nameref} % Ссылка с именем
+\usepackage{rotating} % разворот изображений 
+\usepackage{colortbl} % цвет ячейки в таблицах
+
+\renewcommand{\thechapterfont}{\normalsize\bfseries} % Номер главы полужирным
+\renewcommand{\prethechapter}{} % Убираем слово "глава"
+\renewcommand{\chapteralign}{\raggedright}
+\renewcommand{\postthechapter}{.~} % ставим точку и пробел после номер
+
+\renewcommand{\appendixfont}{\normalsize\bfseries}
+\renewcommand{\chapterfont}{\normalsize\bfseries}
+\renewcommand{\sectionfont}{\normalsize\bfseries}
+\renewcommand{\subsectionfont}{\normalsize\bfseries}
+\renewcommand{\subsubsectionfont}{\normalsize\bfseries}
+\renewcommand{\tocprethechapter}{} % в оглавлении убираем слово "Глава"
+\usepackage{blindtext} 
+
+\setcounter{tocdepth}{4} % Глубина tableofcontent
+\setcounter{secnumdepth}{4} % Глубина tableofcontent
+\pagestyle{footcenter}
+\chapterpagestyle{footcenter} % Расположение номеров страниц снизу
+\usepackage{lastpage} % Найти последнию страницу 
+\usepackage{float} % [H]
+% Расчет количества рисунков и таблиц
+\usepackage{xassoccnt}
+\NewTotalDocumentCounter{totalfigures}
+\NewTotalDocumentCounter{totaltables}
+\DeclareAssociatedCounters{figure}{totalfigures}
+\DeclareAssociatedCounters{table}{totaltables}
+
+% Рисуники и таблица
+\usepackage[tableposition=top]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~---~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+% title
+\newcommand*{\titleASU}{\begingroup
+
+\begin{center}
+\large Федеральное агентство по образованию\\
+МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ\\
+(Национальный исследовательский университет)\\
+
+\noindent\rule{\textwidth}{0.4pt}\\
+Кафедра 106
+
+\vspace{5cm}
+
+\large{КУРСОВАЯ РАБОТА}\\
+\normalsize{по дисциплине «Динамика полета»}\\
+\normalsize{Тема: <<>>}
+
+\vspace{2.8cm}
+\end{center}
+
+\begin{flushright}
+\normalsize Выполнил Москвитин Андрей\\
+Студент гр. М1О-403Б-18\\
+\end{flushright}
+\begin{center}
+
+\vfill
+
+Москва\\
+2022\\
+
+\end{center}
+\pagestyle{empty}
+\newpage
+\endgroup}
+
+
+\usepackage{graphicx,import} % PGF_tex import
+\usepackage{pgfplots} % pgf plot from python 
+
+
+\begin{document}
+%\titleASU
+\section{Исходные данные для самолета Ил-76}
+При интегрировании по формулам (\ref{eq:L_T_integral}) $m_{к}=122364 \, кг$, $m_{н}=210000 \, кг$.
+
+\section{Исследование характеристик транспортного самолета при выполнении эшелонирования}
+\subsection{Постановка задачи}
+В работе исследуется задача минимизации километрового расхода топлива в крейсерском полете путем оптимизации вертикальной трактории и скоростного режима.  
+
+\subsection{Расчетные формулы} 
+\begin{equation}
+\label{eq:L_T_integral}
+q_{ч}=P Ce, \: q_{км}=\frac{q_{ч}}{3.6 V}, \: L_{кс}= \int_{m_к}^{m_н} \frac{dm}{q_{км}},\: T_{кс}= \int_{m_к}^{m_н} \frac{dm}{q_{ч}},
+\end{equation}
+
+\begin{equation}
+\label{eq:P_potr}
+P_п = \frac{mg}{K} 
+\end{equation}
+
+\[
+P_р(M, H, \bar{R})=\frac{mg}{K} 
+\]
+\[
+P_р(M, H, \bar{ R }) = C_{xa} \frac{\rho a_{зв}^2}{2}M^2 S   
+\]
+
+\[ 
+q_ч = Ce \frac{mg}{K}, \: q_{км} = \frac{mg Ce}{3.6KV}, \: L_{кс}= \frac{3.6}{g}\int_{m_к}^{m_н} \frac{KV}{Ce m}
+\, dm, \: T_{кс}= \frac{1}{g} \int_{m_к}^{m_н} \frac{K}{Ce m}\, dm
+\]
+$C_{ya}, C_{xa}$ из курсовой работы №1 по динамике полета.
+
+\subsection{Задачи}
+По мере уменьшения массы из-за выгорания топлива в крейсерском полете будет уменьшаться $P_п$ из формулы (\ref{eq:P_potr}), что ведет к уменьшению расхода топлива.  
+Провдем такие количественные анализы:  
+\begin{enumerate}
+    \item Влияние массы на изменение экономической скорости.  
+    \item Оптимальную траекторию с учетом выгорания топлива.
+    \item Найти моменты смены эшелона для перехода на экономиечески выгодный эшелон. 
+    \item Разница в расходах топлива при полете на постоянной высоте и со сменой высоты.
+\end{enumerate}
+
+\subsection{Результаты}
+Результаты расчетов по нахождению $q_{{km}_{min}}$ минимального километрового расхода топлива сведены в таблицу \ref{t:1}
+\begin{enumerate}
+\item Исходя из расчетов по мере уменьшения массы скорость уменьшается, а высота для поддержания $q_{{km}_{min}}$ увеличивается.
+\item Оптимальная траектория набора представлена на рисунке \ref{fig:fig1}.
+\item Моменты смены эшелона выбрали, если между оптимальной и текущей траекторией разница в расходах топлива будет больше 1.5\%, так получилась псевдо оптимальная траектория полета рисунки \ref{fig:fig2}, \ref{fig:fig4}.
+\item Разницы в максимальной дальности полета, которые зависят от километрового расход топлива представлены на таблице \ref{tab:tab:opt_vs_const_h} 
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Режим & $L, км$ & $T$ & $q_{km_{ср}}, \, \frac{кг}{км}$\\
+\hline
+Полет по оптимальной траектории рис. \ref{fig:fig1}& 4738 & 6 ч. 12 мин. & 18.4617\\
+\hline
+Полет по псевдо оптимальной траектории рис.\ref{fig:fig2}& 4712 & 6 ч. 23 мин. & 18.5261\\
+\hline
+Полет на $H=7500\,м$ & 4648 & 6 ч. 35 мин.& 18.6890\\
+\hline
+Полет на $H=11000\,м$ & 4453 & 5 ч. 43 мин. & 19.5844\\
+\hline
+\end{tabular}
+\caption{Результаты расчетов}
+\label{tab:tab:opt_vs_const_h}
+\end{table}
+
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig1.pgf}}
+\caption{Оптимальная траектория набора}
+\label{fig:fig1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig3.pgf}}
+\caption{Оптимальное изменение скорости}
+\label{fig:fig3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig2.pgf}}
+\caption{Псевдо оптимальная траектория набора}
+\label{fig:fig2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig4.pgf}}
+\caption{Псевдо оптимальное изменение скорости}
+\label{fig:fig4}
+\end{figure}
+
+\begin{table}
+\centering
+\resizebox{\textwidth-1cm}{!}{
+\begin{tabular}{|l|l|llllllllll|}
+\hline
+\multicolumn{2}{|c|}{$m$, тонн}& \multicolumn{10}{c|}{$H$, м}\\
+\cline{3-12}
+\multicolumn{2}{|c|}{}&7000 &                     7500 &                     8000 &                     8500 &                     9000 &                     9500 &                    10000 &                    10500 &   11000 &   11500 \\
+\hline
+125 & $M$ &  0.550  &                   0.570  &                   0.592  &                   0.600  &                   0.613  &                   0.643  &                   0.667  &  0.697 \cellcolor{green} &  0.700  &  0.700  \\
+& $q_{km}$ &  15.55  &                   15.27  &                   15.00  &                   14.79  &                   14.67  &                   14.58  &                   14.52  &  14.45 \cellcolor{green} &  14.46  &  14.55  \\
+& $V$ &    172  &                     177  &                     182  &                     184  &                     186  &                     194  &                     200  &    207 \cellcolor{green} &    207  &    207  \\
+\hline
+130 & $M$ &  0.560  &                   0.582  &                   0.600  &                   0.600  &                   0.629  &                   0.652  &                   0.684  &  0.700 \cellcolor{green} &  0.700  &  0.707  \\
+& $q_{km}$ &  15.99  &                   15.71  &                   15.44  &                   15.27  &                   15.17  &                   15.09  &                   15.04  &  14.99 \cellcolor{green} &  15.06  &  15.22  \\
+& $V$ &    175  &                     181  &                     185  &                     184  &                     191  &                     197  &                     205  &    208 \cellcolor{green} &    207  &    209  \\
+\hline
+140 & $M$ &  0.583  &                   0.600  &                   0.601  &                   0.630  &                   0.652  &                   0.683  &  0.700 \cellcolor{green} &                   0.700  &  0.706  &  0.744  \\
+& $q_{km}$ &  16.87  &                   16.58  &                   16.38  &                   16.26  &                   16.17  &                   16.12  &  16.10 \cellcolor{green} &                   16.16  &  16.37  &  16.60  \\
+& $V$ &    182  &                     186  &                     185  &                     193  &                     198  &                     206  &    210 \cellcolor{green} &                     208  &    208  &    220  \\
+\hline
+150 & $M$ &  0.600  &                   0.600  &                   0.630  &                   0.650  &                   0.681  &  0.700 \cellcolor{green} &                   0.700  &                   0.702  &  0.740  &  0.750  \\
+& $q_{km}$ &  17.74  &                   17.52  &                   17.36  &                   17.26  &                   17.20  &  17.17 \cellcolor{green} &                   17.25  &                   17.45  &  17.74  &  18.05  \\
+& $V$ &    187  &                     186  &                     194  &                     199  &                     207  &    211 \cellcolor{green} &                     210  &                     209  &    218  &    221  \\
+\hline
+160 & $M$ &  0.600  &                   0.626  &                   0.650  &                   0.677  &  0.700 \cellcolor{green} &                   0.700  &                   0.700  &                   0.735  &  0.750  &  0.750  \\
+& $q_{km}$ &  18.67  &                   18.50  &                   18.35  &                   18.28  &  18.24 \cellcolor{green} &                   18.30  &                   18.52  &                   18.81  &  19.17  &  19.63  \\
+& $V$ &    187  &                     194  &                     200  &                     207  &    213 \cellcolor{green} &                     211  &                     210  &                     219  &    221  &    221  \\
+\hline
+170 & $M$ &  0.622  &                   0.650  &                   0.672  &  0.700 \cellcolor{green} &                   0.700  &                   0.700  &                   0.728  &                   0.750  &  0.750  &  0.750  \\
+& $q_{km}$ &  19.66  &                   19.49  &                   19.36  &  19.31 \cellcolor{green} &                   19.35  &                   19.54  &                   19.86  &                   20.21  &  20.72  &  21.35  \\
+& $V$ &    194  &                     202  &                     207  &    214 \cellcolor{green} &                     213  &                     211  &                     218  &                     223  &    221  &    221  \\
+\hline
+180 & $M$ &  0.646  &                   0.664  &  0.696 \cellcolor{green} &                   0.700  &                   0.700  &                   0.719  &                   0.750  &                   0.750  &  0.750  &  0.750  \\
+& $q_{km}$ &  20.64  &                   20.50  &  20.39 \cellcolor{green} &                   20.39  &                   20.55  &                   20.86  &                   21.24  &                   21.71  &  22.38  &  23.20  \\
+& $V$ &    202  &                     206  &    214 \cellcolor{green} &                     214  &                     213  &                     217  &                     225  &                     223  &    221  &    221  \\
+\hline
+190 & $M$ &  0.655  &                   0.687  &  0.700 \cellcolor{green} &                   0.700  &                   0.710  &                   0.746  &                   0.750  &                   0.750  &  0.750  &  0.750  \\
+& $q_{km}$ &  21.64  &                   21.53  &  21.44 \cellcolor{green} &                   21.56  &                   21.85  &                   22.21  &                   22.69  &                   23.32  &  24.18  &  25.18  \\
+& $V$ &    205  &                     213  &    216 \cellcolor{green} &                     214  &                     216  &                     225  &                     225  &                     223  &    221  &    221  \\
+\hline
+200 & $M$ &  0.677  &  0.700 \cellcolor{green} &                   0.700  &                   0.700  &                   0.735  &                   0.750  &                   0.750  &                   0.750  &  0.750  &     NaN \\
+& $q_{km}$ &  22.67  &  22.56 \cellcolor{green} &                   22.58  &                   22.82  &                   23.18  &                   23.62  &                   24.25  &                   25.05  &  26.09  &     NaN \\
+& $V$ &    211  &    217 \cellcolor{green} &                     216  &                     214  &                     223  &                     226  &                     225  &                     223  &    221  &     NaN \\
+\hline
+\end{tabular}
+}
+\caption{$q_{km}\, [\frac{кг}{км}], V \, [\frac{м}{с}] $}
+\label{t:1}
+
+\end{table}
+
+
+
+\end{document}
