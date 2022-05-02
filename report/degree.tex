@@ -1,108 +1,15 @@
 \documentclass[bachelor,subf,14pt, substylefile = spbu.rtx]{disser}
-\usepackage{pdfpages}
 
-\usepackage{hyperref}
-\usepackage[
-a4paper, mag=1000, includefoot,
-left=1cm, right=1cm, top=2cm, bottom=2cm, headsep=1cm, footskip=1cm
-]{geometry}
-
-% Русский пакет
-\usepackage[warn]{mathtext}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
-
-\usepackage{multirow} % Таблицы
-\usepackage{upgreek } % upgamma 
-\usepackage{longtable}
-\usepackage{amsmath} %% \text 
-\usepackage{nameref} % Ссылка с именем
-\usepackage{rotating} % разворот изображений 
-\usepackage{colortbl} % цвет ячейки в таблицах
-
-\renewcommand{\thechapterfont}{\normalsize\bfseries} % Номер главы полужирным
-\renewcommand{\prethechapter}{} % Убираем слово "глава"
-\renewcommand{\chapteralign}{\raggedright}
-\renewcommand{\postthechapter}{.~} % ставим точку и пробел после номер
-
-\renewcommand{\appendixfont}{\normalsize\bfseries}
-\renewcommand{\chapterfont}{\normalsize\bfseries}
-\renewcommand{\sectionfont}{\normalsize\bfseries}
-\renewcommand{\subsectionfont}{\normalsize\bfseries}
-\renewcommand{\subsubsectionfont}{\normalsize\bfseries}
-\renewcommand{\tocprethechapter}{} % в оглавлении убираем слово "Глава"
-\usepackage{blindtext} 
-
-\setcounter{tocdepth}{4} % Глубина tableofcontent
-\setcounter{secnumdepth}{4} % Глубина tableofcontent
-\pagestyle{footcenter}
-\chapterpagestyle{footcenter} % Расположение номеров страниц снизу
-\usepackage{lastpage} % Найти последнию страницу 
-\usepackage{float} % [H]
-% Расчет количества рисунков и таблиц
-\usepackage{xassoccnt}
-\NewTotalDocumentCounter{totalfigures}
-\NewTotalDocumentCounter{totaltables}
-\DeclareAssociatedCounters{figure}{totalfigures}
-\DeclareAssociatedCounters{table}{totaltables}
-
-% Рисуники и таблица
-\usepackage[tableposition=top]{caption}
-\usepackage{subcaption}
-\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
-\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
-\DeclareCaptionLabelSeparator{gost}{~---~}
-\captionsetup{labelsep=gost}
-\captionsetup[figure]{labelformat=gostfigure}
-\captionsetup[table]{labelformat=gosttable}
-\renewcommand{\thesubfigure}{\asbuk{subfigure}}
-
-% title
-\newcommand*{\titleASU}{\begingroup
-
-\begin{center}
-\large Федеральное агентство по образованию\\
-МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ\\
-(Национальный исследовательский университет)\\
-
-\noindent\rule{\textwidth}{0.4pt}\\
-Кафедра 106
-
-\vspace{5cm}
-
-\large{КУРСОВАЯ РАБОТА}\\
-\normalsize{по дисциплине «Динамика полета»}\\
-\normalsize{Тема: <<>>}
-
-\vspace{2.8cm}
-\end{center}
-
-\begin{flushright}
-\normalsize Выполнил Москвитин Андрей\\
-Студент гр. М1О-403Б-18\\
-\end{flushright}
-\begin{center}
-
-\vfill
-
-Москва\\
-2022\\
-
-\end{center}
-\pagestyle{empty}
-\newpage
-\endgroup}
-
-
-\usepackage{graphicx,import} % PGF_tex import
-\usepackage{pgfplots} % pgf plot from python 
+\input{preamble.tex}
+\input{gost_style.tex}
+\input{title.tex}
 
 
 \begin{document}
 %\titleASU
 \section{Исходные данные для самолета Ил-76}
-При интегрировании по формулам (\ref{eq:L_T_integral}) $m_{к}=122364 \, кг$, $m_{н}=210000 \, кг$.
+$m_{пуст} = 86000\ \text{кг}$, $m_{топл}= 60000\ \text{кг}$, $m_{поле}=20000\ \text{кг}$.
+При интегрировании по формулам (\ref{eq:L_T_integral}) $m_{к}=116000\, кг$, $m_{н}=166000\, кг$.
 
 \section{Исследование характеристик транспортного самолета при выполнении эшелонирования}
 \subsection{Постановка задачи}

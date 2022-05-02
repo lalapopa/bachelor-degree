@@ -2,7 +2,6 @@ import numpy as np
 from lerp import linear1d
 from DataHandler import DataHandler as dh
 
-
 class AerodynamicsData:
     def __init__(self):
         self.df = dh("ad_data.csv")

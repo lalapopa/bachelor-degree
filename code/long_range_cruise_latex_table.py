@@ -64,7 +64,6 @@ def parse_json_and_return_latex_table(file_name):
 
 json_name = "output.json"
 output_latex_name = "table.tex"
-
 create_json_with_opt_fly_params(json_name)
 
 with open(output_latex_name, "w") as f:

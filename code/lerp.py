@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def linear1d(x, y, x_int):
     if isinstance(x, np.ndarray):
         pass

@@ -1,5 +1,5 @@
-# TODO:
-# calculate climb
+# TODO: combing flight level flight and climb
+# also analyze txt files
 import os
 import scipy.integrate as integrate
 import numpy as np
@@ -7,13 +7,15 @@ import matplotlib.pyplot as plt
 from ambiance import Atmosphere
 from matplotlib import rc
 from datetime import datetime
+import multiprocessing
+import concurrent.futures
+from functools import partial
 
 from lerp import linear1d
 from DataHandler import DataHandler as dh
 from plane_data import PlaneData
 from aerodynamics_data import AerodynamicsData
 from formulas import Formulas as eq
-
 
 class Calculation:
     def __init__(self, mass, plane_char, H):
@@ -62,14 +64,13 @@ class Calculation:
             Ce_dr = self.ad.Ce_dr_value(tilda_R)
             Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
             q_chas = eq.q_ch_hour_consumption(Ce, self.P_potr)
+            self.q_km = eq.q_km_range_consumption(q_chas, self.V_calc)
 
-            q_km = eq.q_km_range_consumption(q_chas, self.V_calc)
-
-            min_km_fuel_index = dh.get_min_or_max(q_km)
+            min_km_fuel_index = dh.get_min_or_max(self.q_km)
             mach_min_fuel = self.V_calc[min_km_fuel_index] / self.a_sos
 
             return (
-                q_km[min_km_fuel_index],
+                self.q_km[min_km_fuel_index],
                 mach_min_fuel,
                 self.V_calc[min_km_fuel_index],
             )
@@ -100,7 +101,6 @@ def L_range(mass):
     result = 1 / q_km_min[min_index]
     return result
 
-
 def to_height_mach_table(H, M, q_km, V, index):
     table = []
     for i, val in enumerate(H):
@@ -116,6 +116,44 @@ def to_height_mach_table(H, M, q_km, V, index):
         table.append(only_H)
     return table
 
+def divide_into_chunks(array):
+    cpu_number = multiprocessing.cpu_count()
+    img_size = list(array.shape)
+    divide = int(img_size[0] / cpu_number)
+    chunks = [] 
+    if img_size[0] > cpu_number:
+        for val in range(0, cpu_number):
+            right_limit = divide * (val + 1)
+            left_limit = val * divide
+            if val == cpu_number - 1:
+                right_limit = img_size[0]
+            chunks.append(array[left_limit:right_limit])
+    else:
+        chunks = [array]
+    return chunks
+
+def paralell_optimal_fly_param(H, mass):
+    chunks = divide_into_chunks(H)
+
+    init_function = partial(optimal_fly_param, mass)
+    H_opt_array = []
+    V_opt_array = []
+    M_opt_array = []
+    q_km_min_array = []
+    with concurrent.futures.ProcessPoolExecutor() as exe:
+        result = exe.map(init_function, chunks)
+        for H_opt, V_opt, M_opt, q_km_min in result:
+            H_opt_array.append(H_opt)
+            V_opt_array.append(V_opt)
+            M_opt_array.append(M_opt)
+            q_km_min_array.append(q_km_min)
+    min_q_km_index = np.unique(np.where(q_km_min_array == np.min(q_km_min_array)))[0]
+    return (
+            H_opt_array[min_q_km_index], 
+            V_opt_array[min_q_km_index], 
+            M_opt_array[min_q_km_index],
+            q_km_min_array[min_q_km_index]
+            )
 
 def optimal_fly_param(m, H, like_array=False):
     q_km_min = []
@@ -136,27 +174,28 @@ def optimal_fly_param(m, H, like_array=False):
     if like_array:
         return H_opt, V_opt, M_opt, q_km_min
 
-    mfi = dh.get_min_or_max(q_km_min)
+    if not q_km_min:
+        return (999, 999, 999, 999)
+
+    mfi = np.unique(np.where(q_km_min == np.min(q_km_min)))[0]
     return H_opt[mfi], V_opt[mfi], M_opt[mfi], q_km_min[mfi]
 
-
-def cruise_fly_sim(m0, mk):
+def cruise_fly_sim(m0, mk, L_k):
     time_tick = 1  # sec
-    now_date = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
+    now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
-    H = np.arange(5000, 13000, 300)
+    H = np.arange(6000, 12500, 10)
+#    H = np.array([7500])
     total_range = 0
     # begin with optimal height and speed
-    H_opt, V_opt, M_opt, q_km = optimal_fly_param(m0, H)
-    H_opt = 11000
+
+    H_opt, V_opt, M_opt, q_km = paralell_optimal_fly_param(H, m0)
     total_mass = m0
     total_time = 0
-    while total_mass > mk:
+    while total_mass > mk and total_range < L_k:
         # q_km [kg/km], V [m/s]
-        print(
-            f"fuel_remaning= {round(total_mass - mk)} kg, total_range = {total_range}, height = {H_opt}"
-        )
-        q_km, _, V = min_fuel_consumption(total_mass, il_76, H_opt)
+        calc = Calculation(total_mass, il_76, H_opt)
+        q_km, _, V = calc.find_min_fuel_consumption()
         S = V * time_tick
         S_km = S / 1000
         total_range += S_km
@@ -164,12 +203,14 @@ def cruise_fly_sim(m0, mk):
         total_mass -= fuel_burned
 
         output = f"{H_opt},{total_range},{V},{q_km},{total_mass}"
-        finded_H_opt, _, _, finded_q_km_opt = optimal_fly_param(total_mass, H)
-        percent_difference = ((q_km / finded_q_km_opt) - 1) * 100
-        fuel_remaning = round(total_mass - mk)
+
+        finded_H_opt, _, _, finded_q_km_opt = paralell_optimal_fly_param(H, total_mass)
+#        percent_difference = ((q_km / finded_q_km_opt) - 1) * 100
+        fuel_remaning = total_mass - mk
         write_in_file(log_name, output)
-        if percent_difference >= 1.5:
-            H_opt = H_opt
+#        if percent_difference >= 1.5:
+        H_opt = finded_H_opt
+        print( f"fuel_remaning= {fuel_remaning} kg, total_range = {total_range}, height = {H_opt}, speed = {V_opt}")
     return total_range
 
 
@@ -186,48 +227,122 @@ def delete_file(file_name):
         pass
     return True
 
+def calulate_climb(H_0, H_k, m0, plane):
+    time_stamp = 1
+    H_current = H_0
+    L = 0
+    L_array = []
+    H_array = []
+    V_array = []
+    q_array = []
+    mass_change_array = []
+
+    m_climb = m0 
+
+    while H_current < H_k:
+        print(f'Climbint to {H_k}/{H_current} m | Traveled dist {L}')
+
+        calc = Calculation(m_climb, il_76, H_current)
+        Vy_speeds = calc.find_Vy_speeds()
+        _, _, _ = calc.find_min_fuel_consumption()
+
+        theta_angle = np.degrees(Vy_speeds/calc.V_calc)
+        Vy_max = np.max(Vy_speeds)
+        V_calc = calc.V_calc
+        q_km_calc = calc.q_km
+
+        index_max_Vy = np.unique(np.where(Vy_speeds == Vy_max))[0]
+        V_climb = V_calc[index_max_Vy]
+        q_km_climb = q_km_calc[index_max_Vy]
+
+        S_v = Vy_max*time_stamp
+        S_h = V_climb*time_stamp
+        S_h_km = S_h/1000
+
+        fuel_burned = q_km_climb*S_h_km
+        m_climb -= fuel_burned
+
+        H_current += S_v 
+        L += S_h 
+
+        H_array.append(H_current)
+        L_array.append(L)
+        V_array.append(V_climb)
+        q_array.append(q_km_climb)
+        mass_change_array.append(m_climb)
+        print(f"{H_current},{L},{V_climb},{q_km_climb},{m_climb}")
+        print(f'V_y = {Vy_max}')
+
+    return L_array, H_array, V_array, q_array, mass_change_array 
+
+
 
 il_76 = PlaneData()
 m0 = il_76.MTOW
 m_k = m0 - il_76.TFL
-calc = Calculation(m0, il_76, 0)
-Vy_speeds = calc.find_Vy_speeds()
-theta_angle =np.degrees(Vy_speeds/calc.V_calc)
+L_k = 3000
 
-theta_climb = max(theta_angle)
-max_index = dh.get_index_element(theta_angle, theta_climb)
-tangent_line_function = dh.find_linear_func([0, calc.V_calc[max_index]], [0, Vy_speeds[max_index]])
-tangent_line_x_values = [0, calc.V_calc[max_index] + 20] 
-tangent_line_y_values = [tangent_line_function(value) for value in tangent_line_x_values] 
+L, H, V_array, q_km, mass_change  = calulate_climb(9000,10000 , m0, il_76)
 
-#
-fig, ax1 = plt.subplots()
 
-color = 'tab:red'
-ax1.set_xlabel('$V, \\ [м/с]$')
-ax1.set_ylabel('$V_y, \\ [м/с]$', color=color)
-ax1.plot(calc.V_calc, Vy_speeds, color=color)
-ax1.plot(calc.V_calc[max_index], Vy_speeds[max_index], 'ro')
-ax1.plot(tangent_line_x_values, tangent_line_y_values, 'g')
+plt.plot(L, V,  label='$L(H)$')
+plt.xlabel('q')
+plt.ylabel('H')
+plt.grid()
+plt.legend()
 
-ax1.tick_params(axis='y', labelcolor=color)
-ax1.set_ylim([0, max(Vy_speeds)+5])
-ax1.set_xlim([0, max(calc.V_calc)])
-
-ax1.grid(which='both')
-ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-
-color = 'tab:blue'
-ax2.set_ylabel('$\\theta, \\ [град] $', color=color)  # we already handled the x-label with ax1
-ax2.plot(calc.V_calc, theta_angle, color=color)
-ax2.tick_params(axis='y', labelcolor=color)
-ax2.set_ylim([0, max(theta_angle)+ 3])
-fig.tight_layout()  # otherwise the right y-label is slightly clipped
-plt.xticks(np.arange(0, max(calc.V_calc)+1, 50))
 plt.savefig('out1.png')
 plt.clf()
 
+
+
+
+#print(f'start mass = {m0}, end mass = {m_k}')
+#L = integrate.quad(L_range, m_k, m0)
+#L = trapezoid(L_range, m_k, m0)
+#L = cruise_fly_sim(m0, m_k, L_k)
+#print(f'Range = {L}')
+
+#calc = Calculation(m0, il_76, 10)
+#Vy_speeds = calc.find_Vy_speeds()
+##print(Vy_speeds)
+#theta_angle = np.degrees(Vy_speeds/calc.V_calc)
+#Vy_max = np.max(Vy_speeds) 
+#theta_climb = theta_angle[np.unique(np.where(Vy_speeds == Vy_max))[0]]
+
+
+#max_index = dh.get_index_element(theta_angle, theta_climb)
+#tangent_line_function = dh.find_linear_func([0, calc.V_calc[max_index]], [0, Vy_speeds[max_index]])
+#tangent_line_x_values = [0, calc.V_calc[max_index] + 20] 
+#tangent_line_y_values = [tangent_line_function(value) for value in tangent_line_x_values] 
 #
+#
+#fig, ax1 = plt.subplots()
+#color = '#5e3c99'
+#ax1.set_xlabel('$V, \\ [м/с]$')
+#ax1.set_ylabel('$V_y, \\ [м/с]$', color=color)
+#ax1.plot(calc.V_calc, Vy_speeds, color=color)
+#ax1.plot(calc.V_calc[max_index], Vy_speeds[max_index], 'ro')
+#ax1.plot(tangent_line_x_values, tangent_line_y_values, 'g')
+#
+#ax1.tick_params(axis='y', labelcolor=color)
+#ax1.set_ylim([0, max(Vy_speeds)+5])
+#ax1.set_xlim([0, max(calc.V_calc)])
+#
+#ax1.grid(which='both')
+#ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+#
+#color = '#e66101'
+#ax2.set_ylabel('$\\theta, \\ [град] $', color=color)  # we already handled the x-label with ax1
+#ax2.plot(calc.V_calc, theta_angle, color=color)
+#ax2.tick_params(axis='y', labelcolor=color)
+#ax2.set_ylim([0, max(theta_angle)+ 3])
+#fig.tight_layout()  # otherwise the right y-label is slightly clipped
+#plt.xticks(np.arange(0, max(calc.V_calc)+1, 50))
+#plt.savefig('climbing_angle.png')
+#plt.clf()
+
+
 #fig, ax1 = plt.subplots()
 #ax1.plot(calc.V_calc, Vy_speeds, color='red', label='$V_y(V)$')
 #ax2 = ax1.twinx()
@@ -238,24 +353,17 @@ plt.clf()
 #plt.ylabel('$V_y, [m/s]$')
 #plt.grid()
 #plt.legend()
-
-
-# print(f'start mass = {m0}, end mass = {m_k}')
-# L = integrate.quad(L_range, m_k, m0)
-# L = trapezoid(L_range, m_k, m0)
-# L = cruise_fly_sim(m0, m_k)
-# print(f'Range = {L}')
-
-# plt.plot(mass_array, mach_optimal, label='M_{opt}')
-# plt.xlabel('m, [kg]')
-# plt.ylabel('MACH')
-# plt.grid()
-# plt.legend()
-# plt.savefig('out1.png')
-# plt.clf()
 #
-# plt.plot(mass_array, H_optimal, label='H_{opt}')
-# plt.xlabel('m, [kg]')
+#plt.plot(mass_array, mach_optimal, label='M_{opt}')
+#plt.xlabel('m, [kg]')
+#plt.ylabel('MACH')
+#plt.grid()
+#plt.legend()
+#plt.savefig('out1.png')
+#plt.clf()
+# 
+#  plt.plot(mass_array, H_optimal, label='H_{opt}')
+#p plt.xlabel('m, [kg]')
 # plt.ylabel('H, [m]')
 # plt.grid()
 # plt.legend()

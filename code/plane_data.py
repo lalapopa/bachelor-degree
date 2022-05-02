@@ -1,16 +1,15 @@
 from DataHandler import DataHandler as dh
 import numpy as np
 
-
 class PlaneData:
     def __init__(self):
         df = dh("var_data.csv")
         self.M_OGR = float(df.get_column("M_OGR"))
         self.V_I_MAX = float(df.get_column("V_i"))
-        self.OEW = 88500  # KG
-        self.TFL = 87636  # KG
-        self.TP = 60000  # KG
-        self.MTOW = 210000  # KG
+        self.OEW = 88500  # operating empty weight in KG
+        self.TFL = 60000 # total fuel load in KG 
+        self.TP = 20000 # total payload KG
+        self.MTOW = 166000 # maximum takeoff weight KG
         self.OTN_M_TSN = float(df.get_column("otn_m_tsn"))
         self.OTN_M_T = float(df.get_column("otn_m_t"))
         self.OTN_M_CH = float(df.get_column("otn_m_CH"))

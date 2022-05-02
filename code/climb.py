@@ -7,6 +7,7 @@ from matplotlib import rc
 import json
 from datetime import datetime
 
+from formulas import Formulas
 from my_integral_calc import trapezoid
 from lerp import linear1d 
 from plane_data import PlaneData
@@ -21,12 +22,11 @@ def get_Vy_value(mass, plane_char, H):
     g = 9.81
     Ro = air_H.density[0]
     a_sos = air_H.speed_of_sound[0]
-
     MACH_calc = np.arange(0.3, 0.95, 0.001) 
     V_calc = V_speed(MACH_calc, a_sos)
     q = q_dynamic_pressure(V_calc, Ro)
 
-    Cy = my_C_y_n(mass, g, plane_char.WING_AREA,Ro, MACH_calc, a_sos) 
+    Cy = my_C_y_n(mass, g, plane_char.WING_AREA, Ro, MACH_calc, a_sos) 
     A = aero.A_value(MACH_calc) 
     Cxm = aero.Cxm_value(MACH_calc)
     Cym = aero.Cym_value(MACH_calc)
