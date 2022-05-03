@@ -1,5 +1,5 @@
-# TODO: combing flight level flight and climb
-# also analyze txt files
+# TODO: analyze fl data
+
 import os
 import scipy.integrate as integrate
 import numpy as np
@@ -16,6 +16,7 @@ from DataHandler import DataHandler as dh
 from plane_data import PlaneData
 from aerodynamics_data import AerodynamicsData
 from formulas import Formulas as eq
+import config
 
 class Calculation:
     def __init__(self, mass, plane_char, H):
@@ -76,7 +77,7 @@ class Calculation:
             )
         #        return q_chas[min_km_fuel_index], mach_min_fuel, V_calc[min_km_fuel_index]
         else:
-            return False
+            return ( False, False, False ) 
 
     def _can_fly(self, thrust_diff):
         for i in thrust_diff:
@@ -101,20 +102,6 @@ def L_range(mass):
     result = 1 / q_km_min[min_index]
     return result
 
-def to_height_mach_table(H, M, q_km, V, index):
-    table = []
-    for i, val in enumerate(H):
-        if index == i:
-            add_text = "\\cellcolor{green}"
-        else:
-            add_text = ""
-        only_H = {}
-        only_H["$M$"] = str(f"{M[i]:.3f} {add_text}")
-        only_H["$q_{km}$"] = str(f"{q_km[i]:.2f} {add_text}")
-        only_H["$V$"] = str(f"{V[i]:.0f} {add_text}")
-        only_H["$H$"] = str(val)
-        table.append(only_H)
-    return table
 
 def divide_into_chunks(array):
     cpu_number = multiprocessing.cpu_count()
@@ -133,8 +120,17 @@ def divide_into_chunks(array):
     return chunks
 
 def paralell_optimal_fly_param(H, mass):
-    chunks = divide_into_chunks(H)
-
+    if type(H) == np.int64:
+        chunks = H
+        H_opt, V_opt, M_opt, q_km_min = optimal_fly_param(mass, chunks)
+        return (
+                H_opt, 
+                V_opt, 
+                M_opt,
+                q_km_min,
+                )
+    else:
+        chunks = divide_into_chunks(H)
     init_function = partial(optimal_fly_param, mass)
     H_opt_array = []
     V_opt_array = []
@@ -148,6 +144,7 @@ def paralell_optimal_fly_param(H, mass):
             M_opt_array.append(M_opt)
             q_km_min_array.append(q_km_min)
     min_q_km_index = np.unique(np.where(q_km_min_array == np.min(q_km_min_array)))[0]
+    print('FUEL CONSUMPTION = ',q_km_min_array[min_q_km_index])
     return (
             H_opt_array[min_q_km_index], 
             V_opt_array[min_q_km_index], 
@@ -181,41 +178,46 @@ def optimal_fly_param(m, H, like_array=False):
     return H_opt[mfi], V_opt[mfi], M_opt[mfi], q_km_min[mfi]
 
 def cruise_fly_sim(m0, mk, L_k):
-    time_tick = 1  # sec
+    time_tick = 60 # sec
     now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
-    H = np.arange(6000, 12500, 10)
-#    H = np.array([7500])
+    H = np.arange(9500, 12000, 10)
+#    H = np.array([10000])
     total_range = 0
     # begin with optimal height and speed
-
-    H_opt, V_opt, M_opt, q_km = paralell_optimal_fly_param(H, m0)
+    H_opt, _, _, _ = paralell_optimal_fly_param(H, m0)
     total_mass = m0
-    total_time = 0
     while total_mass > mk and total_range < L_k:
         # q_km [kg/km], V [m/s]
         calc = Calculation(total_mass, il_76, H_opt)
         q_km, _, V = calc.find_min_fuel_consumption()
-        S = V * time_tick
-        S_km = S / 1000
+        S = V*time_tick
+        S_km = S/1000
         total_range += S_km
-        fuel_burned = q_km * S_km
+        fuel_burned = q_km*S_km
         total_mass -= fuel_burned
 
         output = f"{H_opt},{total_range},{V},{q_km},{total_mass}"
+        write_in_file(log_name, output)
 
         finded_H_opt, _, _, finded_q_km_opt = paralell_optimal_fly_param(H, total_mass)
-#        percent_difference = ((q_km / finded_q_km_opt) - 1) * 100
+        percent_difference = ((q_km / finded_q_km_opt) - 1) * 100
         fuel_remaning = total_mass - mk
-        write_in_file(log_name, output)
-#        if percent_difference >= 1.5:
-        H_opt = finded_H_opt
-        print( f"fuel_remaning= {fuel_remaning} kg, total_range = {total_range}, height = {H_opt}, speed = {V_opt}")
+        if percent_difference >= 1.5:
+            L_array, H_array, V_array, q_array, mass_change_array = calulate_climb(H_opt, finded_H_opt, total_mass, il_76)
+            H_opt = finded_H_opt
+            for i, value in enumerate(L_array):
+                output = f"{H_array[i]},{total_range+(L_array[i]/1000)},{V_array[i]},{q_array[i]},{mass_change_array[i]}"
+                write_in_file(log_name, output)
+            total_mass = mass_change_array[-1]
+            total_range += L_array[-1]/1000
+
+        print( f"fuel_remaning= {fuel_remaning} kg, total_range = {total_range}, height = {H_opt}, speed = {V}")
     return total_range
 
 
 def write_in_file(file_name, data):
-    with open(file_name, "a") as f:
+    with open(config.PATH_DATA+file_name, "a") as f:
         f.write(str(data) + "\n")
     return True
 
@@ -236,9 +238,7 @@ def calulate_climb(H_0, H_k, m0, plane):
     V_array = []
     q_array = []
     mass_change_array = []
-
     m_climb = m0 
-
     while H_current < H_k:
         print(f'Climbint to {H_k}/{H_current} m | Traveled dist {L}')
 
@@ -248,12 +248,10 @@ def calulate_climb(H_0, H_k, m0, plane):
 
         theta_angle = np.degrees(Vy_speeds/calc.V_calc)
         Vy_max = np.max(Vy_speeds)
-        V_calc = calc.V_calc
-        q_km_calc = calc.q_km
 
         index_max_Vy = np.unique(np.where(Vy_speeds == Vy_max))[0]
-        V_climb = V_calc[index_max_Vy]
-        q_km_climb = q_km_calc[index_max_Vy]
+        V_climb = calc.V_calc[index_max_Vy]
+        q_km_climb = calc.q_km[index_max_Vy]
 
         S_v = Vy_max*time_stamp
         S_h = V_climb*time_stamp
@@ -275,32 +273,35 @@ def calulate_climb(H_0, H_k, m0, plane):
 
     return L_array, H_array, V_array, q_array, mass_change_array 
 
-
-
 il_76 = PlaneData()
 m0 = il_76.MTOW
-m_k = m0 - il_76.TFL
-L_k = 3000
-
-L, H, V_array, q_km, mass_change  = calulate_climb(9000,10000 , m0, il_76)
-
-
-plt.plot(L, V,  label='$L(H)$')
-plt.xlabel('q')
-plt.ylabel('H')
-plt.grid()
-plt.legend()
-
-plt.savefig('out1.png')
-plt.clf()
+m_k = m0 - il_76.TFL - 10000 
+L_k = 1000 
 
 
 
-
+#print(m_k)
+#calc = Calculation(140000, il_76, 12450)
+#Vy_speeds = calc.find_Vy_speeds()
+#q_km, mach_min, V_min = calc.find_min_fuel_consumption()
+#print(max(Vy_speeds))
+#print(V_min)
+#
+##L, H, V_array, q_km, mass_change  = calulate_climb(9000, 13000, 166000, il_76)
+#
+#plt.plot(calc.MACH_calc, calc.q_km)
+#plt.xlabel('Mach')
+#plt.ylabel('q')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out1.png')
+#plt.clf()
+#
 #print(f'start mass = {m0}, end mass = {m_k}')
-#L = integrate.quad(L_range, m_k, m0)
-#L = trapezoid(L_range, m_k, m0)
-#L = cruise_fly_sim(m0, m_k, L_k)
+##L = integrate.quad(L_range, m_k, m0)
+##L = trapezoid(L_range, m_k, m0)
+##L = cruise_fly_sim(m0, m_k, L_k)
 #print(f'Range = {L}')
 
 #calc = Calculation(m0, il_76, 10)

@@ -19,15 +19,25 @@ def linear1d(x, y, x_int):
                 y_int.append(y[int(index[0])])
                 continue
             else:
-                x_pair, y_pair = find_pair(x, y, x_val)
-                y_int.append(lerp(x_pair, y_pair, x_val))
+                if x_val > x[-1]:
+                    y_int.append(y[-1])
+                elif x_val < x[0]:
+                    y_int.append(y[0])
+                else:
+                    x_pair, y_pair = find_pair(x, y, x_val)
+                    y_int.append(lerp(x_pair, y_pair, x_val))
     else:
         if x_int in x:
             index = np.where(x == x_int)
             y_int.append(y[int(index[0])])
         else:
-            x_pair, y_pair = find_pair(x, y, x_int)
-            y_int.append(lerp(x_pair, y_pair, x_int))
+            if x_int > x[-1]:
+                y_int.append(y[-1])
+            elif x_int < x[0]:
+                y_int.append(y[0])
+            else:
+                x_pair, y_pair = find_pair(x, y, x_int)
+                y_int.append(lerp(x_pair, y_pair, x_int))
 
     if len(y_int) == 1:
         return y_int[0]

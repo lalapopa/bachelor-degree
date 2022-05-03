@@ -17,8 +17,7 @@ class Formulas:
         return C_x_m + A * (C_y_n - C_y_m) ** 2
 
     def K_n_lift_to_drag_ratio(C_y_n, C_x_n):
-        K_n = np.nan_to_num(C_y_n / C_x_n)
-        return K_n
+        return np.nan_to_num(C_y_n / C_x_n)
 
     def P_potr_equation(M0, g, K_n):
         return (M0 * g) / K_n
@@ -28,9 +27,6 @@ class Formulas:
             return otn_P_0 * M0 * g * tilda_P * (p_h / p_h_11)
         else:
             return otn_P_0 * M0 * g * tilda_P
-
-    def otn_R_equation(P_rasp, P_potr):
-        return P_potr / P_rasp
 
     def q_ch_hour_consumption(Ce, P_potr):
         return Ce * P_potr

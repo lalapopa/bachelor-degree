@@ -1,10 +1,12 @@
 import numpy as np
+
+import config
 from lerp import linear1d
 from DataHandler import DataHandler as dh
 
 class AerodynamicsData:
     def __init__(self):
-        self.df = dh("ad_data.csv")
+        self.df = dh(config.PATH_DATA+"ad_data.csv")
 
         self.mach_A_column = self.df.get_column("M")
         self.A_column = self.df.get_column("A")
