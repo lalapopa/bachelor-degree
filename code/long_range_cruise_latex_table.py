@@ -44,7 +44,7 @@ def create_json_with_opt_fly_params(file_name):
         q_km_min = np.array(['-' if i == 9999 else str(round(i,3)) for i in q_km_min])
         H_fly = np.array(['-' if i is False else str(round(i,0)) for i in H_fly])
         M_opt = np.array(['-' if i is False else str(round(i,3)) for i in M_opt])
-        V_opt = np.array(['-' if i is False else str(round(i,0)) for i in V_opt])
+        V_opt = np.array(['-' if i is False else str(round(i,3)) for i in V_opt])
 
         mass_table = to_height_mach_table(H_fly, M_opt, q_km_min, V_opt, min_fuel_index)
         result_table[str(mass)] = mass_table
@@ -52,6 +52,7 @@ def create_json_with_opt_fly_params(file_name):
         print("_" * 30)
         print(f"Consumption {q_km_min[min_fuel_index]}")
         print(f"MACH = {M_opt[min_fuel_index]}")
+        print(f"V = {V_opt[min_fuel_index]}")
         print("_" * 30)
 
     with open(file_name, "w", encoding="utf-8") as jf:
@@ -116,16 +117,6 @@ def format_latex_table(latex_table):
         formated_latex_table += f"{new_line}" 
     return formated_latex_table 
     
-
-
-
-
-
-
-   
-
-
-
 json_name = "output.json"
 output_latex_name = "table.tex"
 create_json_with_opt_fly_params(json_name)

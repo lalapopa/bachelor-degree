@@ -1,0 +1,24 @@
+\documentclass[bachelor,subf,12pt, substylefile = spbu.rtx]{disser}
+
+\input{preamble.tex}
+\input{gost_style.tex}
+\input{title.tex}
+
+\newcommand{\incfig}[1]{
+        \import{./figures/}{#1.pdf_tex}
+    }
+    \newcommand{\addstrut}[1]{\vcenter{\hbox{\rule{0pt}{#1}}}}
+
+\begin{document}
+\titleASU
+
+\input{essay.tex}
+\newpage
+\renewcommand{\contentsname}{\center{\large СОДЕРЖАНИЕ}}
+\tableofcontents
+\input{chapter1.tex}
+\input{chapter2.tex}
+\input{chapter3.tex}
+
+\end{document}
+

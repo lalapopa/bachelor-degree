@@ -1,0 +1,85 @@
+\subsection{Результаты}
+Результаты расчетов по нахождению $q_{{km}_{min}}$ минимального километрового расхода топлива сведены в таблицу \ref{t:1}
+\begin{enumerate}
+\item Исходя из расчетов по мере уменьшения массы скорость уменьшается, а высота для поддержания $q_{{km}_{min}}$ увеличивается.
+\item Оптимальная траектория набора представлена на рисунке \ref{fig:fig1}.
+\item Моменты смены эшелона выбрали, если между оптимальной и текущей траекторией разница в расходах топлива будет больше 1.5\%, так получилась псевдо оптимальная траектория полета рисунки \ref{fig:fig2}, \ref{fig:fig4}.
+\item Разницы в максимальной дальности полета, которые зависят от километрового расход топлива представлены на таблице \ref{tab:tab:opt_vs_const_h} 
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Режим & $L, км$ & $T$ & $q_{km_{ср}}, \, \frac{кг}{км}$\\
+\hline
+Полет по оптимальной траектории рис. \ref{fig:fig1}& 4738 & 6 ч. 12 мин. & 18.4617\\
+\hline
+Полет по псевдо оптимальной траектории рис.\ref{fig:fig2}& 4712 & 6 ч. 23 мин. & 18.5261\\
+\hline
+Полет на $H=7500\,м$ & 4648 & 6 ч. 35 мин.& 18.6890\\
+\hline
+Полет на $H=11000\,м$ & 4453 & 5 ч. 43 мин. & 19.5844\\
+\hline
+\end{tabular}
+\caption{Результаты расчетов}
+\label{tab:tab:opt_vs_const_h}
+\end{table}
+
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig1.pgf}}
+\caption{Оптимальная траектория набора}
+\label{fig:fig1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig3.pgf}}
+\caption{Оптимальное изменение скорости}
+\label{fig:fig3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig2.pgf}}
+\caption{Псевдо оптимальная траектория набора}
+\label{fig:fig2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/fig4.pgf}}
+\caption{Псевдо оптимальное изменение скорости}
+\label{fig:fig4}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\resizebox{\textwidth-5cm}{!}{
+    \input{./tables/table.tex}
+}
+\caption{$q_{km}\, [\frac{кг}{км}], V \, [\frac{м}{с}] $}
+\label{t:1}
+
+\end{table}
+
+
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/140000_q_km_V.pgf}}
+\caption{График изменения $q_{km}$}
+\label{fig:q_km_1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/150000_q_km_V.pgf}}
+\caption{График изменения $q_{km}$}
+\label{fig:q_km_2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\input{./img/166000_q_km_V.pgf}}
+\caption{График изменения $q_{km}$}
+\label{fig:q_km_3}
+\end{figure}

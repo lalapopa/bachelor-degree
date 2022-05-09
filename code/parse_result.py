@@ -9,23 +9,25 @@ import os
 
 import config
 
-# matplotlib.use("pgf")
-# matplotlib.rcParams.update(
-#    {
-#        "pgf.texsystem": "pdflatex",
-#        "font.family": "serif",
-#        "text.usetex": True,
-#        "pgf.rcfonts": False,
-#        "pgf.preamble": "\n".join(
-#        [
-#            r"\usepackage[T2A]{fontenc}",
-#            r"\usepackage[warn]{mathtext}",
-#            r"\usepackage[utf8]{inputenc}",
-#            r"\usepackage[english,russian]{babel}",
-#        ]
-#        ),
-#    }
-# )
+def pgf_setting():
+    matplotlib.rcParams.update(matplotlib.rcParamsDefault)
+    matplotlib.use("pgf")
+    matplotlib.rcParams.update(
+    {
+    "pgf.texsystem": "pdflatex",
+    "font.family": "serif",
+    "text.usetex": True,
+    "pgf.rcfonts": False,
+    "pgf.preamble": "\n".join(
+    [
+    r"\usepackage[warn]{mathtext}",
+    r"\usepackage[T2A]{fontenc}",
+    r"\usepackage[utf8]{inputenc}",
+    r"\usepackage[english,russian]{babel}",
+    ]
+    ),
+    }
+    )
 
 def get_total_fuel_burned(m0, m_array):
     return m0 - np.unique(np.min(m_array))
@@ -40,8 +42,7 @@ m0 = 166000
 t_0 = 60
 
 file_name = os.listdir(config.PATH_DATA)
-file_name = [f for f in file_name if '.txt' in f]
-
+file_name = [f for f in file_name if '.txt' in f][1:]
 
 
 for i, val in enumerate(file_name):
@@ -58,6 +59,24 @@ for i, val in enumerate(file_name):
     print(f"AVG fuel_q_km = {np.average(q_data)}")
     print(f"Flight_range = {np.max(L_data)}")
     print(f"Total_fuel burned = {get_total_fuel_burned(m0, m_data )}\nTotal Flight time = {get_total_flight_time(t_0, L_data)}")
+
+    fig, ax1 = plt.subplots()
+
+    ax2 = ax1.twinx()
+    ax1.plot(L_data, H_data, 'g', label='$H(L)$')
+    ax2.plot(L_data, V_data, 'b', label='$V(L)$')
+    ax2.set_ylim([200, max(V_data)+2])
+
+    ax1.set_xlabel('L, [km]')
+    ax1.set_ylabel('H, м', color='g')
+    ax2.set_ylabel('V, м/с', color='b')
+
+    fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+    ax1.grid()
+    plt.savefig(f'{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf')
+    plt.clf()
+
+
 #    L_int = np.linspace(L_data[0], L_data[-1], 10000)
 #    V_int = np.linspace(V_data[0], V_data[-1], 10000)
 #
