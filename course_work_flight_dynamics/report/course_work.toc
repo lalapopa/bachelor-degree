@@ -6,3 +6,6 @@
 \contentsline {section}{\numberline {3.2.\hskip 1em}Расчет характеристик крейсерского полета}{9}{section.3.2}%
 \contentsline {section}{\numberline {3.3.\hskip 1em}Расчет характеристик участка снижения}{9}{section.3.3}%
 \contentsline {section}{\numberline {3.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{10}{section.3.4}%
+\contentsline {section}{\numberline {3.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{10}{section.3.5}%
+\contentsline {section}{\numberline {3.6.\hskip 1em}Расчет характеристик маневренности самолета}{12}{section.3.6}%
+\contentsline {section}{\numberline {3.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{13}{section.3.7}%
