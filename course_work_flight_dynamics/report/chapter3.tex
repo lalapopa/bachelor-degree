@@ -55,11 +55,14 @@
     \centering
     \caption{Результаты расчета набора высоты}
     \label{tab:result_climb}
-    \input{./tables/climb_data_part1.tex}
+    \input{./tables/climb_data.tex}
     \centering
     \caption{(Продолжение) Результаты расчета набора высоты}
-    \label{tab:result_climb}
+    \label{tab:result_climb_2}
     \input{./tables/climb_data_part2.tex}
+    \caption{Основные параметры в наборе высоты}
+    \input{./tables/climb_mini_table.tex}
+    \label{tab:minitable_climb}
 \end{sidewaystable}
 
 
@@ -96,6 +99,16 @@ $Ce= 0.0617\, \frac{Кг}{Н*ч} $ – удельный расход топли�
 \end{equation}
 где $\bar{m}_{к\, кр} = 1 - \bar{m}_{T_{наб}} - \bar{m}_{T_{пр}} - \bar{m}_{T_{кр}}$
 
+Результаты
+
+\begin{table}[htpb]
+    \centering
+    \caption{Результаты расчета участка крейсерского полета}
+    \label{tab:kr_flight}
+    \input{./tables/level_flight_data.tex}
+\end{table}
+
+
 
 
 \section{Расчет характеристик участка снижения}
@@ -115,6 +128,20 @@ $M(P_{n\, \min})=f(H)$ (Рисунок 2.2).
 $M_к = 0.30$; $H_к = 0$
 Результаты расчетов приведены на таблице №3.3.2, по этим данным построили
 
+\begin{sidewaystable}[ph!]
+    \centering
+    \caption{Результаты расчета снижения высоты}
+    \label{tab:result_descent}
+    \input{./tables/descent_data.tex}
+    \centering
+    \caption{(Продолжение) Результаты расчета снижения высоты}
+    \label{tab:result_descent_2}
+    \input{./tables/descent_data_part2.tex}
+    \caption{Основные параметры снижения высоты}
+    \input{./tables/descent_mini_table.tex}
+    \label{tab:minitable_descent}
+\end{sidewaystable}
+\newpage
 
 \section{Расчет диаграммы транспортных возможностей}
 Определим зависимость целевой нагрузки от дальности полета самолета
@@ -163,6 +190,16 @@ $ L = L_{наб} + L_{кр} + L_{сн} $
 \[
     \bar{m}_{взл} = \bar{m}_{пуст} + \bar{m}_{T_{max}}
 \]
+
+
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчета}
+    \label{tab:cargo_load}
+    \input{./tables/cargo_load.tex}
+\end{table}
+
+
 
 \section{Расчет взлетно-посадочных характеристик самолета}
 
@@ -252,6 +289,13 @@ $L_{пд}$.
 
 Результаты расчетов на таблице № 3.5.1
 
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчета}
+    \label{tab:landing_takeoff}
+    \input{./tables/takeoff_landing_table.tex}
+\end{table}
+
 \section{Расчет характеристик маневренности самолета}
 
 В данном разделе определим характеристики правильного виража.
@@ -288,6 +332,19 @@ $L_{пд}$.
         \item Диапазон Маха берется:
             $M = [0.4,\, 0.5,\, 0.6,\,0.7,\,0.8]$
 \end{enumerate}
+
+\begin{table}[H]
+    \centering
+    \caption{Расчет виража}
+    \label{tab:turn_part1}
+    \input{./tables/turn_data_table_part1.tex}
+\end{table}
+\begin{table}[H]
+    \centering
+    \caption{(Продолжение) Расчет виража}
+    \label{tab:turn_part2}
+    \input{./tables/turn_data_table_part2.tex}
+\end{table}
 
 
 \section{Расчет характеристик продольной статической устойчивости и

@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {3.1.\hskip 1em}Расчет характеристик набора высоты}{17}{section.3.1}%
 \contentsline {section}{\numberline {3.2.\hskip 1em}Расчет характеристик крейсерского полета}{19}{section.3.2}%
 \contentsline {section}{\numberline {3.3.\hskip 1em}Расчет характеристик участка снижения}{19}{section.3.3}%
-\contentsline {section}{\numberline {3.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{20}{section.3.4}%
-\contentsline {section}{\numberline {3.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{20}{section.3.5}%
-\contentsline {section}{\numberline {3.6.\hskip 1em}Расчет характеристик маневренности самолета}{22}{section.3.6}%
-\contentsline {section}{\numberline {3.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{23}{section.3.7}%
+\contentsline {section}{\numberline {3.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{23}{section.3.5}%
+\contentsline {section}{\numberline {3.6.\hskip 1em}Расчет характеристик маневренности самолета}{24}{section.3.6}%
+\contentsline {section}{\numberline {3.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{25}{section.3.7}%
