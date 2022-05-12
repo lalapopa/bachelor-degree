@@ -1,0 +1,396 @@
+\documentclass{article}
+\usepackage{zref}
+\usepackage{linegoal}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{wrapfig}
+\usepackage[
+a4paper, mag=1000, includefoot,
+left=2cm, right=2cm, top=2cm, bottom=2cm, headsep=1cm, footskip=1cm
+]{geometry}
+\usepackage{changepage}
+
+% Русский пакет
+\usepackage[warn]{mathtext}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath} %% \text 
+% Remove warning with cyrillic letters in equations 
+\usepackage{silence}
+\WarningFilter{mathtext}{letter}
+\usepackage{float}
+
+\newcommand{\incfig}[2][1]{%
+        \def\svgwidth{#1\columnwidth}
+        \import{./figures/}{#2.pdf_tex}
+}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\pdfsuppresswarningpagegroup=1
+
+\pagenumbering{gobble}
+\begin{document}
+\begin{center}
+
+
+\begin{center}
+\begin{minipage}{0.05\textwidth}% adapt widths of minipages to your needs
+    \resizebox{3cm}{!}{\input{logo.pdf_tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.85\textwidth}\raggedleft
+    \begin{center}
+    \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ\\ РОССИЙСКОЙ ФЕДЕРАЦИИ }\\
+    \vspace{14pt}
+    \textbf{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
+        УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ\\
+    <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ}\\ 
+    (национальный исследовательский университет)>>
+\end{center}
+\end{minipage}
+\end{center}
+\vspace{14pt}
+\rule{\textwidth}{2pt}\\
+
+\vspace{14pt}
+
+\begin{minipage}{\textwidth}
+
+\makebox{\textbf{Институт (Филиал)} \rlap{\hspace{0.5cm}1} \rule[-2pt]{0.5\textwidth}{0.5pt}
+\textbf{Кафедра} \rlap{\hspace{0.5cm}106}\rule[-2pt]{\linegoal}{0.5pt}
+}
+
+\makebox{\textbf{Группа} \rlap{\hspace{0.5cm}М10-403Б-18} \rule[-2pt]{3cm}{0.5pt}
+\textbf{Направление подготовки} \rlap{\hspace{0.5cm}Баллистика и гидроаэродинамика}
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+
+\makebox{\textbf{Профиль} \rlap{\hspace{0.5cm}Динамика и управление движением ЛА} \rule[-2pt]{\linegoal}{0.5pt}
+}
+
+\makebox{\textbf{Квалификация} \rlap{\hspace{0.5cm}бакалавр} \rule[-2pt]{\linegoal}{0.5pt}
+}
+\end{minipage}
+
+\vspace{14pt}
+
+\hfill
+\begin{minipage}{0.7\textwidth}
+\raggedleft
+\begin{tabular}{@{}llll}  
+    \multicolumn{4}{c}{\textbf{УТВЕРЖДАЮ}}\\
+    Заведующий кафедрой & \rule{1cm}{0.5pt} & \rule{2cm}{0.5pt} & \rule{3.5cm}{0.5pt}\\
+                        & \scriptsize{(№ каф.)} & \scriptsize{(подпись)}& \scriptsize{(инициалы, фамилия)}\\
+    \rule{0pt}{14pt} &   & \rule{2cm}{0.5pt}  & \rule{2.5cm}{0.5pt} 2022 г. \\ 
+\end{tabular}
+\end{minipage}
+\vspace{14pt}
+
+{\Large\textbf{ЗАДАНИЕ}}\\
+{\Large\textbf{на выпускную квалификационную работу бакалавра}}\\
+\vspace{14pt}
+{
+\addtolength\tabcolsep{-6pt}
+\begin{tabularx}{\textwidth}{X}
+\makebox{\textbf{Обучающийся} \rlap{\hspace{0.5cm}Москвитин Андрей Семенович} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\textbf{Руководитель} \rlap{\hspace{0.5cm}Мальцев Юрий Иванович} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\rlap{\hspace{0.5cm}A} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\hspace{0.38\textwidth}{\scriptsize (ученая степень, ученое звание, должность и место работы) }\\
+\end{tabularx}
+}
+\vspace{14pt}
+\makebox{\textbf{1. Наименование темы} \rlap{\hspace{0.5cm}Исследование  характеристик
+транспортного самолета } \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}при выполнении эшелонирования } \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\vspace{14pt}
+\makebox{\textbf{2. Срок сдачи обучающимся законченной работы} \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\vspace{14pt}
+\makebox{\textbf{3. Задание и исходные данные к работе}\rule[-2pt]{\linegoal}{0.0pt}} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\vspace{14pt}
+\makebox{
+\textbf{Перечень иллюстранивно-графических материалов:}\rule[-2pt]{\linegoal}{0.0pt}
+} \\
+\vspace{14pt}
+\begin{tabularx}{\textwidth}{|l|Y|Y|}
+    \hline
+    \rule{0pt}{14pt}№ & Наименование & Количество листов \\    
+\hline
+ \rule{0pt}{14pt} & & \\
+  \hline
+ \rule{0pt}{14pt} & & \\
+  \hline
+ \rule{0pt}{14pt} & & \\
+  \hline
+ \rule{0pt}{14pt} & & \\
+  \hline
+ \rule{0pt}{14pt} & & \\
+  \hline
+\end{tabularx}
+
+\vspace{14pt}
+\makebox{
+\textbf{4. Перечень подлежащих разработке разделов и этапы выполнения работы}\rule[-2pt]{\linegoal}{0.0pt}
+} \\
+\begin{tabularx}{\textwidth}{|p{0.75cm}|Y|Y|Y|Y|}
+\hline
+\rule{0pt}{14pt}№ & Наименование раздела или этапа & Трудоёмкость в \% от полной трудоёмкости ВКРБ &
+Срок выполнения & Примечания\\    
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\rule{0pt}{14pt} & & & &\\
+\hline
+\end{tabularx}
+
+\vspace{14pt}
+\makebox{\textbf{5. Исходные материалы и пособия} \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\makebox{\rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\vspace{14pt}
+\makebox{\textbf{6. Дата выдачи задания} \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\end{center}
+\vspace{14pt}
+\hfill
+\begin{tabular}{l}  
+    \makebox{\hspace{0.5\textwidth}Руководитель \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\hspace{0.5\textwidth+5cm} {\scriptsize(подпись)}\\
+\makebox{\hspace{0.5\textwidth}Принял к исполнению \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\hspace{0.5\textwidth+5cm} {\scriptsize(подпись)}\\
+\end{tabular}
+\newpage
+
+\begin{center}
+\begin{center}
+\begin{minipage}{0.05\textwidth}% adapt widths of minipages to your needs
+    \resizebox{3cm}{!}{\input{logo.pdf_tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.85\textwidth}\raggedleft
+    \begin{center}
+    \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ\\ РОССИЙСКОЙ ФЕДЕРАЦИИ }\\
+    \vspace{14pt}
+    \textbf{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
+        УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ\\
+    <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ}\\ 
+    (национальный исследовательский университет)>>
+\end{center}
+\end{minipage}
+\end{center}
+\vspace{14pt}
+\rule{\textwidth}{2pt}\\
+
+\vspace{14pt}
+
+\begin{minipage}{\textwidth}
+\makebox{\textbf{Институт (Филиал)} \rlap{\hspace{0.5cm}1} \rule[-2pt]{0.5\textwidth}{0.5pt}
+\textbf{Кафедра} \rlap{\hspace{0.5cm}106}\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{\textbf{Группа} \rlap{\hspace{0.5cm}М10-403Б-18} \rule[-2pt]{3cm}{0.5pt}
+\textbf{Направление подготовки} \rlap{\hspace{0.5cm}Баллистика и гидроаэродинамика}
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{\textbf{Профиль} \rlap{\hspace{0.5cm}Динамика и управление движением ЛА} \rule[-2pt]{\linegoal}{0.5pt}
+}
+
+\makebox{\textbf{Квалификация} \rlap{\hspace{0.5cm}бакалавр} \rule[-2pt]{\linegoal}{0.5pt}
+}
+\end{minipage}
+
+\vspace{14pt}
+{\Large\textbf{ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА}}\\
+{\Large\textbf{БАКАЛАВРА}}\\
+\vspace{14pt}
+
+\makebox{\textbf{На тему:} \rlap{\hspace{0.5cm}Исследование характеристик транспортного самолета при выполнении эшелонирования} \rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+
+\vspace{14pt}
+{
+\addtolength\tabcolsep{-6pt}
+\begin{tabularx}{\textwidth}{X}
+\makebox{\textbf{Автор ВКРБ} \rlap{\hspace{0.5cm}Москвитин Андрей Семенович}
+\rule[-2pt]{\linegoal}{0.5pt}
+}\\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\textbf{Руководитель} \rlap{\hspace{0.5cm}Мальцев Юрий Иванович} \rule[-2pt]{\linegoal}{0.5pt}
+}\\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\textbf{Консультант} \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+}\\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\textbf{Консультант} \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}
+}\\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\makebox{\textbf{Рецензент} \rlap{\hspace{0.5cm}Титов Константин Николаевич} \rule[-2pt]{\linegoal}{0.5pt}
+}\\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\end{tabularx}
+}
+
+\vspace{24pt}
+\makebox{\textbf{К защите допустить} \rule[-2pt]{\linegoal}{0.0pt}
+}\\
+\vspace{14pt}
+\begin{minipage}{0.7\textwidth}
+\raggedright
+\begin{tabular}{@{}llll}  
+Заведующий кафедрой & \rule[-2pt]{1cm}{0.5pt} & \makebox{\rlap{\hspace{0.5cm}Ефремов Александр Викторович} \rule[-2pt]{10cm}{0.5pt} }\\
+                    & \scriptsize{(№ каф.)} &\hspace{3cm}{\scriptsize (фамилия, имя, отчество полностью) } & \\ 
+\rule{0pt}{14pt} \rule[-2pt]{1cm}{0.5pt} \rule[-2pt]{3cm}{0.5pt} & 2022 г. & &                    \\
+\end{tabular}
+\end{minipage}
+\hfill
+\vspace{14pt}
+    \vfill
+    Москва 2022\\
+\end{center}
+\newpage
+
+\begin{center}
+\begin{minipage}{0.05\textwidth}% adapt widths of minipages to your needs
+    \resizebox{3cm}{!}{\input{logo.pdf_tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.85\textwidth}\raggedleft
+    \begin{center}
+    \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ\\ РОССИЙСКОЙ ФЕДЕРАЦИИ }\\
+    \vspace{14pt}
+    \textbf{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
+        УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ\\
+    <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ}\\ 
+    (национальный исследовательский университет)>>
+\end{center}
+\end{minipage}
+
+\vspace{14pt}
+\rule{\textwidth}{2pt}\\
+
+\vspace{24pt}
+
+{\Large\textbf{ОТЗЫВ}}\\
+{\large\textbf{РУКОВОДИТЕЛЯ}}\\
+\vspace{14pt}
+
+\begin{minipage}{\textwidth}
+{
+\addtolength\tabcolsep{-6pt}
+\begin{tabular}{l}
+\makebox{\textbf{Обучающийся} \rlap{\hspace{0.5cm}Москвитин Андрей Семенович} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\hspace{0.38\textwidth}{\scriptsize (фамилия, имя, отчество полностью) }\\
+\end{tabular}
+}
+
+\makebox{\textbf{Институт (Филиал)}\rlap{\hspace{0.5cm}1}\rule[-2pt]{0.5\textwidth}{0.5pt}
+\textbf{Кафедра}\rlap{\hspace{0.5cm}106}\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{\textbf{Группа}\rlap{\hspace{0.5cm}М10-403Б-18} \rule[-2pt]{3cm}{0.5pt}
+\textbf{Направление подготовки} \rlap{\hspace{0.5cm}Баллистика и гидроаэродинамика}
+\rule[-2pt]{\linegoal}{0.5pt}
+}
+\makebox{\textbf{Профиль}\rlap{\hspace{0.5cm}Динамика и управление движением ЛА}\rule[-2pt]{\linegoal}{0.5pt}}
+\makebox{\textbf{Наименование темы}
+\rlap{\hspace{0.5cm}Исследование  характеристик
+транспортного самолета}\rule[-2pt]{\linegoal}{0.5pt}}\\
+\makebox{\rlap{\hspace{0.5cm}при выполнении эшелонирования}\rule[-2pt]{\linegoal}{0.5pt}}\\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\end{minipage}
+\vspace{14pt}
+
+{
+\addtolength\tabcolsep{-6pt}
+\begin{tabular}{l}
+\makebox{\textbf{Руководитель}\rlap{\hspace{0.5cm}Мальцев Юрий Иванович} \rule[-2pt]{\linegoal}{0.5pt}
+} \\
+\hspace{0.38\textwidth}{\scriptsize(фамилия, имя, отчество полностью)}\\
+\makebox{\rule[-2pt]{\linegoal}{0.5pt}} \\
+\end{tabular}
+\vspace{14pt}
+}
+
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{Заключение: \rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+\makebox{\rlap{\hspace{0.5cm}}\rule[-2pt]{\linegoal}{0.5pt}} \\
+
+\vspace{14pt}
+{
+\addtolength\tabcolsep{-6pt}
+\begin{tabularx}{\textwidth}{X}  
+\rule{0pt}{14pt}\rule[-2pt]{1cm}{0.5pt}\hspace{0.5cm}\rule[-2pt]{3cm}{0.5pt}  2022 г. \makebox{\hspace{0.2\textwidth}Руководитель \rlap{\hspace{0.5cm}} \rule[-2pt]{\linegoal}{0.5pt}} \\
+\hspace{0.5\textwidth+5cm} {\scriptsize(подпись)}\\
+\end{tabularx}
+}
+\end{center}
+
+\end{document}
+
