@@ -486,7 +486,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.458333in,y=2.227500in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \theta(t) [град]\) \(\displaystyle V_y^*(t) [м/с]\) \(\displaystyle H [км]\)}%
+\pgftext[x=0.458333in,y=2.227500in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \theta(t) [град]\), \(\displaystyle V_y^*(t) [м/с]\), \(\displaystyle H [км]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.750000in}{0.495000in}}{\pgfqpoint{4.650000in}{3.465000in}}%
@@ -595,10 +595,10 @@
 \pgfsetstrokeopacity{0.800000}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.847222in}{2.997038in}}%
-\pgfpathlineto{\pgfqpoint{1.926661in}{2.997038in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.954438in}{2.997038in}}{\pgfqpoint{1.954438in}{3.024816in}}%
-\pgfpathlineto{\pgfqpoint{1.954438in}{3.862778in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.954438in}{3.890556in}}{\pgfqpoint{1.926661in}{3.890556in}}%
+\pgfpathlineto{\pgfqpoint{1.949808in}{2.997038in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.977586in}{2.997038in}}{\pgfqpoint{1.977586in}{3.024816in}}%
+\pgfpathlineto{\pgfqpoint{1.977586in}{3.862778in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.977586in}{3.890556in}}{\pgfqpoint{1.949808in}{3.890556in}}%
 \pgfpathlineto{\pgfqpoint{0.847222in}{3.890556in}}%
 \pgfpathquadraticcurveto{\pgfqpoint{0.819444in}{3.890556in}}{\pgfqpoint{0.819444in}{3.862778in}}%
 \pgfpathlineto{\pgfqpoint{0.819444in}{3.024816in}}%
@@ -638,7 +638,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.522500in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \theta(t)[град]\)}%
+\pgftext[x=1.263889in,y=3.522500in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \theta(t)\,[град]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetrectcap%
@@ -655,7 +655,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.314167in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V_y^*(t) [м/с]\)}%
+\pgftext[x=1.263889in,y=3.314167in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V_y^*(t)\,[м/с]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetrectcap%
@@ -672,7 +672,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.087316in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V(t) [м/с]\)}%
+\pgftext[x=1.263889in,y=3.087316in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V(t)\,[м/с]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -853,7 +853,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=5.761112in,y=2.227500in,,top,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont V [м/с]}%
+\pgftext[x=5.761112in,y=2.227500in,,top,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont V\,[м/с]}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.750000in}{0.495000in}}{\pgfqpoint{4.650000in}{3.465000in}}%

@@ -637,10 +637,10 @@
 \pgfsetstrokeopacity{0.800000}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.847222in}{3.432222in}}%
-\pgfpathlineto{\pgfqpoint{1.836709in}{3.432222in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.864487in}{3.432222in}}{\pgfqpoint{1.864487in}{3.460000in}}%
-\pgfpathlineto{\pgfqpoint{1.864487in}{3.862778in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.864487in}{3.890556in}}{\pgfqpoint{1.836709in}{3.890556in}}%
+\pgfpathlineto{\pgfqpoint{1.875303in}{3.432222in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.903081in}{3.432222in}}{\pgfqpoint{1.903081in}{3.460000in}}%
+\pgfpathlineto{\pgfqpoint{1.903081in}{3.862778in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.903081in}{3.890556in}}{\pgfqpoint{1.875303in}{3.890556in}}%
 \pgfpathlineto{\pgfqpoint{0.847222in}{3.890556in}}%
 \pgfpathquadraticcurveto{\pgfqpoint{0.819444in}{3.890556in}}{\pgfqpoint{0.819444in}{3.862778in}}%
 \pgfpathlineto{\pgfqpoint{0.819444in}{3.460000in}}%
@@ -666,12 +666,12 @@
 \pgftext[x=1.263889in,y=3.730833in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle L(t) [км]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.505625pt}%
-\definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
+\definecolor{currentstroke}{rgb}{0.000000,0.501961,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
-\pgfsetdash{}{0pt}%
+\pgfsetdash{{5.550000pt}{2.400000pt}}{0.000000pt}%
 \pgfpathmoveto{\pgfqpoint{0.875000in}{3.571111in}}%
 \pgfpathlineto{\pgfqpoint{1.152778in}{3.571111in}}%
 \pgfusepath{stroke}%
@@ -680,7 +680,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.522500in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle m_t(t) [кг]\)}%
+\pgftext[x=1.263889in,y=3.522500in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle m_T(t) [кг]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -836,7 +836,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=5.730247in,y=2.227500in,,top,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle m_t [кг]\)}%
+\pgftext[x=5.730247in,y=2.227500in,,top,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle m_T [кг]\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
@@ -847,12 +847,12 @@
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.750000in}{0.495000in}}{\pgfqpoint{4.650000in}{3.465000in}}%
 \pgfusepath{clip}%
-\pgfsetrectcap%
+\pgfsetbuttcap%
 \pgfsetroundjoin%
 \pgfsetlinewidth{1.505625pt}%
-\definecolor{currentstroke}{rgb}{0.000000,0.000000,1.000000}%
+\definecolor{currentstroke}{rgb}{0.000000,0.501961,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
-\pgfsetdash{}{0pt}%
+\pgfsetdash{{5.550000pt}{2.400000pt}}{0.000000pt}%
 \pgfpathmoveto{\pgfqpoint{0.961364in}{0.652500in}}%
 \pgfpathlineto{\pgfqpoint{1.710807in}{1.400645in}}%
 \pgfpathlineto{\pgfqpoint{2.319275in}{1.932493in}}%

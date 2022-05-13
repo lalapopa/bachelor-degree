@@ -91,12 +91,49 @@
 \end{equation}
 где $q_{ч}$ --- часовой расход топлива, $q_{км}$ --- километровый расход топлива.
 
-
-\begin{sidewaystable}
+\begin{sidewaystable}[ph!]
     \centering
     \caption{Результаты расчета для высоты $H=0$ км}
     \label{tab:result_0}
     \input{./tables/alt_0.0.tex}
+    \vfill
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=0.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_0}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=0.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_0}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=0.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_0}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=0.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_0}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
 \end{sidewaystable}
 
 \begin{sidewaystable}
@@ -106,11 +143,86 @@
     \input{./tables/alt_2.0.tex}
 \end{sidewaystable}
 
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=2.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_2}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=2.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_2}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=2.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_2}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=2.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_2}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
+\end{sidewaystable}
+
+
 \begin{sidewaystable}
     \centering
     \caption{Результаты расчета для высоты $H=4$ км}
     \label{tab:result_4}
     \input{./tables/alt_4.0.tex}
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=4.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_4}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=4.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_4}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=4.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_4}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=4.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_4}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
 \end{sidewaystable}
 
 \begin{sidewaystable}
@@ -120,11 +232,85 @@
     \input{./tables/alt_6.0.tex}
 \end{sidewaystable}
 
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=6.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_6}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=6.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_6}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=6.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_6}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=6.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_6}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
+\end{sidewaystable}
+
 \begin{sidewaystable}
     \centering
     \caption{Результаты расчета для высоты $H=8$ км}
     \label{tab:result_8}
     \input{./tables/alt_8.0.tex}
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=8.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_8}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=8.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_8}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=8.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_8}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=8.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_8}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
 \end{sidewaystable}
 
 \begin{sidewaystable}
@@ -134,11 +320,85 @@
     \input{./tables/alt_10.0.tex}
 \end{sidewaystable}
 
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=10.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_10}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=10.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_10}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=10.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_10}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=10.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_10}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
+\end{sidewaystable}
+
 \begin{sidewaystable}
     \centering
     \caption{Результаты расчета для высоты $H=12$ км}
     \label{tab:result_12}
     \input{./tables/alt_12.0.tex}
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=12.0.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_12}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=12.0.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_12}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=12.0.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_12}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=12.0.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_12}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
 \end{sidewaystable}
 
 \begin{sidewaystable}
@@ -148,8 +408,44 @@
     \input{./tables/alt_12.4009.tex}
 \end{sidewaystable}
 
-Для построение таблицы (TODO: стр 40 в курсовой)
+\begin{sidewaystable}[ph!]
+    \begin{tabularx}{\textwidth}{XX}
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+            \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+            \resizebox{\textwidth}{!}{\input{./figures/P_H=12.4.pgf}}}
+            \caption{График располагаемой и потребной тяги}
+            \label{fig:P_H_12_4}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/Cy_H=12.4.pgf}}}
+        \caption{График $C_{y_{доп}}, \, C_{y_n}$}
+        \label{fig:Cy_12_4}
+        \end{figure}
+    \end{minipage} \\
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/V_y_H=12.4.pgf}}}
+        \caption{График $V_y^*(M, H)$}
+        \label{fig:Vy_12_4}
+        \end{figure}
+    \end{minipage} &
+    \begin{minipage}{0.45\textheight}
+        \begin{figure}[H]
+        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=12.4.pgf}}}
+        \caption{График $q_{км},\, q_{ч}$}
+        \label{fig:q_12_4}
+        \end{figure}
+    \end{minipage} \\
+    \end{tabularx}
+\end{sidewaystable}
 
+Для построение таблицы (TODO: стр 40 в курсовой)
 \begin{enumerate}
     \item Определим $M_{{\min}_P}$ и $M_{{\max}_P}$, как точка пересечения
         графиков $P_n(M, H_i)$ и $P_p(M, H_i)$ рисунки @@@ 
@@ -192,10 +488,33 @@
             \arg \min_V q_{км} (V, H_i)
         \]
 \end{enumerate}
-
 \begin{sidewaystable}
     \centering
     \caption{Результаты для построение графика высот и скоростей}
     \label{tab:H_M}
     \input{./tables/table_2.tex}
 \end{sidewaystable}
+\newpage
+
+\begin{figure}[H]
+\centering
+%\resizebox{.79\linewidth}{!}{\input{./figures/V_y_H.pgf}}
+\input{./figures/H_M_flight_area.pgf}
+\caption{График области высот и скоростей установившегося горизонтального полета}
+\label{fig:H_M}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.79\linewidth}{!}{\input{./figures/V_y_H.pgf}}
+    \caption{График $V_{y_{max}}^*(H)$}
+    \label{fig:H_v_celling}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.79\linewidth}{!}{\input{./figures/q_km_q_ch.pgf}}
+    \caption{График $q_{ч_{min}}(H)$,$q_{км_{min}}(H)$}
+    \label{fig:q_min_H}
+\end{figure}
+

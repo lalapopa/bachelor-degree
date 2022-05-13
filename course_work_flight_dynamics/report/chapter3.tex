@@ -65,6 +65,26 @@
     \label{tab:minitable_climb}
 \end{sidewaystable}
 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/climb_params.pgf}}
+\caption{График зависимости $L(t)$, $m_{T}(t)$}
+\label{fig:climb_params}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/L_m_climb.pgf}}
+\caption{График зависимости $L(t)$, $m_{T}(t)$}
+\label{fig:L_t_climb}
+\end{figure}
+ 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/H_climb.pgf}}
+\caption{Программа набора высоты}
+\label{fig:H_M_des}
+\end{figure}
 
 \section{Расчет характеристик крейсерского полета}
 
@@ -143,6 +163,34 @@ $M_к = 0.30$; $H_к = 0$
 \end{sidewaystable}
 \newpage
 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/descent_params.pgf}}
+\caption{График зависимости $L(t)$, $m_{T}(t)$}
+\label{fig:param_des}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/L_m_des.pgf}}
+\caption{График зависимости $L(t)$, $m_{T}(t)$}
+\label{fig:L_t_des}
+\end{figure}
+ 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/H_des.pgf}}
+\caption{Программа снижения}
+\label{fig:H_M_des}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/H_L_graph.pgf}}
+\caption{Совмещенный график $H(L)$ для участков набора высоты, крейсерского полета и снижения}
+\label{fig:H_L}
+\end{figure}
+
 \section{Расчет диаграммы транспортных возможностей}
 Определим зависимость целевой нагрузки от дальности полета самолета
 $m_{цн}(L)$ (Рисунок 3.4.1)
@@ -198,6 +246,13 @@ $ L = L_{наб} + L_{кр} + L_{сн} $
     \label{tab:cargo_load}
     \input{./tables/cargo_load.tex}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/m_L_graph.pgf}}
+\caption{График зависимости $m_{цн}(L)$}
+\label{fig:m_L}
+\end{figure}
 
 
 
@@ -345,6 +400,13 @@ $L_{пд}$.
     \label{tab:turn_part2}
     \input{./tables/turn_data_table_part2.tex}
 \end{table}
+ 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/turn_graph.pgf}}
+\caption{График зависимости $n_{y_{вир}}(M)$, $\omega_{вир}(M)$, $r_{вир}(M)$, $t_{вир}(M)$}
+\label{fig:turn}
+\end{figure}
 
 
 \section{Расчет характеристик продольной статической устойчивости и
@@ -360,7 +422,7 @@ $\bar{S}_{ГО}$ из условия устойчивости и
 посадки ($H=0,\, M=0.2$) и предельно задняя
 $\bar{x}_{ТПЗ}$ центровки:
 \[
-    \bar{x}_{ТПЗ} = \frac{-m_{Z_0\, БГО} + \bar{x}_{F\, БГО}C_{y\, БГО}+ 
+    \bar{x}_{ТПП} = \frac{-m_{Z_0\, БГО} + \bar{x}_{F\, БГО}C_{y\, БГО}+ 
     C_{y\, ГО} \bar{S}_{ГО} K_{ГО} \bar{L}_{ГО}}{C_{y\, БГО}},
 \]
 Где $C_{y \, БГО} = C_{y_0\,{БГО}} + C_{y\, БГО}^\alpha \alpha$, 
@@ -428,4 +490,79 @@ $\bar{x}_{F} = \bar{x}_{F\, БГО} + \Delta \bar{x}_{F\, ГО}$, $m_z^{\delta_�
 \[
     n_{y_р} = 1 + \frac{\delta_{\max} + \varphi_{уст} - \delta_{бал}}{\delta^n}
 \]
+
+\begin{table}[H]
+    \centering
+    \caption{Значения для построения графика на рисунке \ref{fig:xTP}}
+    \label{tab:otn_S_go}
+    \input{./tables/otn_S_go.tex}
+\end{table}
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/xTP_graph.pgf}}
+\caption{График зависимости $\bar{x}_{ТПП}(\bar{S}_{го})$} 
+\label{fig:xTP}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчетов}
+    \label{tab:sigmas}
+    \input{./tables/sigmas_table.tex}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/xis_sigma.pgf}}
+\caption{График зависимости $\bar{x}_{F}(M)$, $\bar{x}_{H}(M)$, $\bar{x}_{ТПЗ}(M)$, $\sigma_{n}(M)$}
+\label{fig:xis_sigma}
+\end{figure}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчетов для балансировочных зависимостей для высоты
+    $H=0$ км}
+    \label{tab:phi_0}
+    \input{./tables/phi_table_H=0.tex}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчетов для балансировочных зависимостей для высоты
+    $H=6$ км}
+    \label{tab:phi_6}
+    \input{./tables/phi_table_H=6.tex}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Результаты расчетов для балансировочных зависимостей для высоты
+    $H=11$ км}
+    \label{tab:phi_11}
+    \input{./tables/phi_table_H=11.tex}
+\end{table}
+
+\begin{minipage}{\textwidth}
+\flushright 
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/phi_bal_graph.pgf}}
+\caption{График зависимости $\varphi_{бал}(M,\, H=0,6,11\, \text{км})$}
+\label{fig:phi_bal}
+\end{figure}
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/phi_n_graph.pgf}}
+\caption{График зависимости $\varphi^{n}(M,\, H=0,6,11\, \text{км})$}
+\label{fig:phi_n}
+\end{figure}
+\end{minipage}
+
+\begin{figure}[H]
+\centering
+\resizebox{.79\linewidth}{!}{\input{./figures/ny_p_graph.pgf}}
+\caption{График зависимости $n_{y_{p}}(M,\, H = 0,6,11 \, км)$}
+\label{fig:ny_p_graph}
+\end{figure}
 
