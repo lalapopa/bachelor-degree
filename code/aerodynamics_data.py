@@ -4,9 +4,12 @@ import config
 from lerp import linear1d
 from DataHandler import DataHandler as dh
 
+
 class AerodynamicsData:
     def __init__(self):
-        self.df = dh(config.PATH_DATA+"ad_data.csv")
+        self.df = dh(config.PATH_DATA + "ad_data.csv")
+        self.df_Ptilde = dh(config.PATH_DATA + "ad_data_P_H_M.csv")
+        self.df_Cetilde = dh(config.PATH_DATA + "ad_data_Ce_H_M.csv")
 
         self.mach_A_column = self.df.get_column("M")
         self.A_column = self.df.get_column("A")
@@ -23,13 +26,13 @@ class AerodynamicsData:
         column_x_text = "Ptilda"
         column_mach_text = "M_H_ptilda"
         self.Ptilda_dict = self._take_from_table_in_dict(
-            column_mach_text, column_x_text
+             self.df_Ptilde, column_mach_text, column_x_text
         )
 
         column_x_text = "Cetilda"
         column_mach_text = "M_H_ce"
         self.Cetilda_dict = self._take_from_table_in_dict(
-            column_mach_text, column_x_text
+            self.df_Cetilde, column_mach_text, column_x_text
         )
 
     def PTilda(self, mach, height):
@@ -72,7 +75,7 @@ class AerodynamicsData:
     def Ce_dr_value(self, R):
         return linear1d(self.Rdr_column, self.Cedr_column, R)
 
-    def _take_from_table_in_dict(self, x_name, y_name):
+    def _take_from_table_in_dict(self, df, x_name, y_name):
         output = {}
         x_column = self.df.get_column(x_name)
         H_text = (0, 2, 4, 6, 8, 10, 11)

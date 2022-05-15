@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def linear1d(x, y, x_int):
     if isinstance(x, np.ndarray):
         pass
@@ -64,3 +65,4 @@ def find_pair(x_array, y_array, element):
 
 def lerp(x, y, x_int):
     return y[0] + (x_int - x[0]) * ((y[1] - y[0]) / (x[1] - x[0]))
+

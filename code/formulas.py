@@ -1,8 +1,9 @@
 import numpy as np
 
+
 class Formulas:
     def q_dynamic_pressure(v, air_density):
-        return (air_density * (v ** 2)) / 2
+        return (air_density * (v**2)) / 2
 
     def V_speed(mach, sos):
         return mach * sos
