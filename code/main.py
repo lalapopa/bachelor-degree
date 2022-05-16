@@ -92,9 +92,7 @@ class Calculation:
                 Ce_dr = self.ad.Ce_dr_value(self.H, tilda_R)
                 Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
             else:
-                print('here')
                 Ce = self._ce_11_km()
-            print(Ce)
                 
             q_chas = eq.q_ch_hour_consumption(Ce, self.P_potr)
 
@@ -226,8 +224,6 @@ def paralell_optimal_fly_param(H, mass):
             q_km_min_array.append(q_km_min)
     min_q_km_index = np.unique(np.where(q_km_min_array == np.min(q_km_min_array)))[0]
 
-    print(min_q_km_index)
-    print(q_km_min_array)
     print("FUEL CONSUMPTION = ", q_km_min_array[min_q_km_index])
     return (
         H_opt_array[min_q_km_index],
@@ -286,7 +282,7 @@ def cruise_fly_sim(m0, mk, L_k):
         fuel_burned = q_km * S_km
         total_mass -= fuel_burned
 
-        output = f"{H_opt},{total_range},{V},{q_km},{total_mass}"
+        output = f"0,{H_opt},{total_range},{V},{q_km},{total_mass}"
         write_in_file(log_name, output)
 
         finded_H_opt, _, _, finded_q_km_opt = paralell_optimal_fly_param(H, total_mass)
@@ -299,7 +295,7 @@ def cruise_fly_sim(m0, mk, L_k):
             )
             H_opt = finded_H_opt
             for i, value in enumerate(L_array):
-                output = f"{H_array[i]},{total_range+(L_array[i]/1000)},{V_array[i]},{q_array[i]},{mass_change_array[i]}"
+                output = f"1,{H_array[i]},{total_range+(L_array[i]/1000)},{V_array[i]},{q_array[i]},{mass_change_array[i]}"
                 write_in_file(log_name, output)
             total_mass = mass_change_array[-1]
             total_range += L_array[-1] / 1000
@@ -371,12 +367,11 @@ def calulate_climb(H_0, H_k, m0, plane):
 #pgf_setting()
 il_76 = PlaneData()
 m0 = il_76.MTOW
-m_k = m0 - il_76.TFL - 10000
+m_k = m0 - il_76.TFL
 L_k = 4000
 
 
 #calc = Calculation(140000, il_76, 0)
-
 #Cx = calc.Cx
 #Cy = calc.Cy
 #K = Cy/Cx
@@ -407,11 +402,11 @@ L_k = 4000
 #
 #plt.savefig('out3.png')
 
-#print(f'start mass = {m0}, end mass = {m_k}')
+print(f'start mass = {m0}, end mass = {m_k}')
 #L = integrate.quad(L_range, m_k, m0)
 #L = trapezoid(L_range, m_k, m0)
-#L = cruise_fly_sim(m0, m_k, L_k)
-#print(f'Range = {L}')
+L = cruise_fly_sim(m0, m_k, L_k)
+print(f'Range = {L}')
 
 # print(m_k)
 # calc = Calculation(140000, il_76, 10000)

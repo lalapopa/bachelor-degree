@@ -35,8 +35,13 @@ def get_total_fuel_burned(m0, m_array):
     return m0 - np.unique(np.min(m_array))
 
 
-def get_total_flight_time(time_stamp, L_array):
-    return (time_stamp * len(L_array)) / 60
+def get_total_flight_time(time_stamp, L_array, climb_state):
+    climb_time_stamp = 1
+    climb_index = np.where(climb_state == 1)[0]
+    climb_time = (len(climb_index)*climb_time_stamp)/60 # in minutes
+    level_flight_index = np.where(climb_state == 0)[0]
+    level_flight_time = (len(level_flight_index)*time_stamp)/60
+    return level_flight_time + climb_time 
 
 
 #'{H_opt},{total_range},{V},{q_km},{total_mass}'
@@ -48,19 +53,21 @@ file_name = [f for f in file_name if ".txt" in f][0:]
 
 for i, val in enumerate(file_name):
     data = pd.read_csv(config.PATH_SAVE_DATA + val, sep=",", header=None)
-    name_change = ["H", "L", "V", "q_km", "m"]
+    name_change = ["climb_state", "H", "L", "V", "q_km", "m"]
     data.columns = name_change
-
+    
+    climb_state = np.array(data.loc[:, "climb_state"])
     H_data = np.array(data.loc[:, "H"])
     L_data = np.array(data.loc[:, "L"])
     V_data = np.array(data.loc[:, "V"])
     q_data = np.array(data.loc[:, "q_km"])
     m_data = np.array(data.loc[:, "m"])
+
     print("=" * 10, val, "=" * 10)
     print(f"AVG fuel_q_km = {np.average(q_data)}")
     print(f"Flight_range = {np.max(L_data)}")
     print(
-        f"Total_fuel burned = {get_total_fuel_burned(m0, m_data )}\nTotal Flight time = {get_total_flight_time(t_0, L_data)}"
+        f"Total_fuel burned = {get_total_fuel_burned(m0, m_data)}\nTotal Flight time = {get_total_flight_time(t_0, L_data, climb_state)}"
     )
 
     fig, ax1 = plt.subplots()
