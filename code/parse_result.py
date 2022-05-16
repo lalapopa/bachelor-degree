@@ -43,12 +43,11 @@ def get_total_flight_time(time_stamp, L_array):
 m0 = 166000
 t_0 = 60
 
-file_name = os.listdir(config.PATH_DATA)
-file_name = [f for f in file_name if ".txt" in f][1:]
-
+file_name = os.listdir(config.PATH_SAVE_DATA)
+file_name = [f for f in file_name if ".txt" in f][0:]
 
 for i, val in enumerate(file_name):
-    data = pd.read_csv(config.PATH_DATA + val, sep=",", header=None)
+    data = pd.read_csv(config.PATH_SAVE_DATA + val, sep=",", header=None)
     name_change = ["H", "L", "V", "q_km", "m"]
     data.columns = name_change
 
@@ -69,7 +68,7 @@ for i, val in enumerate(file_name):
     ax2 = ax1.twinx()
     ax1.plot(L_data, H_data, "g", label="$H(L)$")
     ax2.plot(L_data, V_data, "b", label="$V(L)$")
-    ax2.set_ylim([200, max(V_data) + 2])
+    ax2.set_ylim([100, max(V_data) + 2])
 
     ax1.set_xlabel("L, [km]")
     ax1.set_ylabel("H, м", color="g")
@@ -78,6 +77,21 @@ for i, val in enumerate(file_name):
     fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
     ax1.grid()
     plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf")
+    plt.clf()
+
+    fig, ax1 = plt.subplots()
+
+    ax2 = ax1.twinx()
+    ax1.plot(L_data, m_data, "g", label="$m(L)$")
+    ax2.plot(L_data, q_data, "b", label="$q(L)$")
+
+    ax1.set_xlabel("L, [km]")
+    ax1.set_ylabel("m, [кг]", color="g")
+    ax2.set_ylabel("q_km, [kg/km]", color="b")
+
+    fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+    ax1.grid()
+    plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_m.pgf")
     plt.clf()
 
 

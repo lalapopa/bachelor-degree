@@ -38,7 +38,6 @@ def pgf_setting():
         }
     )
 
-
 class Calculation:
     def __init__(self, mass, plane_char, H):
         self.ad = AerodynamicsData()
@@ -56,15 +55,14 @@ class Calculation:
         self.V_calc = eq.V_speed(self.MACH_calc, self.a_sos)
         q = eq.q_dynamic_pressure(self.V_calc, Ro)
 
-        Cy = eq.my_C_y_n(
+        self.Cy = eq.my_C_y_n(
             self.mass, self.g, self.plane_char.WING_AREA, Ro, self.MACH_calc, self.a_sos
         )
         A = self.ad.A_value(self.MACH_calc)
         Cxm = self.ad.Cxm_value(self.MACH_calc)
         Cym = self.ad.Cym_value(self.MACH_calc)
-        Cx = eq.C_x_n_drag_coefficient(Cxm, A, Cy, Cym)
-
-        K = eq.K_n_lift_to_drag_ratio(Cy, Cx)
+        self.Cx = eq.C_x_n_drag_coefficient(Cxm, A, self.Cy, Cym)
+        K = eq.K_n_lift_to_drag_ratio(self.Cy, self.Cx)
 
         self.P_potr = eq.P_potr_equation(self.mass, self.g, K)
         tilda_P = np.array([self.ad.PTilda(M, self.H) for M in self.MACH_calc])
@@ -83,29 +81,34 @@ class Calculation:
             air_11.pressure[0],
             air_H.pressure[0],
         )
-        print(f'if H = {H}, MACH = {round(self.MACH_calc[300],2)} K= {round(K[300],2)}, Cy = {round(Cy[300], 3)}, T/W ration = {otn_P_0}')
+#        print(f'if H = {H}, MACH = {round(self.MACH_calc[300],2)} K= {round(K[300],2)}, self.Cy = {round(self.Cy[300], 3)}, T/W ration = {otn_P_0}')
 
     def find_min_fuel_consumption(self):
         P_diff = self.P_rasp - self.P_potr
         if self._can_fly(P_diff):
-            tilda_R = eq.tilda_R_equation(self.P_potr, self.P_rasp)
-            Ce_tilda = [self.ad.CeTilda(M, self.H) for M in self.MACH_calc]
-            Ce_dr = self.ad.Ce_dr_value(tilda_R)
-            #            print(f'Tilda R = {min(tilda_R)}, Ce_dr = {min(Ce_dr)}')
-            #            print(f'index = {np.where(tilda_R == np.min(tilda_R))}')
-#            print(f"{self.V_calc[np.where(tilda_R == np.min(tilda_R))[0]]}")
-
-            Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
+            if self.H < 11000:
+                tilda_R = eq.tilda_R_equation(self.P_potr, self.P_rasp)
+                Ce_tilda = [self.ad.CeTilda(M, self.H) for M in self.MACH_calc]
+                Ce_dr = self.ad.Ce_dr_value(self.H, tilda_R)
+                Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
+            else:
+                print('here')
+                Ce = self._ce_11_km()
+            print(Ce)
+                
             q_chas = eq.q_ch_hour_consumption(Ce, self.P_potr)
 
             self.q_km = eq.q_km_range_consumption(q_chas, self.V_calc)
+
+            
 #            print(
 #                f"min q km = { np.min(self.q_km) }, V min q  = {self.V_calc[np.where(self.q_km == np.min(self.q_km))]}"
 #            )
-
             min_km_fuel_index = dh.get_min_or_max(self.q_km)
             mach_min_fuel = self.V_calc[min_km_fuel_index] / self.a_sos
 
+#            print(f"Ce = {Ce_dr[min_km_fuel_index]}, Ce_tilda = {Ce_tilda[min_km_fuel_index]} ")
+#            print(f"P_potr {self.P_potr[min_km_fuel_index]}")
             return (
                 self.q_km[min_km_fuel_index],
                 mach_min_fuel,
@@ -113,7 +116,48 @@ class Calculation:
             )
         #        return q_chas[min_km_fuel_index], mach_min_fuel, V_calc[min_km_fuel_index]
         else:
-            return (False, False, False)
+            return (999, 999, 999)
+
+    def _ce_11_km(self):
+        air_H = Atmosphere(11000)
+        air_11 = Atmosphere(11000)
+        Ro = air_H.density[0]
+        a_sos = air_H.speed_of_sound[0]
+        V_calc = eq.V_speed(self.MACH_calc, a_sos)
+        q = eq.q_dynamic_pressure(V_calc, Ro)
+
+        Cy = eq.my_C_y_n(
+            self.mass, self.g, self.plane_char.WING_AREA, Ro, self.MACH_calc, a_sos
+        )
+        A = self.ad.A_value(self.MACH_calc)
+        Cxm = self.ad.Cxm_value(self.MACH_calc)
+        Cym = self.ad.Cym_value(self.MACH_calc)
+        Cx = eq.C_x_n_drag_coefficient(Cxm, A, Cy, Cym)
+        K = eq.K_n_lift_to_drag_ratio(Cy, Cx)
+
+        P_potr = eq.P_potr_equation(self.mass, self.g, K)
+        tilda_P = np.array([self.ad.PTilda(M, 11000) for M in self.MACH_calc])
+        otn_P_0 =  eq.thrust_to_weight_equation(
+                self.plane_char.zero_thrust_one_eng,
+                self.plane_char.N_DV,
+                self.mass,
+                self.g,
+                )
+        P_rasp = eq.P_rasp_equation(
+            otn_P_0,
+            self.mass,
+            self.g,
+            tilda_P,
+            11000,
+            air_11.pressure[0],
+            air_H.pressure[0],
+        )
+        tilda_R = eq.tilda_R_equation(P_potr, P_rasp)
+        Ce_tilda = [self.ad.CeTilda(M, 11000) for M in self.MACH_calc]
+        Ce_dr = self.ad.Ce_dr_value(11000, tilda_R)
+        Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
+        return Ce
+
 
     def _can_fly(self, thrust_diff):
         for i in thrust_diff:
@@ -181,6 +225,9 @@ def paralell_optimal_fly_param(H, mass):
             M_opt_array.append(M_opt)
             q_km_min_array.append(q_km_min)
     min_q_km_index = np.unique(np.where(q_km_min_array == np.min(q_km_min_array)))[0]
+
+    print(min_q_km_index)
+    print(q_km_min_array)
     print("FUEL CONSUMPTION = ", q_km_min_array[min_q_km_index])
     return (
         H_opt_array[min_q_km_index],
@@ -206,10 +253,11 @@ def optimal_fly_param(m, H, like_array=False):
             M_opt.append(mach)
         else:
             break
+
     if like_array:
         return H_opt, V_opt, M_opt, q_km_min
 
-    if not q_km_min:
+    if np.array(q_km_min).any() == False:
         return (999, 999, 999, 999)
 
     mfi = np.unique(np.where(q_km_min == np.min(q_km_min)))[0]
@@ -220,11 +268,13 @@ def cruise_fly_sim(m0, mk, L_k):
     time_tick = 60  # sec
     now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
-    H = np.arange(9500, 12000, 10)
-    #    H = np.array([10000])
+    H = np.arange(7500, 12000, 10)
+#    H = np.array([10000])
     total_range = 0
     # begin with optimal height and speed
+    print(f'Hmin {min(H)}, Hmax {max(H)}')
     H_opt, _, _, _ = paralell_optimal_fly_param(H, m0)
+    H_opt = float(H_opt)
     total_mass = m0
     while total_mass > mk and total_range < L_k:
         # q_km [kg/km], V [m/s]
@@ -243,7 +293,7 @@ def cruise_fly_sim(m0, mk, L_k):
         H_diff = finded_H_opt - H_opt
         fuel_remaning = total_mass - mk
 
-        if H_diff >= 10:
+        if H_diff >= 300:
             L_array, H_array, V_array, q_array, mass_change_array = calulate_climb(
                 H_opt, finded_H_opt, total_mass, il_76
             )
@@ -260,7 +310,7 @@ def cruise_fly_sim(m0, mk, L_k):
 
 
 def write_in_file(file_name, data):
-    with open(config.PATH_DATA + file_name, "a") as f:
+    with open(config.PATH_SAVE_DATA + file_name, "a") as f:
         f.write(str(data) + "\n")
     return True
 
@@ -312,6 +362,7 @@ def calulate_climb(H_0, H_k, m0, plane):
         V_array.append(V_climb)
         q_array.append(q_km_climb)
         mass_change_array.append(m_climb)
+
         print(f"{H_current},{L},{V_climb},{q_km_climb},{m_climb}")
         print(f"V_y = {Vy_max}")
 
@@ -319,15 +370,48 @@ def calulate_climb(H_0, H_k, m0, plane):
 
 #pgf_setting()
 il_76 = PlaneData()
-#m0 = il_76.MTOW
-#m_k = m0 - il_76.TFL - 10000
-#L_k = 4000
+m0 = il_76.MTOW
+m_k = m0 - il_76.TFL - 10000
+L_k = 4000
 
-# print(f'start mass = {m0}, end mass = {m_k}')
-##L = integrate.quad(L_range, m_k, m0)
-##L = trapezoid(L_range, m_k, m0)
-# L = cruise_fly_sim(m0, m_k, L_k)
-# print(f'Range = {L}')
+
+#calc = Calculation(140000, il_76, 0)
+
+#Cx = calc.Cx
+#Cy = calc.Cy
+#K = Cy/Cx
+#
+#plt.plot(Cy, K)
+#plt.xlabel('Cy')
+#plt.ylabel('K')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out1.png')
+#plt.clf()
+#
+#plt.plot(calc.MACH_calc, Cx)
+#plt.xlabel('M')
+#plt.ylabel('Cx')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out2.png')
+#plt.clf()
+#
+#plt.plot(Cx, Cy)
+#plt.xlabel('Cx')
+#plt.ylabel('Cy')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out3.png')
+
+#print(f'start mass = {m0}, end mass = {m_k}')
+#L = integrate.quad(L_range, m_k, m0)
+#L = trapezoid(L_range, m_k, m0)
+#L = cruise_fly_sim(m0, m_k, L_k)
+#print(f'Range = {L}')
 
 # print(m_k)
 # calc = Calculation(140000, il_76, 10000)
@@ -336,49 +420,60 @@ il_76 = PlaneData()
 # print(max(Vy_speeds))
 # print(V_min)
 
-mass = [170000, 150000, 140000]
-H_calc = 9000 
+#mass = [170000, 150000, 140000]
+#H_calc = 9000 
 
-for i in mass:
-    calc = Calculation(i, il_76, H_calc)
-    Vy_speeds = calc.find_Vy_speeds()
-    q_km, mach_min, V_min = calc.find_min_fuel_consumption()
-    V_calc = calc.V_calc
-    q_km_calc = calc.q_km
-    index_min_fuel = np.where(q_km_calc == np.min(q_km_calc))
-    label_q_min = "$q_{{км}_{min}}=%.3f$" % (q_km)
-    text_V = "$V = %.2f$" % (V_calc[index_min_fuel])
-    title_text = "Для высоты H= %.0f м, m = %.0f кг" % (H_calc, i)
-
-    plt.plot(
-        V_calc[index_min_fuel],
-        q_km_calc[index_min_fuel],
-        "o",
-        color="r",
-        label=label_q_min,
-    )
-    plt.text(V_calc[index_min_fuel], q_km_calc[index_min_fuel] + 2, text_V)
-    plt.title(title_text)
-
-    plt.plot(V_calc, q_km_calc, label="$q_{km}(V)$")
-    plt.xlabel(r"$V, \frac{м}{с}$")
-    plt.ylabel(r"$q_{km}, \frac{кг}{км}$")
-
-    plt.grid()
-    plt.legend()
-    plt.savefig(f"{i}_q_km_V.pgf")
-    plt.clf()
-
-# L, H, V_array, q_km, mass_change  = calulate_climb(9000, 13000, 166000, il_76)
+#for i in mass:
+#    calc = Calculation(i, il_76, H_calc)
+#    Vy_speeds = calc.find_Vy_speeds()
+#    q_km, mach_min, V_min = calc.find_min_fuel_consumption()
+#    V_calc = calc.V_calc
+#    q_km_calc = calc.q_km
+#    index_min_fuel = np.where(q_km_calc == np.min(q_km_calc))
+#    label_q_min = "$q_{{км}_{min}}=%.3f$" % (q_km)
+#    text_V = "$V = %.2f$" % (V_calc[index_min_fuel])
+#    title_text = "Для высоты H= %.0f м, m = %.0f кг" % (H_calc, i)
 #
-# plt.plot(calc.MACH_calc, calc.q_km)
-# plt.xlabel('Mach')
-# plt.ylabel('q')
-# plt.grid()
-# plt.legend()
+#    plt.plot(
+#        V_calc[index_min_fuel],
+#        q_km_calc[index_min_fuel],
+#        "o",
+#        color="r",
+#        label=label_q_min,
+#    )
+#    plt.text(V_calc[index_min_fuel], q_km_calc[index_min_fuel] + 2, text_V)
+#    plt.title(title_text)
 #
-# plt.savefig('out1.png')
-# plt.clf()
+#    plt.plot(V_calc, q_km_calc, label="$q_{km}(V)$")
+#    plt.xlabel(r"$V, \frac{м}{с}$")
+#    plt.ylabel(r"$q_{km}, \frac{кг}{км}$")
+#
+#    plt.grid()
+#    plt.legend()
+#    plt.savefig(f"{i}_q_km_V.pgf")
+#    plt.clf()
+
+#L, H, V_array, q_km, mass_change, V_q_km_min  = calulate_climb(8000, 8300, 166000, il_76)
+#
+#
+#plt.plot(L, V_array)
+#plt.plot(L, V_q_km_min)
+#plt.xlabel('L')
+#plt.ylabel('V')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out1.png')
+#plt.clf()
+#
+#plt.plot(L, H)
+#plt.xlabel('L')
+#plt.ylabel('H')
+#plt.grid()
+#plt.legend()
+#
+#plt.savefig('out2.png')
+#plt.clf()
 #
 
 # calc = Calculation(m0, il_76, 10)

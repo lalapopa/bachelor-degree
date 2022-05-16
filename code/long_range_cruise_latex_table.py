@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import numpy as np
+import os 
 import re
 
 from DataHandler import DataHandler as dh
@@ -26,11 +27,13 @@ def to_height_mach_table(H, M, q_km, V, index):
 
 
 def create_json_with_opt_fly_params(file_name):
-#    H_array = np.arange(7000, 13000, 500)
-    H_array = np.arange(7000, 13000, 100)
+    H_array = np.arange(7000, 13000, 500)
+#    H_array = np.arange(7000, 13000, 100)
     mass_array = np.array(
         [100, 110, 120, 130, 140, 150, 160, 170, 180, 190]
     )*1000
+#    mass_array = np.array([110,115, 118, 120])*1000
+
 
     result_table = {}
     for mass in mass_array:
@@ -44,10 +47,10 @@ def create_json_with_opt_fly_params(file_name):
 
         min_fuel_index = dh.get_min_or_max(q_km_min)
 
-        q_km_min = np.array(["-" if i == 9999 else str(round(i, 3)) for i in q_km_min])
-        H_fly = np.array(["-" if i is False else str(round(i, 0)) for i in H_fly])
-        M_opt = np.array(["-" if i is False else str(round(i, 3)) for i in M_opt])
-        V_opt = np.array(["-" if i is False else str(round(i, 3)) for i in V_opt])
+        q_km_min = np.array(["-" if i == 999 else str(round(i, 3)) for i in q_km_min])
+        H_fly = np.array(["-" if i == 999 else str(round(i, 0)) for i in H_fly])
+        M_opt = np.array(["-" if i == 999 else str(round(i, 3)) for i in M_opt])
+        V_opt = np.array(["-" if i == 999 else str(round(i, 3)) for i in V_opt])
 
         mass_table = to_height_mach_table(H_fly, M_opt, q_km_min, V_opt, min_fuel_index)
         result_table[str(mass)] = mass_table
@@ -65,6 +68,7 @@ def create_json_with_opt_fly_params(file_name):
 def parse_json_and_return_latex_table(file_name):
     with open(file_name) as jf:
         data = json.load(jf)
+    os.remove(file_name)
     keys_data = list(data.keys())[0]
     actual_name = [d["$H$"] for d in data[keys_data]]
     mass_array = []
