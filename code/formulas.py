@@ -29,6 +29,9 @@ class Formulas:
         else:
             return otn_P_0 * M0 * g * tilda_P
 
+    def thrust_to_weight_equation(one_engine_thrust, engine_amount, weight, g):
+        return (one_engine_thrust*engine_amount)/(weight*g)
+
     def q_ch_hour_consumption(Ce, P_potr):
         return Ce * P_potr
 

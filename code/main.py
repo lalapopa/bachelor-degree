@@ -65,12 +65,17 @@ class Calculation:
         Cx = eq.C_x_n_drag_coefficient(Cxm, A, Cy, Cym)
 
         K = eq.K_n_lift_to_drag_ratio(Cy, Cx)
-        print(f'if H = {H}, MACH = {round(self.MACH_calc[300],2)} K= {round(K[300],2)}, Cy = {round(Cy[300], 3)}')
 
         self.P_potr = eq.P_potr_equation(self.mass, self.g, K)
         tilda_P = np.array([self.ad.PTilda(M, self.H) for M in self.MACH_calc])
+        otn_P_0 =  eq.thrust_to_weight_equation(
+                self.plane_char.zero_thrust_one_eng,
+                self.plane_char.N_DV,
+                self.mass,
+                self.g,
+                )
         self.P_rasp = eq.P_rasp_equation(
-            self.plane_char.OTN_P_0,
+            otn_P_0,
             self.mass,
             self.g,
             tilda_P,
@@ -78,6 +83,7 @@ class Calculation:
             air_11.pressure[0],
             air_H.pressure[0],
         )
+        print(f'if H = {H}, MACH = {round(self.MACH_calc[300],2)} K= {round(K[300],2)}, Cy = {round(Cy[300], 3)}, T/W ration = {otn_P_0}')
 
     def find_min_fuel_consumption(self):
         P_diff = self.P_rasp - self.P_potr
@@ -330,37 +336,38 @@ il_76 = PlaneData()
 # print(max(Vy_speeds))
 # print(V_min)
 
-#mass = [166000, 150000, 140000]
-#H_calc = 11000
-#for i in mass:
-#    calc = Calculation(i, il_76, H_calc)
-#    Vy_speeds = calc.find_Vy_speeds()
-#    q_km, mach_min, V_min = calc.find_min_fuel_consumption()
-#    V_calc = calc.V_calc
-#    q_km_calc = calc.q_km
-#    index_min_fuel = np.where(q_km_calc == np.min(q_km_calc))
-#    label_q_min = "$q_{{км}_{min}}=%.3f$" % (q_km_calc[index_min_fuel])
-#    text_V = "$V = %.2f$" % (V_calc[index_min_fuel])
-#    title_text = "Для высоты H= %.0f м, m = %.0f кг" % (H_calc, i)
-#
-#    plt.plot(
-#        V_calc[index_min_fuel],
-#        q_km_calc[index_min_fuel],
-#        "o",
-#        color="r",
-#        label=label_q_min,
-#    )
-#    plt.text(V_calc[index_min_fuel], q_km_calc[index_min_fuel] + 2, text_V)
-#    plt.title(title_text)
-#
-#    plt.plot(V_calc, q_km_calc, label="$q_{km}(V)$")
-#    plt.xlabel(r"$V, \frac{м}{с}$")
-#    plt.ylabel(r"$q_{km}, \frac{кг}{км}$")
-#
-#    plt.grid()
-#    plt.legend()
-#    plt.savefig(f"{i}_q_km_V.pgf")
-#    plt.clf()
+mass = [170000, 150000, 140000]
+H_calc = 9000 
+
+for i in mass:
+    calc = Calculation(i, il_76, H_calc)
+    Vy_speeds = calc.find_Vy_speeds()
+    q_km, mach_min, V_min = calc.find_min_fuel_consumption()
+    V_calc = calc.V_calc
+    q_km_calc = calc.q_km
+    index_min_fuel = np.where(q_km_calc == np.min(q_km_calc))
+    label_q_min = "$q_{{км}_{min}}=%.3f$" % (q_km)
+    text_V = "$V = %.2f$" % (V_calc[index_min_fuel])
+    title_text = "Для высоты H= %.0f м, m = %.0f кг" % (H_calc, i)
+
+    plt.plot(
+        V_calc[index_min_fuel],
+        q_km_calc[index_min_fuel],
+        "o",
+        color="r",
+        label=label_q_min,
+    )
+    plt.text(V_calc[index_min_fuel], q_km_calc[index_min_fuel] + 2, text_V)
+    plt.title(title_text)
+
+    plt.plot(V_calc, q_km_calc, label="$q_{km}(V)$")
+    plt.xlabel(r"$V, \frac{м}{с}$")
+    plt.ylabel(r"$q_{km}, \frac{кг}{км}$")
+
+    plt.grid()
+    plt.legend()
+    plt.savefig(f"{i}_q_km_V.pgf")
+    plt.clf()
 
 # L, H, V_array, q_km, mass_change  = calulate_climb(9000, 13000, 166000, il_76)
 #

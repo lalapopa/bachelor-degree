@@ -26,7 +26,8 @@ def to_height_mach_table(H, M, q_km, V, index):
 
 
 def create_json_with_opt_fly_params(file_name):
-    H_array = np.arange(7000, 13000, 500)
+#    H_array = np.arange(7000, 13000, 500)
+    H_array = np.arange(7000, 13000, 100)
     mass_array = np.array(
         [100, 110, 120, 130, 140, 150, 160, 170, 180, 190]
     )*1000

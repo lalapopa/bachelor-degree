@@ -73,7 +73,7 @@ column_names = list(df.columns)
 
 H_values = take_H_from_columns_name(column_names)
 M_pos = column_pos_with_name('M', column_names)
-P_pos = [val-1 for val in M_pos]
+P_pos = [val+1 for val in M_pos]
 
 M_values = df.iloc[:, M_pos].T.to_numpy()
 P_values = df.iloc[:, P_pos].T.to_numpy()
@@ -85,7 +85,6 @@ P_array = []
 column_names = []
 P_array.append(MACH_int)
 column_names.append('M_H_ptilda')
-
 for i, H in enumerate(H_int):
     column_names.append('Ptilda%.0f' % H)
     M_H_values, P_H_values = interpolate_H(M_values, P_values, H_values, H)
@@ -93,7 +92,7 @@ for i, H in enumerate(H_int):
     P_int = P_f(MACH_int)
     P_H_array = []
     for P_value in P_int:
-        P_tilde = P_value/94000
+        P_tilde = P_value*1000/94700
         P_H_array.append(P_tilde)
     P_array.append(P_H_array)
 
@@ -104,7 +103,7 @@ df.to_csv(save_path+'ad_data_P_H_M.csv', index=False)
 #  CeTilde  #
 #############
 
-file_name = 'Cud_M.csv'
+file_name = 'Cud_M_correct.csv'
 df = pd.read_csv(file_name)
 column_names = list(df.columns)
 
@@ -130,7 +129,7 @@ for i, H in enumerate(H_int):
     C_int = C_f(MACH_int)
     C_H_array = []
     for C_value in C_int:
-        C_tilde = C_value/0.0475
+        C_tilde = C_value/0.0477
         C_H_array.append(C_tilde)
     C_array.append(C_H_array)
 

@@ -12,6 +12,7 @@ class PlaneData:
         self.TFL = 60000  # total fuel load in KG
         self.TP = 20000  # total payload KG
         self.MTOW = 166000  # maximum takeoff weight KG
+        self.zero_thrust_one_eng = 94700 # [H] 
         self.OTN_M_TSN = float(df.get_column("otn_m_tsn"))
         self.OTN_M_T = float(df.get_column("otn_m_t"))
         self.OTN_M_CH = float(df.get_column("otn_m_CH"))
