@@ -402,11 +402,11 @@ L_k = 4000
 #
 #plt.savefig('out3.png')
 
-print(f'start mass = {m0}, end mass = {m_k}')
+#print(f'start mass = {m0}, end mass = {m_k}')
 #L = integrate.quad(L_range, m_k, m0)
 #L = trapezoid(L_range, m_k, m0)
-L = cruise_fly_sim(m0, m_k, L_k)
-print(f'Range = {L}')
+#L = cruise_fly_sim(m0, m_k, L_k)
+#print(f'Range = {L}')
 
 # print(m_k)
 # calc = Calculation(140000, il_76, 10000)

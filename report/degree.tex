@@ -4,152 +4,21 @@
 \input{gost_style.tex}
 \input{title.tex}
 
-
 \begin{document}
 %\titleASU
+
 \section{Исходные данные для самолета Ил-76}
+
 $m_{пуст} = 86000\ \text{кг}$, $m_{топл}= 60000\ \text{кг}$, $m_{поле}=34000\ \text{кг}$
 При интегрировании по формулам (\ref{eq:L_T_integral}) $m_{к}=120000\, кг$, $m_{н}=180000\, кг$.
+Полет будет осуществляется на дальность $L_{кр} = 3000 \, м$.
 
 \section{Исследование характеристик транспортного самолета при выполнении эшелонирования}
 \subsection{Постановка задачи}
-В работе исследуется задача минимизации километрового расхода топлива в крейсерском полете на заданную дальность путем оптимизации вертикальной трактории и скоростного режима.  
+В работе исследуется задача минимизации километрового расхода топлива в крейсерском полете на заданную дальность путем оптимизации вертикальной траектории и скоростного режима.
 
 \input{special_part_text.tex}
-%\input{special_part_result.tex}
-
-\section{Полученный результаты}
-\subsection{Результаты расчета при постоянный высоте и оптимальной скорости полета}
-
-\begin{table}[H]
-    \centering
-    \caption{Полученный параметры}
-    \label{tab:table_H_const_V_diff}
-    \begin{tabular}{|c|c|}
-        \hline
-        $q_{км\, ср},\ \frac{кг}{км}$ & 9.0784 \\
-        \hline
-        $L,\ м$ & 4000 \\
-        \hline
-        $m_{сож.топл},\ кг$ & 36361.23 \\
-        \hline
-        $t_{пол.},\ мин$ & 295 \\
-        \hline
-    \end{tabular}
-\end{table}
-
-
-
-\begin{figure}[H]
-\centering
-\input{./img/H_const_V_opt_L_H.pgf}
-\caption{График зависимости $H(L)$ и $V(L)$}
-\label{fig:H_const_V_diff_L_H_V}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\input{./img/H_const_V_opt_L_m.pgf}
-\caption{График зависимости $q(L)$ и $m(L)$}
-\label{fig:H_const_V_diff_L_m}
-\end{figure}
-
-\subsection{Результаты расчета при оптимальном изменении высоты и скорости полета}
-\begin{table}[H]
-    \centering
-    \caption{Полученный параметры}
-    \label{tab:H_opt_V_opt}
-    \begin{tabular}{|c|c|}
-        \hline
-        $q_{км\, ср},\ \frac{кг}{км}$ & 8.51 \\
-        \hline
-        $L,\ м$ & 4000 \\
-        \hline
-        $m_{сож.топл},\ кг$ & 34139.74\\
-        \hline
-        $t_{пол.},\ мин$ & 392 \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\input{./img/H_opt_V_opt_L_H.pgf}
-\caption{График зависимости $H(L)$ и $V(L)$}
-\label{fig:H_vat_optimal}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\input{./img/H_opt_V_opt_L_m.pgf}
-\caption{График зависимости $q(L)$ и $m(L)$}
-\label{fig:H_opt_L_m}
-\end{figure}
-
-\subsection{Эшелонированный полет, высота меняется ступенчато с шагом 300 м}
-
-\begin{table}[H]
-    \centering
-    \caption{Полученные параметры}
-    \label{tab:H_300_V_opt}
-    \begin{tabular}{|c|c|}
-        \hline
-        $q_{км\, ср},\ \frac{кг}{км}$ & 8.5619 \\
-        \hline
-        $L,\ м$ & 4000 \\
-        \hline
-        $m_{сож.топл},\ кг$ & 34301.74\\
-        \hline
-        $t_{пол.},\ мин$ & 368 \\
-        \hline
-    \end{tabular}
-\end{table}
-
-
-\begin{figure}[H]
-\centering
-\input{./img/H_300_V_opt_L_H.pgf}
-\caption{График зависимости $H(L)$ и $V(L)$}
-\label{fig:FL_H_V_opt}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
-\input{./img/H_300_V_opt_L_m.pgf}
-\label{fig:H_300_L_m}
-\caption{График зависимости $q(L)$ и $q(L)$}
-\end{figure}
-
-
-
-\begin{table}[H]
-\centering
-\resizebox{\textwidth-1.4cm}{!}{
-    \input{./tables/table.tex}
-}
-\caption{$q_{km}\, [\frac{кг}{км}], V \, [\frac{м}{с}] $}
-\label{t:1}
-\end{table}
-
-\begin{figure}[H]
-\centering
-\scalebox{0.8}{\input{./img/140000_q_km_V.pgf}}
-\caption{График изменения $q_{km}$}
-\label{fig:q_km_1}
-\end{figure}
-\begin{figure}[H]
-\centering
-\scalebox{0.8}{\input{./img/150000_q_km_V.pgf}}
-\caption{График изменения $q_{km}$}
-\label{fig:q_km_2}
-\end{figure}
-\begin{figure}[H]
-\centering
-\scalebox{0.8}{\input{./img/170000_q_km_V.pgf}}
-\caption{График изменения $q_{km}$}
-\label{fig:q_km_3}
-\end{figure}
-
+\input{special_part_result.tex}
+\input{special_part_conclusion.tex}
 
 \end{document}
