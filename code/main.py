@@ -1,3 +1,4 @@
+#TODO fix different data in diploma and here
 import os
 import scipy.integrate as integrate
 import numpy as np

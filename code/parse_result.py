@@ -71,7 +71,7 @@ def crate_and_save_latex_table(file_name, avg_fuel_burn, flight_range, fuel_burn
     text_column = np.array([
         r'$q_{км\, ср},\, \frac{кг}{км}$',
         r'$L,\, м$',
-        r'$m_{сож. топл.},\, кг$',
+        r'$m_{изр},\, кг$',
         r'$t_{кр},\, мин$',
         ])
     value_column = np.array([

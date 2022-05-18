@@ -536,11 +536,11 @@
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{3.540000in}{3.802500in}}%
-\pgfpathlineto{\pgfqpoint{3.354000in}{3.172500in}}%
-\pgfpathlineto{\pgfqpoint{3.075000in}{2.542500in}}%
-\pgfpathlineto{\pgfqpoint{2.796000in}{1.912500in}}%
-\pgfpathlineto{\pgfqpoint{2.563500in}{1.282500in}}%
-\pgfpathlineto{\pgfqpoint{2.377500in}{0.652500in}}%
+\pgfpathlineto{\pgfqpoint{3.075000in}{3.172500in}}%
+\pgfpathlineto{\pgfqpoint{2.796000in}{2.542500in}}%
+\pgfpathlineto{\pgfqpoint{2.517000in}{1.912500in}}%
+\pgfpathlineto{\pgfqpoint{2.331000in}{1.282500in}}%
+\pgfpathlineto{\pgfqpoint{2.145000in}{0.652500in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%

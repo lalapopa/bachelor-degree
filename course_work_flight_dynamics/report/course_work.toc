@@ -1,11 +1,11 @@
 \babel@toc {russian}{}\relax 
 \contentsline {chapter}{1.\hskip 1em Исходные данные}{4}{chapter.1}%
 \contentsline {chapter}{2.\hskip 1em Расчет лётно – технических характеристик самолета}{5}{chapter.2}%
-\contentsline {chapter}{3.\hskip 1em Расчет траектории полета}{27}{chapter.3}%
-\contentsline {section}{\numberline {3.1.\hskip 1em}Расчет характеристик набора высоты}{27}{section.3.1}%
-\contentsline {section}{\numberline {3.2.\hskip 1em}Расчет характеристик крейсерского полета}{30}{section.3.2}%
-\contentsline {section}{\numberline {3.3.\hskip 1em}Расчет характеристик участка снижения}{31}{section.3.3}%
-\contentsline {section}{\numberline {3.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{35}{section.3.4}%
-\contentsline {section}{\numberline {3.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{36}{section.3.5}%
-\contentsline {section}{\numberline {3.6.\hskip 1em}Расчет характеристик маневренности самолета}{38}{section.3.6}%
-\contentsline {section}{\numberline {3.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{39}{section.3.7}%
+\contentsline {chapter}{3.\hskip 1em Расчет траектории полета}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1.\hskip 1em}Расчет характеристик набора высоты}{25}{section.3.1}%
+\contentsline {section}{\numberline {3.2.\hskip 1em}Расчет характеристик крейсерского полета}{28}{section.3.2}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Расчет характеристик участка снижения}{29}{section.3.3}%
+\contentsline {section}{\numberline {3.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{33}{section.3.4}%
+\contentsline {section}{\numberline {3.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{34}{section.3.5}%
+\contentsline {section}{\numberline {3.6.\hskip 1em}Расчет характеристик маневренности самолета}{36}{section.3.6}%
+\contentsline {section}{\numberline {3.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{37}{section.3.7}%
