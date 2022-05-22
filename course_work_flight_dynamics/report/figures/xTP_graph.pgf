@@ -714,7 +714,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.350308in,y=2.227500in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{X}_{Т}\)}%
+\pgftext[x=0.350308in,y=2.227500in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{x}_{Т}\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.750000in}{0.495000in}}{\pgfqpoint{4.650000in}{3.465000in}}%
@@ -949,10 +949,10 @@
 \pgfsetstrokeopacity{0.800000}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.847222in}{3.412624in}}%
-\pgfpathlineto{\pgfqpoint{1.967699in}{3.412624in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.995477in}{3.412624in}}{\pgfqpoint{1.995477in}{3.440402in}}%
-\pgfpathlineto{\pgfqpoint{1.995477in}{3.862778in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{1.995477in}{3.890556in}}{\pgfqpoint{1.967699in}{3.890556in}}%
+\pgfpathlineto{\pgfqpoint{1.932013in}{3.412624in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.959790in}{3.412624in}}{\pgfqpoint{1.959790in}{3.440402in}}%
+\pgfpathlineto{\pgfqpoint{1.959790in}{3.862778in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{1.959790in}{3.890556in}}{\pgfqpoint{1.932013in}{3.890556in}}%
 \pgfpathlineto{\pgfqpoint{0.847222in}{3.890556in}}%
 \pgfpathquadraticcurveto{\pgfqpoint{0.819444in}{3.890556in}}{\pgfqpoint{0.819444in}{3.862778in}}%
 \pgfpathlineto{\pgfqpoint{0.819444in}{3.440402in}}%
@@ -975,7 +975,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.721034in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{X}_{ТПЗ}(\bar{S}_{го})\)}%
+\pgftext[x=1.263889in,y=3.721034in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{x}_{ТПЗ}(\bar{S}_{го})\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetrectcap%
@@ -992,7 +992,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=3.502902in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{X}_{ТПП}(\bar{S}_{го})\)}%
+\pgftext[x=1.263889in,y=3.502902in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle \bar{x}_{ТПП}(\bar{S}_{го})\)}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%
