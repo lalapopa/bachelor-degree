@@ -127,7 +127,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=0.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_0}
@@ -171,7 +171,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=2.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_2}
@@ -216,7 +216,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=4.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_4}
@@ -260,7 +260,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=6.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_6}
@@ -304,7 +304,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=8.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_8}
@@ -348,7 +348,7 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=10.0.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
         \label{fig:q_10}
@@ -392,58 +392,68 @@
     \end{minipage} &
     \begin{minipage}{0.45\textheight}
         \begin{figure}[H]
-        \adjustbox{trim=16pt 2pt 24pt 28pt,clip}{
+        \adjustbox{trim=16pt 2pt 2pt 28pt,clip}{
         \resizebox{\textwidth}{!}{\input{./figures/q_km_ch_together_H=11.558.pgf}}}
         \caption{График $q_{км},\, q_{ч}$}
-        \label{fig:q_12.0259}
+        \label{fig:q_11.558}
         \end{figure}
     \end{minipage} \\
     \end{tabularx}
 \end{sidewaystable}
+\newpage
 
-Для построение таблицы (TODO: стр 40 в курсовой)
+Для построение таблицы \ref{tab:H_M}
+
 \begin{enumerate}
-    \item Определим $M_{{\min}_P}$ и $M_{{\max}_P}$, как точка пересечения
-        графиков $P_n(M, H_i)$ и $P_p(M, H_i)$ рисунки @@@ 
-    \item Минимально допустимое число $M_{{\min}_{доп}}$, как точка пересечения
-        графиков $C_{y_n}(M, H_i)$ и $C_{y_{доп}}(M)$ рисунки @@@
-    \item Максимально допустимое число $M$ полета по условиям безопасности 
+\item Определим $M_{{\min}_P}$ и $M_{{\max}_P}$, как точка пересечения
+    графиков $P_n(M, H_i)$ и $P_p(M, H_i)$ (рисунки \ref{fig:P_H_0}, \ref{fig:P_H_2},
+\ref{fig:P_H_4},\ref{fig:P_H_6},\ref{fig:P_H_8},\ref{fig:P_H_10},\ref{fig:P_H_11.558}).
+
+\item Минимально допустимое число $M_{{\min}_{доп}}$, как точка пересечения
+    графиков $C_{y_n}(M, H_i)$ и $C_{y_{доп}}(M)$ (рисунки
+    ,\ref{fig:Cy_0}, \ref{fig:Cy_2}, \ref{fig:Cy_4}, \ref{fig:Cy_8},
+    \ref{fig:Cy_10}, \ref{fig:Cy_11.558}
+    ).
+\item Максимально допустимое число $M$ полета по условиям безопасности 
         определяется как: 
     \[
         M_{{\max}_{доп}} = \min \left\{ M_{пред}, M(V_{i_{\max}} \right\},
     \]
     где $M(V_{i_{\max}}) = \frac{V_{i_{\max}} \sqrt{\Delta^{-1}}}{3.6 a_H}$, 
     $\sqrt{\Delta^{-1}} = \sqrt{\frac{\rho_0}{\rho_H}}$
-    \item Располагаемые значение минимального и максимального числа $M$
+\item Располагаемые значение минимального и максимального числа $M$
 определяются как: 
 \[
     M_{\min} = \max \left\{ M_{{\min}_{доп}}, M_{{\min}_P} \right\},
 \]
 \[
-    M_{\max} = \min \left\{ M_{{\max}_{доп}}, M_{{\max}_P}, M_{пред} \right\},
+    M_{\max} = \min \left\{ M_{{\max}_{доп}}, M_{{\max}_P}, M_{пред} \right\}.
 \]
-    \item Число $М_1$ полета, соответствующее минимальной потребной тяге
+\item Число $М_1$ полета, соответствующее минимальной потребной тяге
         определяется как:
         \[
-            M_1 = M(P_{n_{\min}}) = \arg \min_{M} \Delta P_n (M)
+            M_1 = M(P_{n_{\min}}) = \arg \min_{M} \Delta P_n (M).
         \]
-    \item Число $М_2$ полета, соответствующее максимальной энергетической скороподъёмности
+\item Число $М_2$ полета, соответствующее максимальной энергетической скороподъёмности
 определяется как:
         \[
-            M_2 = M(V_{y_{max}}^*) = \arg \max_{M} V_y^* (M, H_i)
+            M_2 = M(V_{y_{max}}^*) = \arg \max_{M} V_y^* (M, H_i).
         \]
-    \item Минимальные значения часового $q_{ч_{min}}$ и километрового
+\item Минимальные значения часового $q_{ч_{min}}$ и километрового
         $q_{км_{min}}$ расхода топлива, и соответствующие им скорости полета
-        определены на графике 2.4.1-7 и 2.5.1-7 или как:
+        определены на рисунка 
+        \ref{fig:q_0}, \ref{fig:q_0}, \ref{fig:q_0}, \ref{fig:q_0}, \ref{fig:q_0}, \ref{fig:q_0}, \ref{fig:q_0}
+        или как:
         \[
             q_{ч_{min}} = \min_V q_ч(V, H_i), \, V_3 = V(q_{ч_{min}}) =
-            \arg \min_V q_ч (V, H_i)
+            \arg \min_V q_ч (V, H_i);
         \]
         \[
             q_{{км}_{min}} = \min_V q_{км}(V, H_i), \, V_4 = V(q_{{км}_{min}}) =
-            \arg \min_V q_{км} (V, H_i)
+            \arg \min_V q_{км} (V, H_i).
         \]
 \end{enumerate}
+
 \begin{sidewaystable}
     \centering
     \caption{Результаты для построение графика высот и скоростей}
