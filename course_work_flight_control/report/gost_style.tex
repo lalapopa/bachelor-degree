@@ -1,0 +1,28 @@
+\renewcommand{\thechapterfont}{\normalsize\bfseries} % Номер главы полужирным
+\renewcommand{\prethechapter}{} % Убираем слово "глава"
+\renewcommand{\chapteralign}{\raggedright}
+\renewcommand{\postthechapter}{.~} % ставим точку и пробел после номер
+
+\renewcommand{\appendixfont}{\normalsize\bfseries}
+\renewcommand{\chapterfont}{\normalsize\bfseries}
+\renewcommand{\sectionfont}{\normalsize\bfseries}
+\renewcommand{\subsectionfont}{\normalsize\bfseries}
+\renewcommand{\subsubsectionfont}{\normalsize\bfseries}
+\renewcommand{\tocprethechapter}{} % в оглавлении убираем слово "Глава"
+
+\setcounter{tocdepth}{4} % Глубина tableofcontent
+\setcounter{secnumdepth}{4} % Глубина tableofcontent
+\pagestyle{footcenter}
+\chapterpagestyle{footcenter} % Расположение номеров страниц снизу
+
+% Рисуники и таблица
+\usepackage[tableposition=top]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~---~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+

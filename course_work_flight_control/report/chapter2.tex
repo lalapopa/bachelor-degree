@@ -1,0 +1,100 @@
+\section{Синтез контуров автоматического управления}
+Структурная схема регулирования высоты в тангажном варианте представлена на рисунке \ref{fig:fig_51}
+\begin{figure}[H]
+	\centering
+	\incfig{fig_51}
+    \caption{Структурная схема стабилизации высоты}
+	\label{fig:fig_51}
+\end{figure}
+
+Передаточная функция угловой скорости по отклонению руля высоты имеет вид:
+\begin{equation}
+    \left\{\frac{\Delta \omega_z}{\Delta \delta_\text{в}} \right\} = \frac{\bar{M}_z^{\delta_\text{в}}(p + \bar{Y}^\alpha)}{p^2 + 2hp + \omega_{\text{с}}^2}, \label{eq:d_w_d_d}
+\end{equation}
+где $\omega_{\text{с}}^2= -\bar{M}_z^\alpha - \bar{M}_z^{\omega_z}\bar{M}_z^{\omega_z} $, $2h = 2\xi_{\text{к}} \omega_{\text{с}} = \bar{Y}^\alpha - \bar{M}_z^{\omega_z} - \bar{M}_z^{\dot{\alpha}}$. Подробный вывод в \cite[c.498]{DP_efremov}.
+
+Передаточная функция изменения высоты по изменению угла тангажа имеет вид :
+\begin{equation}
+    \left\{ \frac{\Delta H}{\Delta \vartheta} \right\} = \frac{K_\text{н}}{p(T_{1c}p +1)}, \label{eq:d_H_d_t}
+\end{equation}
+где $T_{1c} = \frac{1}{\bar{Y}^\alpha}$. Подробный вывод в \cite[c.61]{control_book}
+
+
+\subsection{Расчет ядра системы}
+Определим коэффициенты обратных связей $K_\vartheta$, $K_{\omega_z}$ для системы на рисунке \ref{fig:core_scheme}.
+\begin{figure}[H]
+	\centering
+	\incfig{core_scheme}
+    \caption{Структурная схема стабилизации тангажа}
+	\label{fig:core_scheme}
+\end{figure}
+
+Передаточная функция замкнутой системы имеет вид (при $W_п = 1$):
+\begin{equation}
+    \left\{ \frac{\Delta \vartheta}{\Delta \vartheta_{зад}} \right\} = \frac{-K_\vartheta \bar{M}_z^{\delta_в}(\bar{Y}^\alpha + p)}{p^3 + \Delta_1 p^2 + \Delta_2 p + \Delta_3},
+    \label{eq:W_theta_cl}
+\end{equation}
+где $\Delta_1 = 2h + K_{\omega_z}\bar{M}_z^{\delta_в}$, $\Delta_2 = \omega_с^2 - K_\vartheta \bar{M}_z^{\delta_в} + K_{\omega_z}\bar{M}_z^{\delta_в}\bar{Y}^\alpha$, $\Delta_3 = -K_\vartheta \bar{M}_z^{\delta_в} \bar{Y}^\alpha$. 
+\[
+    K_{\omega_z} = \upvarepsilon K_{{\omega_z}_{\text{гр}}}, \ K_{{\omega_z}_{\text{гр}}} = \frac{1}{|\bar{M}_z^{\delta_\text{в}}| T_n},
+\]
+\[
+    K_\vartheta = \nu K_{\omega_z}
+\]
+В первом приближении $\upvarepsilon = 0.25, \nu = \omega_{0_{max}}=2.2517$.
+
+Результаты расчетов коэффициентов $K_{\omega_z}, \ K_\vartheta$ приведены в таблице \ref{tab:K_w_K_t}, для дальнейшего синтеза внешнего контура выберем коэффициенты $K_{\omega_z}$, $K_\vartheta$  как показано на рисунках \ref{fig:K_omega_z}, \ref{fig:K_theta}.
+
+\begin{minipage}[c]{\linewidth}
+    \begin{figure}[H]
+        \centering
+        \resizebox{.79\linewidth}{!}{\input{./figures/K_omega_z_H_q.pgf}}
+        \caption{Значения $K_{\omega_z}$ для всех расчетных точек}
+        \label{fig:K_omega_z}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \resizebox{.79\linewidth}{!}{\input{./figures/K_theta_H_q.pgf}}
+        \caption{Значения $K_{\vartheta}$ для всех расчетных точек}
+        \label{fig:K_theta}
+    \end{figure}
+\end{minipage}
+
+\subsection{Расчет внешнего контура}
+Определим коэффициент $K_H$ и регулятор $R_H(p)$, как показано в
+\cite[с.220]{control_book}, внешнего контура (рисунок \ref{fig:fig_51}):
+\[
+    K_H = V 
+\]
+\[
+    R_H(p) = i_H = 0.8 \frac{1}{T_{1c}V}
+\]
+Результаты расчетов приведены в таблице \ref{tab:K_w_K_t}, также графическое представление на рисунке \ref{fig:K_H}, \ref{fig:i_H}. 
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.8\linewidth}{!}{\input{./figures/K_H_H_q.pgf}}
+    \caption{Значения $K_{H}$ для всех расчетных точек}
+    \label{fig:K_H}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.8\linewidth}{!}{\input{./figures/i_H_H_q.pgf}}
+    \caption{Значения $i_{H}$ для всех расчетных точек}
+    \label{fig:i_H}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Значения коэффициентов передачи}
+\label{tab:K_w_K_t}
+\begin{adjustbox}{height=0.40\paperheight}
+    \input{tables/table_coeffs.tex}
+\end{adjustbox}
+\end{table}
+
+\subsection{Вывод}
+В данном разделе были определены все коэффициенты обратных связей для всех
+контуров, обеспечивающие устойчивость системы.
+

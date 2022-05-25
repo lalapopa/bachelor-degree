@@ -1,0 +1,44 @@
+\babel@toc {russian}{}\relax 
+\contentsline {chapter}{1.\hskip 1em Общая часть}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1.\hskip 1em}Исходные данные}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2.\hskip 1em}Расчет лётно – технических характеристик самолета}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3.\hskip 1em}Расчет траектории полета}{27}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1.\hskip 1em}Расчет характеристик набора высоты}{27}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2.\hskip 1em}Расчет характеристик крейсерского полета}{31}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3.\hskip 1em}Расчет характеристик участка снижения}{32}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4.\hskip 1em}Расчет диаграммы транспортных возможностей}{36}{section.1.4}%
+\contentsline {section}{\numberline {1.5.\hskip 1em}Расчет взлетно-посадочных характеристик самолета}{37}{section.1.5}%
+\contentsline {section}{\numberline {1.6.\hskip 1em}Расчет характеристик маневренности самолета}{39}{section.1.6}%
+\contentsline {section}{\numberline {1.7.\hskip 1em}Расчет характеристик продольной статической устойчивости и управляемости}{41}{section.1.7}%
+\contentsline {chapter}{2.\hskip 1em Синтез системы автоматического управления}{48}{chapter.2}%
+\contentsline {section}{\numberline {2.1.\hskip 1em}Описание объекта управления}{48}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1.\hskip 1em}Построение области высот и скоростей}{50}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2.\hskip 1em}Выбор параметров привода}{52}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3.\hskip 1em}Вывод}{52}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2.\hskip 1em}Синтез контуров автоматического управления}{53}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1.\hskip 1em}Расчет ядра системы}{53}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2.\hskip 1em}Расчет внешнего контура}{56}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3.\hskip 1em}Вывод}{59}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3.\hskip 1em}Частотный анализ}{59}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1.\hskip 1em}Анализ контура демпфирования}{59}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2.\hskip 1em}Анализ ядра системы}{61}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3.\hskip 1em}Анализ внешнего контура}{64}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4.\hskip 1em}Вывод}{67}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4.\hskip 1em}Нелинейное моделирование САУ}{67}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1.\hskip 1em}Сравнение для разных максимальных скоростей отклонения руля высоты}{68}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2.\hskip 1em}Сравнение линейной и нелинейной модели}{69}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3.\hskip 1em}Вывод}{71}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5.\hskip 1em}Вывод по разделу}{71}{section.2.5}%
+\contentsline {chapter}{3.\hskip 1em Специальная часть}{73}{chapter.3}%
+\contentsline {section}{\numberline {3.1.\hskip 1em}Исходные данные для самолета Ил-76}{73}{section.3.1}%
+\contentsline {section}{\numberline {3.2.\hskip 1em}Исследование характеристик транспортного самолета при выполнении эшелонирования}{73}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1.\hskip 1em}Постановка задачи}{73}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Расчетные формулы}{73}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3.\hskip 1em}Задачи}{74}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Результаты}{74}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1.\hskip 1em}Результаты расчета при постоянный высоте и оптимальной скорости полета}{74}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2.\hskip 1em}Результаты расчета при оптимальном изменении высоты и скорости полета}{75}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3.\hskip 1em}Эшелонированный полет, высота меняется ступенчато с шагом 300 м}{76}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4.\hskip 1em}Анализ результатов}{78}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4.\hskip 1em}Вывод}{78}{section.3.4}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{80}{section.3.4}%
