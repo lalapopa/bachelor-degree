@@ -1,10 +1,24 @@
 \section{Исходные данные}
+
+Основные параметры самолета необходимые для расчета представлены в таблице
+\ref{tab:variant_data}.
+
 \begin{table}[H]
     \centering
     \caption{Исходные данные для самолета ИЛ-76}
     \label{tab:variant_data}
-    \input{./tables/plane_data.tex}
+    \resizebox{\textwidth}{!}{
+        \input{./tables/plane_data.tex}
+    }
 \end{table}
+
+Зависимости аэродинамических характеристик представлены на рисунке
+\ref{fig:aero_data}. Зависимости $C_y(C_x)$, $C_y(\alpha)$ для различных 
+конфигурация представлены на рисунке \ref{fig:aero_data_landing}.
+Аэродинамические характеристики для отдельных компоновочных групп приведены на
+рисунке \ref{fig:aero_data_elements}.
+Основные параметры двигателя приведены на рисунках \ref{fig:tilda_P_data},
+\ref{fig:tilda_Ce_data}.
 
 \begin{figure}[H]
 \centering
@@ -20,6 +34,12 @@
 \end{figure}
 \begin{figure}[H]
 \centering
+\resizebox{.79\linewidth}{!}{\input{./figures/aero_data_elements.pgf}}
+\caption{Аэродинамические характеристики для отдельных компоновочных групп самолета}
+\label{fig:aero_data_elements}
+\end{figure}
+\begin{figure}[H]
+\centering
 \resizebox{.79\linewidth}{!}{\input{./figures/tilda_P.pgf}}
 \caption{Высотно-скоростные характеристики ТРДД на режиме <<номинал>>}
 \label{fig:tilda_P_data}
@@ -29,10 +49,4 @@
 \resizebox{.79\linewidth}{!}{\input{./figures/tilda_Ce.pgf}}
 \caption{Относительный удельный часовой расход топлива для ТРДД на режиме <<номинал>>}
 \label{fig:tilda_Ce_data}
-\end{figure}
-\begin{figure}[H]
-\centering
-\resizebox{.79\linewidth}{!}{\input{./figures/aero_data_elements.pgf}}
-\caption{Аэродинамические характеристики для отдельных компоновочных групп самолета}
-\label{fig:aero_data_elements}
 \end{figure}

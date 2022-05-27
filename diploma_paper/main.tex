@@ -1,10 +1,18 @@
-\documentclass[bachelor,subf,14pt, substylefile = spbu.rtx]{disser}
+\documentclass[bachelor,subf,12pt, substylefile = spbu.rtx]{disser}
 
 \input{preamble.tex}
 \input{gost_style.tex}
 
 \newcommand{\addstrut}[1]{\vcenter{\hbox{\rule{0pt}{#1}}}}
 \newcommand{\incfig}[1]{\import{./figures/}{#1.pdf_tex}}
+\makeatletter
+\providecommand\add@text{}
+\newcommand\tagaddtext[1]{%
+      \gdef\add@text{#1\gdef\add@text{}}}% 
+      \renewcommand\tagform@[1]{%
+            \maketag@@@{\llap{\add@text\quad}(\ignorespaces#1\unskip\@@italiccorr)}%
+        }
+\makeatother
 
 \begin{document}
 
