@@ -1,4 +1,4 @@
-\documentclass[bachelor,subf,12pt, substylefile = spbu.rtx]{disser}
+\documentclass[bachelor, 14pt, substylefile = spbu.rtx]{disser}
 
 \input{preamble.tex}
 \input{gost_style.tex}
@@ -13,9 +13,14 @@
             \maketag@@@{\llap{\add@text\quad}(\ignorespaces#1\unskip\@@italiccorr)}%
         }
 \makeatother
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\makeatletter
 
 \begin{document}
-
+\input{essay.tex}
 \newpage
 \renewcommand{\contentsname}{\center{\large СОДЕРЖАНИЕ}}
 \tableofcontents
