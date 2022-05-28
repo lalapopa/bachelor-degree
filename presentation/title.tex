@@ -1,0 +1,34 @@
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+\vspace{-1.25cm}
+\begin{center}
+\begin{minipage}{\textwidth}
+\begin{center}
+    Московский авиационный институт (МАИ)\\
+    Факультет авиационной техники\\
+\end{center}
+\end{minipage}
+\begin{minipage}{0.05\textwidth}
+    \resizebox{1.3cm}{!}{\input{./figures/logo.pdf_tex}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.85\textwidth}
+    \begin{center}
+        \small{Кафедра динамики и управления\\летательных аппаратов}
+    \end{center}
+\end{minipage}
+\begin{minipage}{0.05\textwidth}
+    \includegraphics[height=1.3cm]{./figures/fac_logo.jpg}
+\end{minipage}
+\vfill
+\inserttitle\par
+\vfill
+\hfill \small{Выполнил студент группы \insertinstitute}\par
+\hfill \small{\insertauthor}\par
+\insertdate\par
+\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+\end{center}
+}
+
+

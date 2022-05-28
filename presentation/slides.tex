@@ -1,0 +1,124 @@
+\documentclass{beamer}
+\input{preamble.tex}
+\input{title.tex}
+\title{Исследование характеристик транспортного самолета при выполнении эшелонирования}
+\author{Москвитин Андрей}
+\institute{М1О-403Б-18}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+\frametitle{Цель дипломной работы}
+\begin{block}{Задачи}
+    \begin{itemize}
+        \item Расчет основных летно-технических характеристик, взлетно-посадочных
+            характеристик, характеристик продольной устойчивости и управляемости 
+        \item Синтезировать систему автоматической стабилизации высоты 
+        \item Исследовать характеристики самолета при выполнении эшелонированного полета 
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Объект исследования}
+Прототип транспортного самолета Ил-76
+\begin{figure}
+\resizebox{0.85\textwidth}{!}{
+    { \import{../course_work_flight_dynamics/report/figures}{il_76_s.pdf_tex}}
+}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Объект исследования}
+    Основные параметры
+    \vfill
+    \begin{center}
+    $m=140000\, кг$, $S=300\, м^2$, $b_a = 6.436$
+    \end{center}
+    \vfill
+\end{frame}
+
+\begin{frame}
+    \frametitle{Расчет летно-технических характеристик}
+    \begin{center}
+   Диапазон высот и скоростей полета 
+\resizebox{0.85\textwidth}{!}{
+{\input{../course_work_flight_dynamics/report/figures/H_M_flight_area.pgf}}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Расчет летно-технических характеристик}
+    \begin{center}
+        Значения статического и практического потолка
+        \resizebox{.79\linewidth}{!}{\input{../course_work_flight_dynamics/report//figures/V_y_H.pgf}}
+    \end{center}
+\end{frame}
+\begin{frame}[t]
+    \frametitle{Расчет летно-технических характеристик}
+    \begin{center}
+        Значения километрового и часового расхода для \textbf{массы 140 т.}
+        \resizebox{.79\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/q_km_q_ch.pgf}}
+    \end{center}
+\end{frame}
+\begin{frame}[t]
+    \frametitle{Расчет траектории полета}
+
+    \begin{center}
+        Параметры в наборе высоты:
+
+        \input{../course_work_flight_dynamics/report/tables/climb_mini_table.tex}
+        \vfill
+        Параметры крейсерского полета:
+        \input{../course_work_flight_dynamics/report/tables/level_flight_data.tex}
+        \vfill
+        Параметры  при снижении высоты:
+
+        \input{../course_work_flight_dynamics/report/tables/descent_mini_table.tex}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Расчет траектории полета}
+    \begin{center}
+        Графическое представление:
+        \resizebox{.79\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/H_L_graph.pgf}}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Транспортные возможности}
+    \begin{center}
+        Зависимость максимальной дальности полета от целевой нагрузки
+
+        \resizebox{.79\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/m_L_graph.pgf}}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Взлетно-посадочные характеристики}
+    \vfill
+    \begin{center}
+        Основные параметры взлеты и посадки:
+        \input{../course_work_flight_dynamics/report/tables/takeoff_landing_table.tex}
+    \end{center}
+    \vfill
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Расчет правильного виража}
+    \begin{center}
+        Зависимость различных параметров виража
+        \resizebox{.79\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/turn_graph.pgf}}
+    \end{center}
+\end{frame}
+
+
+
+\end{document}
+
