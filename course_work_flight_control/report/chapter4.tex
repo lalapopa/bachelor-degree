@@ -4,14 +4,14 @@
 отклонения руля высоты $\dot{\delta}_\text{в max} = 15\, \frac{\text{град.}}{\text{сек.}},\ 60\, \frac{\text{град.}}{\text{сек.}}$. Также будут введены ограничения на:
 
 \begin{itemize}
-    \item Диапазон отклонения руля высоты $\delta_\text{в} = -21^\circ ... 15^\circ$ 
-    \item Диапазон угла тангажа в наборе $\vartheta = -6.5^\circ...6.5^\circ$
+    \item Диапазон отклонения руля высоты $\delta_\text{в} = -21^\circ ... 15^\circ$.
+    \item Диапазон угла тангажа в наборе $\vartheta = -6.5^\circ...6.5^\circ$.
 \end{itemize}
 
 Схема нелинейной модели из <<Simulink>> представлена на рисунке \ref{fig:nonlinear_model_simulink}. 
 Блок с названием <<i\_H>> соответствует коэффициенту $i_H$, <<K\_theta\_int>>
 ---  $K_\vartheta$, <<W\_p>> --- $W_{п}$, <<d\_w\_d\_v>> --- $\left\{ \frac{\Delta
-\omega_z}{\Delta \delta_{в}} \right\} $, <<K\_omega\_z\_int>> --- $K_{\omega_z}$,
+\omega_z}{\Delta \delta_{в}} \right\} $, <<K\_omega\_z\_int>> --- $K_{\omega_z}$,\\
 <<W\_H\_theta>> --- $\left\{ \frac{\Delta H}{\Delta \vartheta} \right\} $.
 
 \begin{figure}[H]

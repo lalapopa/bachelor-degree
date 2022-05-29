@@ -5,6 +5,7 @@
 
 \newcommand{\addstrut}[1]{\vcenter{\hbox{\rule{0pt}{#1}}}}
 \newcommand{\incfig}[1]{\import{./figures/}{#1.pdf_tex}}
+
 \makeatletter
 \providecommand\add@text{}
 \newcommand\tagaddtext[1]{%
@@ -13,6 +14,7 @@
             \maketag@@@{\llap{\add@text\quad}(\ignorespaces#1\unskip\@@italiccorr)}%
         }
 \makeatother
+
 \makeatletter
 \newenvironment{figurehere}
 {\def\@captype{figure}}
@@ -29,12 +31,16 @@
 \import{../special_part/report/}{degree}
 \input{conclusion.tex}
 
-\begin{thebibliography}{9}
-    \bibitem{DP_efremov}
-    Динамика полета: Учебник для студентов высших учебных заведений / А.В. Ефремов, В.Ф. Захарченко, В.Н. Овчаренко и др.; под ред. Г.С. Бюшгенса. М.: Машиностроение, 2011. - 776с.
+\begin{thebibliography}{2}
+\bibitem{DP_efremov} 
+Динамика полета: Учебник для студентов высших учебных
+заведений / А.В. Ефремов, В.Ф. Захарченко, В.Н. Овчаренко и др.; под ред. Г.С.
+Бюшгенса. М.: Машиностроение, 2011. - 776с.
 
-    \bibitem{control_book}
-    Управление полетом самолета: Учебное пособие для студентов высших технических учебных заведений / Ю.П. Гуськов, Г.И. Загайнов Г.И. М.: Машиностроение, 1991. - 272с. 
+\bibitem{control_book} 
+Управление полетом самолета: Учебное пособие для
+студентов высших технических учебных заведений / Ю.П. Гуськов, Г.И. Загайнов
+Г.И. М.: Машиностроение, 1991. - 272с. 
 \end{thebibliography}
 
 \end{document}

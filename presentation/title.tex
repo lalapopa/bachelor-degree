@@ -1,31 +1,35 @@
-
 \defbeamertemplate*{title page}{customized}[1][]
 {
-\vspace{-1.25cm}
+\vspace{-9ex}
 \begin{center}
-\begin{minipage}{\textwidth}
-\begin{center}
-    Московский авиационный институт (МАИ)\\
-    Факультет авиационной техники\\
-\end{center}
-\end{minipage}
 \begin{minipage}{0.05\textwidth}
     \resizebox{1.3cm}{!}{\input{./figures/logo.pdf_tex}}
 \end{minipage}
 \hfill
-\begin{minipage}{0.85\textwidth}
-    \begin{center}
-        \small{Кафедра динамики и управления\\летательных аппаратов}
-    \end{center}
+\begin{minipage}{0.93\textwidth}
+\begin{center}
+\tiny{
+    \textbf{МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ}\\
+    \textbf{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ\\
+        УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ\\
+    <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ}\\ 
+(национальный исследовательский университет)>>}
+
+\end{center}
 \end{minipage}
-\begin{minipage}{0.05\textwidth}
-    \includegraphics[height=1.3cm]{./figures/fac_logo.jpg}
-\end{minipage}
-\vfill
-\inserttitle\par
-\vfill
-\hfill \small{Выполнил студент группы \insertinstitute}\par
-\hfill \small{\insertauthor}\par
+\vspace{5ex}
+
+\footnotesize{ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА БАКАЛАВРА\\ на тему:}\par
+\small{\inserttitle}\par
+\vspace{10ex}
+\hfill \scriptsize{Автор квалификационной работы: }\par
+\hfill \scriptsize{студент гр.\insertinstitute}\par
+\hfill \scriptsize{\insertauthor}\par
+\hfill \scriptsize{Руководитель: }\par
+\hfill \scriptsize{к.т.н., доцент кафедры 106}\par
+\hfill \scriptsize{Мальцев Юрий Иванович}\par
+
+
 \insertdate\par
 \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
 \end{center}

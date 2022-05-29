@@ -35,6 +35,13 @@
 }
 \setbeamertemplate{enumerate item}{\boxednumber{\insertenumlabel}}
 
+\makeatletter
+\newenvironment{noheadline}{
+        \setbeamertemplate{headline}{}
+            \addtobeamertemplate{frametitle}{\vspace*{-0.9\baselineskip}}{}
+        }{}
+\makeatother
+
 
 % Русский пакет
 \usepackage[warn]{mathtext}
