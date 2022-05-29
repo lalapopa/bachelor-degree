@@ -5,10 +5,10 @@
 
 \begin{itemize}
     \item Диапазон отклонения руля высоты $\delta_\text{в} = -21^\circ ... 15^\circ$ 
-    \item Диапазон угла наклона траектории в наборе $\theta = -6.5^\circ...6.5^\circ$
+    \item Диапазон угла тангажа в наборе $\vartheta = -6.5^\circ...6.5^\circ$
 \end{itemize}
 
-Схема нелинейной модели из Simulink представленна на рисунке \ref{fig:nonlinear_model_simulink}. 
+Схема нелинейной модели из <<Simulink>> представлена на рисунке \ref{fig:nonlinear_model_simulink}. 
 Блок с названием <<i\_H>> соответствует коэффициенту $i_H$, <<K\_theta\_int>>
 ---  $K_\vartheta$, <<W\_p>> --- $W_{п}$, <<d\_w\_d\_v>> --- $\left\{ \frac{\Delta
 \omega_z}{\Delta \delta_{в}} \right\} $, <<K\_omega\_z\_int>> --- $K_{\omega_z}$,
@@ -23,9 +23,9 @@
 
 \subsection{Сравнение для разных максимальных скоростей отклонения руля высоты}
 
-Результаты изменения $\Delta H$, $\delta_{в}$, $\omega_z$, $\vartheta$ для
+Графики изменения $\Delta H$, $\delta_{в}$, $\omega_z$, $\vartheta$ для
 $\dot{\delta}_\text{в max} = 15\, \frac{\text{град.}}{\text{сек.}},\ 60\, \frac{\text{град.}}{\text{сек.}}$
-представленны на рисунках \ref{fig:model_DD_Delta_H},
+представлены на рисунках \ref{fig:model_DD_Delta_H},
 \ref{fig:model_DD_delta_elevator}, \ref{fig:model_DD_omega_z}, \ref{fig:model_DD_theta}.
 
 \begin{figure}[H]
@@ -61,23 +61,24 @@ $\dot{\delta}_\text{в max} = 15\, \frac{\text{град.}}{\text{сек.}},\ 60\
 
 \begin{table}[H]
     \centering
-    \caption{Сравнение параметров переходного процессса $\Delta H(t)$ при различных $\dot{\delta}_{в}$}
+    \caption{Сравнение параметров переходного процесса $\Delta H(t)$ при различных $\dot{\delta}_{в}$}
     \label{tab:stat_DD}
 
     \begin{tabular}{|c|c|c|}
         \hline
         {} &  Модель при $\dot{\delta}_{{в}_{max}}=15 \frac{град.}{сек.}$ &  Модель при $\dot{\delta}_{{в}_{max}}=60 \frac{град.}{сек.}$ \\
         \hline
-        $t_{рег},\ с$ &                                              26.90 &                                              26.83 \\
+        $t_{рег},\ с$ & 26.70 & 26.69 \\
         \hline
-        $\sigma,\ \%$ &                                              28.49 &                                              28.24 \\
+        $\sigma,\ \%$ & 24.73 & 24.66 \\
         \hline
     \end{tabular}
 \end{table}
+
 \subsection{Сравнение линейной и нелинейной модели}
 
-Результаты изменения $\Delta H$, $\delta_{в}$, $\omega_z$, $\vartheta$ для
-линейной и нелинейной модели представленны на рисунках \ref{fig:model_Delta_H},
+Графики изменения $\Delta H$, $\delta_{в}$, $\omega_z$, $\vartheta$ для
+линейной и нелинейной модели представлены на рисунках \ref{fig:model_Delta_H},
 \ref{fig:delta_elevator}, \ref{fig:model_omega_z}, \ref{fig:model_theta}.
 Моделирование нелинейной модели проводилось при 
 $\dot{\delta}_\text{в max} = 60\, \frac{\text{град.}}{\text{сек.}}$.
@@ -116,35 +117,37 @@ $\dot{\delta}_\text{в max} = 60\, \frac{\text{град.}}{\text{сек.}}$.
 
 \begin{table}[htpb]
     \centering
-    \caption{Сравнение параметров переходного процессса $\Delta H(t)$}
+    \caption{Сравнение параметров переходного процесса $\Delta H(t)$}
     \label{tab:stat_lin_nonlin}
     \begin{tabular}{|c|c|c|}
         \hline
         {} &  Линейная модель &  Нелинейная модель \\
         \hline
-        $t_{рег},\ с$ &            26.67 &              26.83 \\
+        $t_{рег},\ с$ &            26.67 &              26.69 \\
         \hline
-        $\sigma,\ \%$ &            28.00 &              28.24 \\
+        $\sigma,\ \%$ &            28.00 &              24.66 \\
         \hline
     \end{tabular}
 \end{table}
+
 \subsection{Вывод}
 При моделировании различных скоростей отклонения руля высоты, переходный
 процесс практически не изменился (см. рисунок \ref{fig:model_DD_Delta_H}), время
 регулирования привода с наибольшей максимальной скоростью отклонения было
-меньше на $\approx 0.07\ с$. Максимальное отклонение руля высоты в случае с
+меньше на $\approx 0.01\ с$, что незначительно. Максимальное отклонение руля высоты в случае с
 $\dot{\delta}_{{в}_{max}} = 15\, \frac{\text{град.}}{\text{сек.}}$ было меньше
 на $40 \%$ (см. рисунок \ref{fig:model_DD_delta_elevator}). Максимальная
 угловая скорость тангажа равна $\approx 0.115\ \text{рад/с}$ у модели с
 $\dot{\delta}_{{в}_{max}} = 15\, \frac{\text{град.}}{\text{сек.}}$ (см. рисунок
-\ref{fig:model_DD_omega_z}). Изменение угла тангажа практически не изменилось
-(см. рисунок \ref{fig:model_DD_theta})
+\ref{fig:model_DD_omega_z}). Характер изменения угла тангажа имеет различие до
+5 секунды моделирования (см. рисунок \ref{fig:model_DD_theta}).
 
 Разница во времени регулирования между линейной и нелинейной моделью в $\approx
-0.16\ с$ (см. таблицу \ref{tab:stat_lin_nonlin}). У линейной модели
-максимальное отклонение руля высоты имеет недопустимое значение $max(\delta_{в})
-> -21^\circ$ (см. рисунок \ref{fig:delta_elevator}). В следствии этого
-максимальная угловая скорость тангажа $\approx 0.16 \ \text{рад/с}$ (см. рисунок
-\ref{fig:model_omega_z}). Изменение угла тангажа
-практически не изменилось (см. рисунок \ref{fig:model_theta})
+0.03\ с$ (см. таблицу \ref{tab:stat_lin_nonlin}), но разница во времени
+срабатывания порядка $\approx 1.8\, с$. У линейной модели максимальное
+отклонение руля высоты имеет недопустимое значение $max(\delta_{в}) >
+-21^\circ$ (см. рисунок \ref{fig:delta_elevator}). В следствии этого
+максимальная угловая скорость тангажа $\approx 0.16 \ \text{рад/с}$ (см.
+рисунок \ref{fig:model_omega_z}). Изменение угла тангажа у нелинейной модели
+ограничено 0.11 рад, что примерно равно $6.5^\circ$ (см. рисунок \ref{fig:model_theta}).
 

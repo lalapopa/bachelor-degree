@@ -1,5 +1,5 @@
 % Beamer settings
-\usetheme[height=28pt]{Rochester}
+\usetheme[height=36pt]{Rochester}
 \usecolortheme{orchid}
 
 \setbeamertemplate{navigation symbols}{}
@@ -18,12 +18,22 @@
 \definecolor{bluemai}{RGB}{0, 149, 240}
 
 \setbeamercolor{frametitle}{bg=bluemai}
-
 \setbeamercolor{block title}{bg=bluemai, fg=white}
-\setbeamercolor{itemize item}{fg=bluemai!50}
-% 2- Block body (background)
 \setbeamercolor{block body}{bg=cyan!5}
-
+\setbeamercolor{itemize item}{fg=bluemai!50}
+\newcommand\boxednumber[1]
+{
+    \hbox{
+        \color{bluemai!50}
+        \vrule width2.25ex height1.85ex depth.4ex
+        \hskip-2.25ex
+        \hbox to2.25ex{
+            \hfil
+            \color{black}#1
+        \hfil}
+    }
+}
+\setbeamertemplate{enumerate item}{\boxednumber{\insertenumlabel}}
 
 
 % Русский пакет
@@ -34,5 +44,10 @@
 
 \usepackage{pgfplots} % pgf plot from python 
 \usepackage{graphicx,import} % PGF_tex import
-\graphicspath{{figures/}{./figures/}}
+\usepackage{colortbl} % цвет ячейки в таблицах
+\usepackage{adjustbox}
+
+
+\graphicspath{{figures/}{./figures/}{../course_work_flight_control/report/figures}}
+
 
