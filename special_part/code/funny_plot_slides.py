@@ -9,20 +9,21 @@ def pgf_setting():
     matplotlib.use("pgf")
     matplotlib.rcParams.update(
                         {
-                            "pgf.texsystem": "pdflatex",
-                            "font.family": "sans-serif",
-                            "text.usetex": True,
-                            "pgf.rcfonts": False,
-                            "pgf.preamble": "\n".join(
-                                [
-                                    r"\usepackage[warn]{mathtext}",
-                                    r"\usepackage[T2A]{fontenc}",
-                                    r"\usepackage[utf8]{inputenc}",
-                                    r"\usepackage[english,russian]{babel}",
-                                    ]
-                                ),
-                            }
-                        )
+    "pgf.texsystem": "pdflatex",
+    "font.family": "sans-serif",
+    "text.usetex": True,
+    "font.size": 12,
+    "pgf.rcfonts": False,
+    "pgf.preamble": "\n".join(
+        [
+            r"\usepackage[warn]{mathtext}",
+            r"\usepackage[T2A]{fontenc}",
+            r"\usepackage[utf8]{inputenc}",
+            r"\usepackage[english,russian]{babel}",
+        ]
+        ),
+        }
+    )
 
 pgf_setting()
 H_const = 627.6 

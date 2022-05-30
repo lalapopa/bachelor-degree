@@ -9,12 +9,11 @@
 \hspace*{\fill}%
 \usebeamercolor[fg]{page number in head/foot}%
 \usebeamerfont{page number in head/foot}%
-\insertpagenumber%
+\footnotesize{\insertpagenumber}
 \hspace*{\fill}\vskip4pt%
 }
 \setbeamertemplate{footline}[centered page number]
-\setbeamersize{text margin left=10mm,text margin right=10mm} 
-
+\setbeamersize{text margin left=1mm,text margin right=1mm} 
 \definecolor{bluemai}{RGB}{0, 149, 240}
 
 \setbeamercolor{frametitle}{bg=bluemai}
@@ -53,7 +52,7 @@
 \usepackage{graphicx,import} % PGF_tex import
 \usepackage{colortbl} % цвет ячейки в таблицах
 \usepackage{adjustbox}
-
+\usepackage{scalefnt}
 
 \graphicspath{{figures/}{./figures/}{../course_work_flight_control/report/figures}}
 

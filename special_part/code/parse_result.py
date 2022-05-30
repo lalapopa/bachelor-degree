@@ -20,11 +20,16 @@ def pgf_setting():
     matplotlib.use("pgf")
     matplotlib.rcParams.update(
         {
-            "pgf.texsystem": "pdflatex",
-            "font.family": "serif",
-            "text.usetex": True,
-            "pgf.rcfonts": False,
-            "pgf.preamble": "\n".join(
+                "figure.figsize": (7, 5.2),
+                "pgf.texsystem": "pdflatex",
+                "font.family": "sans-serif",
+                "text.usetex": True,
+                "font.size": 11,
+                "xtick.labelsize": 14,
+                "ytick.labelsize": 14,
+                'axes.labelsize': 14,
+                "pgf.rcfonts": False,
+                "pgf.preamble": "\n".join(
                 [
                     r"\usepackage[warn]{mathtext}",
                     r"\usepackage[T2A]{fontenc}",
@@ -85,12 +90,10 @@ def crate_and_save_latex_table(file_name, avg_fuel_burn, flight_range, fuel_burn
     with open(file_name, 'w') as f:
         f.write(latex_output)
 
-
-
 #'{climb or not?},{H_opt},{total_range},{V},{q_km},{total_mass}'
+pgf_setting()
 m0 = 180000 
 t_0 = 60
-
 file_name = os.listdir(config.PATH_SAVE_DATA)
 file_name = [f for f in file_name if ".txt" in f]
 plot_options = []
@@ -160,8 +163,9 @@ for i, val in enumerate(file_name):
         pipeline_V.fit(L_data[:, np.newaxis], V_data)
         L_data_int = np.linspace(L_data[0], L_data[-1], 100)
 
-        ax1.plot(L_data_int, pipeline_H.predict(L_data_int[:, np.newaxis]), "g", label="$H(L)$")
-        ax2.plot(L_data_int, pipeline_V.predict(L_data_int[:, np.newaxis]), "b--", label="$V(L)$")
+        ax1.plot(L_data_int, pipeline_H.predict(L_data_int[:, np.newaxis]), "g", label="$H(L)$", 
+                linewidth=2)
+        ax2.plot(L_data_int, pipeline_V.predict(L_data_int[:, np.newaxis]), "b--", label="$V(L)$", linewidth=2)
         ax2.set_ylim([min(V_data)-15, max(V_data) + 5])
         ax1.set_xlim([0, 3000])
 
@@ -176,8 +180,8 @@ for i, val in enumerate(file_name):
     else:
         fig, ax1 = plt.subplots()
         ax2 = ax1.twinx()
-        ax1.plot(L_data, H_data, "g", label="$H(L)$")
-        ax2.plot(L_data, V_data, "b--", label="$V(L)$")
+        ax1.plot(L_data, H_data, "g", label="$H(L)$", linewidth=2)
+        ax2.plot(L_data, V_data, "b--", label="$V(L)$", linewidth=2)
         ax2.set_ylim([min(V_data)-15, max(V_data) + 5])
         ax1.set_xlim([0, 3000])
 
@@ -191,8 +195,8 @@ for i, val in enumerate(file_name):
 
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
-    ax1.plot(L_data, m_data, "g", label="$m(L)$")
-    ax2.plot(L_data, q_data, "b--", label="$q(L)$")
+    ax1.plot(L_data, m_data, "g", label="$m(L)$", linewidth=2)
+    ax2.plot(L_data, q_data, "b--", label="$q(L)$", linewidth=2)
     ax2.set_ylim([min(q_data)-1, max(q_data)+1])
     ax1.set_ylim([100000, max(m_data) + 5000])
     ax1.set_xlim([0, 3000])
@@ -200,6 +204,7 @@ for i, val in enumerate(file_name):
     ax1.set_ylabel("$m,\, [кг]$", color="g")
     ax2.set_ylabel("$q_{km},\, [кг/км]$", color="b")
     fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+    ax1.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
     ax1.grid()
     plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_m.pgf")
     plt.clf()

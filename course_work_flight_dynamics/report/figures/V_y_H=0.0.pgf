@@ -777,10 +777,10 @@
 \pgfsetstrokeopacity{0.800000}%
 \pgfsetdash{}{0pt}%
 \pgfpathmoveto{\pgfqpoint{0.847222in}{0.564444in}}%
-\pgfpathlineto{\pgfqpoint{2.481625in}{0.564444in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{2.509403in}{0.564444in}}{\pgfqpoint{2.509403in}{0.592222in}}%
-\pgfpathlineto{\pgfqpoint{2.509403in}{0.805184in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{2.509403in}{0.832962in}}{\pgfqpoint{2.481625in}{0.832962in}}%
+\pgfpathlineto{\pgfqpoint{2.473916in}{0.564444in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{2.501694in}{0.564444in}}{\pgfqpoint{2.501694in}{0.592222in}}%
+\pgfpathlineto{\pgfqpoint{2.501694in}{0.805184in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{2.501694in}{0.832962in}}{\pgfqpoint{2.473916in}{0.832962in}}%
 \pgfpathlineto{\pgfqpoint{0.847222in}{0.832962in}}%
 \pgfpathquadraticcurveto{\pgfqpoint{0.819444in}{0.832962in}}{\pgfqpoint{0.819444in}{0.805184in}}%
 \pgfpathlineto{\pgfqpoint{0.819444in}{0.592222in}}%
@@ -803,7 +803,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.263889in,y=0.673240in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V_y^*(H=0.000[Км])\)}%
+\pgftext[x=1.263889in,y=0.673240in,left,base]{\color{textcolor}\rmfamily\fontsize{10.000000}{12.000000}\selectfont \(\displaystyle V_y^*(H=0.000\, [км])\)}%
 \end{pgfscope}%
 \end{pgfpicture}%
 \makeatother%
