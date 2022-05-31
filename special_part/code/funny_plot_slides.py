@@ -48,7 +48,7 @@ ax.spines['top'].set_color('none')
 
 plt.yscale('log', base=10)
 plt.xlabel('Количество полетов')
-plt.ylabel('Потеря топлива, [кг]')
+plt.ylabel('Избыток топлива, [кг]')
 plt.xlim([0, x_axis[-1]])
 plt.ylim([1, 10**5])
 for axis in [ax.xaxis, ax.yaxis]:

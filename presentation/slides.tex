@@ -1,6 +1,3 @@
-% 30 frame change names, some plots should start from 0 
-% Add conclustion.
-
 \documentclass{beamer}
 \input{preamble.tex}
 \input{title.tex}
@@ -63,6 +60,16 @@
     \end{picture}
 \end{center}
 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Расчет летно-технических характеристик}
+    \begin{center}
+    Кривые потребных и располагаемых тяг
+    \resizebox{0.70\textwidth}{!}{
+    {\input{../course_work_flight_dynamics/report/figures/P_rasp_P_potr_combine.pgf}}
+    }
+    \end{center}
 \end{frame}
 
 \begin{frame}
@@ -426,11 +433,22 @@
 \begin{frame}[t]
     \frametitle{Исследования характеристик при выполнении эшелонирования}
     \begin{center}
-        Выигрыш в топливе на большом горизонте полетов
+        Зависимость переизбытка топлива от количества полетов 
         \resizebox{0.7\textwidth}{!}{\input{./figures/funny_plot.pgf}}
     \end{center}
 \end{frame}
 
-\end{document}
+\begin{frame}[t]
+    \frametitle{Заключение}
+    \begin{itemize}
+        \item В данной работе мы определили основные летно-технические характеристики,
+            область располагаемых высот и скоростей полета, практический и статические
+            потолок, взлетно-посадочные характеристики, параметры правильного виража, 
+            характеристики продольной устойчивости и управляемости.
+        \item Синтезировали систему стабилизации высоты в тангажном варианте.
+        \item Также провели исследование характеристик эшелонированного полета.  
+    \end{itemize}
+\end{frame}
 
+\end{document}
 
