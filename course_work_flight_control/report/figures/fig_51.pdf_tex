@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{670.21312014bp}%
+    \setlength{\unitlength}{659.6625669bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,26 +50,26 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.17595591)%
+  \begin{picture}(1,0.17877013)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{fig_51.pdf}}%
-    \put(0.69346768,0.15771856){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H$\end{tabular}}}}%
-    \put(0.63684019,0.14538603){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \left\{ \frac{\Delta H}{\Delta \vartheta} \right\} $\end{tabular}}}}%
-    \put(0.59912134,0.15771856){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \vartheta$\end{tabular}}}}%
-    \put(0.57431348,0.14537785){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \frac{1}{p}$\end{tabular}}}}%
-    \put(0.51505299,0.15771856){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \omega_z$\end{tabular}}}}%
-    \put(0.46305736,0.14494398){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \left\{ \frac{ \omega_z}{ \delta_\text{в}} \right\} $\end{tabular}}}}%
-    \put(0.41831296,0.1578362){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \delta_\text{в}$\end{tabular}}}}%
+    \put(0.71472884,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H$\end{tabular}}}}%
+    \put(0.64601953,0.14771132){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \left\{ \frac{\Delta H}{\Delta \vartheta} \right\} $\end{tabular}}}}%
+    \put(0.60068266,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \vartheta$\end{tabular}}}}%
+    \put(0.567202,0.147703){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \frac{1}{p}$\end{tabular}}}}%
+    \put(0.51299598,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \omega_z$\end{tabular}}}}%
+    \put(0.45562101,0.1472622){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \left\{ \frac{ \omega_z}{ \delta_\text{в}} \right\} $\end{tabular}}}}%
+    \put(0.41749268,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \Delta \delta_\text{в}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fig_51.pdf}}%
-    \put(0.37712487,0.14553357){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$W_\text{п}$\end{tabular}}}}%
-    \put(0.27721535,0.14553356){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-K_{\vartheta}$\end{tabular}}}}%
-    \put(0.18401864,0.15771856){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta \vartheta_\text{зад}$\end{tabular}}}}%
-    \put(0.1134236,0.14553356){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-R_\text{н}(p)$\end{tabular}}}}%
-    \put(0.08439343,0.15771856){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \delta_\text{н}$\end{tabular}}}}%
-    \put(0.07764197,0.10010099){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H$\end{tabular}}}}%
+    \put(0.37431266,0.14786122){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$W_\text{п}$\end{tabular}}}}%
+    \put(0.26225885,0.1478612){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-K_{\vartheta}$\end{tabular}}}}%
+    \put(0.18355283,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta \vartheta_\text{зад}$\end{tabular}}}}%
+    \put(0.11482181,0.14786121){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-R_\text{н}(p)$\end{tabular}}}}%
+    \put(0.08227021,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$ \delta_\text{н}$\end{tabular}}}}%
+    \put(0.07300999,0.11939494){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{fig_51.pdf}}%
-    \put(-0.00103818,0.15812137){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H_\text{зад}$\end{tabular}}}}%
-    \put(0.43281991,0.06720028){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$K_{ \omega_z}$\end{tabular}}}}%
+    \put(0.0070185,0.16024109){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Delta H_\text{зад}$\end{tabular}}}}%
+    \put(0.41530081,0.06827507){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-K_{ \omega_z}$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

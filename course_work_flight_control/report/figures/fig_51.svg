@@ -151,9 +151,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.6804686"
-     inkscape:cx="512.6636"
-     inkscape:cy="51.65572"
+     inkscape:zoom="3.6013426"
+     inkscape:cx="45.39976"
+     inkscape:cy="73.617629"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -161,9 +161,9 @@
      units="mm"
      width="180mm"
      inkscape:window-width="1916"
-     inkscape:window-height="982"
+     inkscape:window-height="1000"
      inkscape:window-x="0"
-     inkscape:window-y="96"
+     inkscape:window-y="78"
      inkscape:window-maximized="0"
      inkscape:snap-midpoints="true"
      inkscape:snap-smooth-nodes="true"
@@ -384,11 +384,11 @@
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1352"
-       x="157.54256"
+       x="157.46909"
        y="27.432571"><tspan
          sodipodi:role="line"
          id="tspan1350"
-         x="157.54256"
+         x="157.46909"
          y="27.432571"
          style="stroke-width:0.264583">$ \left\{ \frac{\Delta H}{\Delta \vartheta} \right\} $</tspan></text>
     <text
@@ -406,11 +406,11 @@
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1380"
-       x="137.87811"
+       x="139.12712"
        y="27.434507"><tspan
          sodipodi:role="line"
          id="tspan1378"
-         x="137.87811"
+         x="139.12712"
          y="27.434507"
          style="stroke-width:0.264583">$ \frac{1}{p}$</tspan></text>
     <text
@@ -429,11 +429,11 @@
        xml:space="preserve"
        id="text1408"
        x="113.16063"
-       y="27.537086"><tspan
+       y="27.537088"><tspan
          sodipodi:role="line"
          id="tspan1406"
          x="113.16063"
-         y="27.537086"
+         y="27.537088"
          style="stroke-width:0.264583">$ \left\{ \frac{ \omega_z}{ \delta_\text{в}} \right\} $</tspan></text>
     <text
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -470,11 +470,11 @@
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1705"
-       x="92.843063"
+       x="94.239014"
        y="27.397688"><tspan
          sodipodi:role="line"
          id="tspan1703"
-         x="92.843063"
+         x="94.239014"
          y="27.397688"
          style="stroke-width:0.264583">$W_\text{п}$</tspan></text>
     <text
@@ -492,11 +492,11 @@
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1733"
-       x="50.360744"
+       x="49.846474"
        y="24.516714"><tspan
          sodipodi:role="line"
          id="tspan1731"
-         x="50.360744"
+         x="49.846474"
          y="24.516714"
          style="stroke-width:0.264583">$\Delta \vartheta_\text{зад}$</tspan></text>
     <text
@@ -540,24 +540,24 @@
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1926"
-       x="1.5913745"
+       x="8.7644129"
        y="24.516714"><tspan
          sodipodi:role="line"
          id="tspan1924"
-         x="1.5913745"
+         x="8.7644129"
          y="24.516714"
          style="stroke-width:0.264583">$\Delta H_\text{зад}$</tspan></text>
     <text
        style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"
        id="text1940"
-       x="104.95306"
+       x="103.77754"
        y="45.918522"><tspan
          sodipodi:role="line"
          id="tspan1938"
-         x="104.95306"
+         x="103.77754"
          y="45.918522"
-         style="stroke-width:0.264583">$K_{ \omega_z}$</tspan></text>
+         style="stroke-width:0.264583">$-K_{ \omega_z}$</tspan></text>
   </g>
   <inkscape:templateinfo>
     <inkscape:name>LALAPOPA</inkscape:name>
