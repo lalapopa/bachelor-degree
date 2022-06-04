@@ -28,7 +28,7 @@ class AerodynamicsData:
         column_x_text = "Ptilda"
         column_mach_text = "M_H_ptilda"
         self.Ptilda_dict = self._take_from_table_in_dict(
-             self.df_Ptilde, column_mach_text, column_x_text
+            self.df_Ptilde, column_mach_text, column_x_text
         )
 
         column_x_text = "Cetilda"
@@ -74,16 +74,17 @@ class AerodynamicsData:
     def Cym_value(self, mach):
         return linear1d(self.mach_Cym_column, self.Cym_column, mach)
 
-#    def Ce_dr_value(self, height, R):
+    #    def Ce_dr_value(self, height, R):
     def Ce_dr_value(self, height, R):
         Ce_dr_column, Rdr_column = get_Ce_dr_R_dr(0.8, height)
         f = interpolate.interp1d(
-                Rdr_column,
-                Ce_dr_column,
-                fill_value="extrapolate",
-                )
+            Rdr_column,
+            Ce_dr_column,
+            fill_value="extrapolate",
+        )
         return f(R)
-#       return linear1d(self.Rdr_column, self.Cedr_column, R)
+
+    #       return linear1d(self.Rdr_column, self.Cedr_column, R)
 
     def _take_from_table_in_dict(self, df, x_name, y_name):
         output = {}

@@ -9,6 +9,10 @@ from datetime import datetime
 import multiprocessing
 import concurrent.futures
 from functools import partial
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score
 
 from lerp import linear1d
 from DataHandler import DataHandler as dh
@@ -43,7 +47,7 @@ class Calculation:
     def __init__(self, mass, plane_char, H):
         self.ad = AerodynamicsData()
         self.plane_char = plane_char
-        self.MACH_calc = np.arange(0.3, 0.95, 0.001)
+        self.MACH_calc = np.arange(0.3, 0.95, 0.1)
         self.g = 9.81
 
         self.mass = mass
@@ -63,10 +67,14 @@ class Calculation:
         Cxm = self.ad.Cxm_value(self.MACH_calc)
         Cym = self.ad.Cym_value(self.MACH_calc)
         self.Cx = eq.C_x_n_drag_coefficient(Cxm, A, self.Cy, Cym)
+        #        print(
+        #            f"Cym = {Cym[300]}, Cxm = {Cxm[300]}, Cx = {self.Cx[300]}, Cy = {self.Cy[300]}"
+        #        )
         K = eq.K_n_lift_to_drag_ratio(self.Cy, self.Cx)
 
         self.P_potr = eq.P_potr_equation(self.mass, self.g, K)
         tilda_P = np.array([self.ad.PTilda(M, self.H) for M in self.MACH_calc])
+        self.K = K
         otn_P_0 = eq.thrust_to_weight_equation(
             self.plane_char.zero_thrust_one_eng,
             self.plane_char.N_DV,
@@ -92,33 +100,37 @@ class Calculation:
                 tilda_R = eq.tilda_R_equation(self.P_potr, self.P_rasp)
                 Ce_tilda = [self.ad.CeTilda(M, self.H) for M in self.MACH_calc]
                 Ce_dr = self.ad.Ce_dr_value(self.H, tilda_R)
-                Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
+                self.Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
             else:
-                Ce = self._ce_11_km()
+                self.Ce = self._ce_11_km()
+            self.V_int = np.linspace(self.V_calc[0], self.V_calc[-1], 250)
+            self.P_potr_int = Calculation.approximate_like_polynom(
+                self.P_potr, self.V_calc, self.V_int
+            )
+            self.Ce_int = Calculation.approximate_like_polynom(
+                self.Ce, self.V_calc, self.V_int
+            )
 
-            q_chas = eq.q_ch_hour_consumption(Ce, self.P_potr)
-
-            self.q_km = eq.q_km_range_consumption(q_chas, self.V_calc)
+            q_chas = eq.q_ch_hour_consumption(self.Ce_int, self.P_potr_int)
+            self.q_km = eq.q_km_range_consumption(q_chas, self.V_int)
 
             #            print(
-            #                f"min q km = { np.min(self.q_km) }, V min q  = {self.V_calc[np.where(self.q_km == np.min(self.q_km))]}"
+            #                f"min q km = { np.min(self.q_km) }, V min q  = {self.V_int[np.where(self.q_km == np.min(self.q_km))]}"
             #            )
             min_km_fuel_index = dh.get_min_or_max(self.q_km)
-            mach_min_fuel = self.V_calc[min_km_fuel_index] / self.a_sos
+            mach_min_fuel = self.V_int[min_km_fuel_index] / self.a_sos
 
-            #            print(f"Ce = {Ce_dr[min_km_fuel_index]}, Ce_tilda = {Ce_tilda[min_km_fuel_index]} ")
-            #            print(f"P_potr {self.P_potr[min_km_fuel_index]}")
             return (
                 self.q_km[min_km_fuel_index],
                 mach_min_fuel,
-                self.V_calc[min_km_fuel_index],
+                self.V_int[min_km_fuel_index],
             )
         #        return q_chas[min_km_fuel_index], mach_min_fuel, V_calc[min_km_fuel_index]
         else:
             return (999, 999, 999)
 
     def _ce_11_km(self):
-        air_H = Atmosphere(11000)
+        air_H = Atmosphere(self.H)
         air_11 = Atmosphere(11000)
         Ro = air_H.density[0]
         a_sos = air_H.speed_of_sound[0]
@@ -153,7 +165,7 @@ class Calculation:
         )
         tilda_R = eq.tilda_R_equation(P_potr, P_rasp)
         Ce_tilda = [self.ad.CeTilda(M, 11000) for M in self.MACH_calc]
-        Ce_dr = self.ad.Ce_dr_value(11000, tilda_R)
+        Ce_dr = self.ad.Ce_dr_value(self.H, tilda_R)
         Ce = eq.Ce_equation(self.plane_char.CE_0, Ce_tilda, Ce_dr)
         return Ce
 
@@ -163,8 +175,24 @@ class Calculation:
                 return True
         return False
 
+    @staticmethod
+    def approximate_like_polynom(target_value, x_value, x_value_int):
+        polynomial_features_target = PolynomialFeatures(degree=3, include_bias=False)
+        linear_regression = LinearRegression()
+        pipeline = Pipeline(
+            [
+                ("polynomial_features", polynomial_features_target),
+                ("linear_regression", linear_regression),
+            ]
+        )
+        pipeline.fit(x_value[:, np.newaxis], target_value)
+        return pipeline.predict(x_value_int[:, np.newaxis])
+
     def find_Vy_speeds(self):
-        return self.V_calc * (self.P_rasp - self.P_potr) / (self.mass * self.g)
+        P_rasp_int = Calculation.approximate_like_polynom(
+            self.P_rasp, self.V_calc, self.V_int
+        )
+        return self.V_int * (P_rasp_int - self.P_potr_int) / (self.mass * self.g)
 
 
 def L_range(mass):
@@ -238,11 +266,12 @@ def optimal_fly_param(m, H, like_array=False):
     H_opt = []
     V_opt = []
     M_opt = []
-    for i in H:
+    H = np.array(H)
+    H_hi_res = np.arange(H[0], H[-1] + 10, 10)
+    for i in H_hi_res:
         calc = Calculation(m, il_76, i)
-        result = calc.find_min_fuel_consumption()
-        if result:
-            q_km, mach, V = result
+        q_km, mach, V = calc.find_min_fuel_consumption()
+        if q_km < 999:
             q_km_min.append(q_km)
             H_opt.append(i)
             V_opt.append(V)
@@ -250,11 +279,21 @@ def optimal_fly_param(m, H, like_array=False):
         else:
             break
 
-    if like_array:
-        return H_opt, V_opt, M_opt, q_km_min
+    q_km_min = Calculation.approximate_like_polynom(
+        np.array(q_km_min), np.array(H_opt), H
+    )
+    M_opt = Calculation.approximate_like_polynom(np.array(M_opt), np.array(H_opt), H)
+    V_opt = Calculation.approximate_like_polynom(np.array(V_opt), np.array(H_opt), H)
 
-    if np.array(q_km_min).any() == False:
-        return (999, 999, 999, 999)
+    for i, alt in enumerate(H):
+        if alt in H_opt:
+            continue
+        q_km_min[i] = 999
+        M_opt[i] = 999
+        V_opt[i] = 999
+
+    if like_array:
+        return H, V_opt, M_opt, q_km_min
 
     mfi = np.unique(np.where(q_km_min == np.min(q_km_min)))[0]
     return H_opt[mfi], V_opt[mfi], M_opt[mfi], q_km_min[mfi]
@@ -265,7 +304,7 @@ def cruise_fly_sim(m0, mk, L_k):
     now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
     H = np.arange(7500, 12000, 10)
-    #    H = np.array([10000])
+    # H = np.array([8500])
     total_range = 0
     # begin with optimal height and speed
     print(f"Hmin {min(H)}, Hmax {max(H)}")
@@ -331,16 +370,13 @@ def calulate_climb(H_0, H_k, m0, plane):
     m_climb = m0
     while H_current < H_k:
         print(f"Climbint to {H_k}/{H_current} m | Traveled dist {L}")
-
         calc = Calculation(m_climb, il_76, H_current)
+        _, _, V_calc_q_min = calc.find_min_fuel_consumption()
         Vy_speeds = calc.find_Vy_speeds()
-        _, _, _ = calc.find_min_fuel_consumption()
 
-        theta_angle = np.degrees(Vy_speeds / calc.V_calc)
-        Vy_max = np.max(Vy_speeds)
-
-        index_max_Vy = np.unique(np.where(Vy_speeds == Vy_max))[0]
-        V_climb = calc.V_calc[index_max_Vy]
+        index_max_Vy = np.unique(np.where(calc.V_int == V_calc_q_min))[0]
+        Vy_max = Vy_speeds[index_max_Vy]
+        V_climb = calc.V_int[index_max_Vy]
         q_km_climb = calc.q_km[index_max_Vy]
 
         S_v = Vy_max * time_stamp
@@ -358,10 +394,6 @@ def calulate_climb(H_0, H_k, m0, plane):
         V_array.append(V_climb)
         q_array.append(q_km_climb)
         mass_change_array.append(m_climb)
-
-        print(f"{H_current},{L},{V_climb},{q_km_climb},{m_climb}")
-        print(f"V_y = {Vy_max}")
-
     return L_array, H_array, V_array, q_array, mass_change_array
 
 
@@ -371,192 +403,66 @@ m0 = il_76.MTOW
 m_k = m0 - il_76.TFL
 L_k = 4000
 
-H = np.arange(0, 11500, 200)
-q_km_min = []
-for i in H:
-    print(i)
-    calc = Calculation(140000, il_76, i)
-    q_km, _, _ = calc.find_min_fuel_consumption()
-    q_km_min.append(q_km)
-print("hi")
-print(q_km_min)
+if __name__ == "__main__":
+    print(f"start mass = {m0}, end mass = {m_k}")
+    # L = integrate.quad(L_range, m_k, m0)
+    # L = trapezoid(L_range, m_k, m0)
+    # L = cruise_fly_sim(m0, m_k, L_k)
+    # print(f"Range = {L}")
+    ###################
+    #  q_min_analyze  #
+    ###################
+    # mass = np.array([145000, 149000, 150000])
+    # H = np.arange(8000, 12000, 10)
+    # q_min_ar = []
+    # V_opt_ar = []
+    # H_opt_ar = []
+    # for m in mass:
+    #    print(f"{'='*10}{m:=^8}{'='*10}")
+    #    H_fly, V_opt, M_opt, q_km_min = optimal_fly_param(m, H)
+    #    q_min_ar.append(q_km_min)
+    #    V_opt_ar.append(V_opt)
+    #    H_opt_ar.append(H_fly)
 
-plt.plot(q_km_min, H)
-plt.xlabel("q_{km_{min}}")
-plt.ylabel("H")
-plt.savefig("test.png")
+    # fig, (ax1, ax2, ax3) = plt.subplots(3)
+    # ax1.plot(mass, H_opt_ar, label=f"H, m={m}")
+    # ax1.legend()
+    # ax2.plot(mass, q_min_ar, label=f"q, m={m}")
+    # ax2.legend()
+    # ax3.plot(mass, V_opt_ar, label=f"V, m={m}")
+    # ax3.legend()
+    # plt.show()
 
-# calc = Calculation(140000, il_76, 0)
-# Cx = calc.Cx
-# Cy = calc.Cy
-# K = Cy/Cx
-#
-# plt.plot(Cy, K)
-# plt.xlabel('Cy')
-# plt.ylabel('K')
-# plt.grid()
-# plt.legend()
-#
-# plt.savefig('out1.png')
-# plt.clf()
-#
-# plt.plot(calc.MACH_calc, Cx)
-# plt.xlabel('M')
-# plt.ylabel('Cx')
-# plt.grid()
-# plt.legend()
-#
-# plt.savefig('out2.png')
-# plt.clf()
-#
-# plt.plot(Cx, Cy)
-# plt.xlabel('Cx')
-# plt.ylabel('Cy')
-# plt.grid()
-# plt.legend()
-#
-# plt.savefig('out3.png')
+#        H_new_int = np.linspace(H_new[0], H_new[-1], 250)
+#        q_int = Calculation.approximate_like_polynom(
+#            np.array(q_array_new), np.array(H_new), np.arange(8000, 12000, 500)
+#        )
+######################
+#  Climb simulaiton  #
+######################
 
-# print(f'start mass = {m0}, end mass = {m_k}')
-# L = integrate.quad(L_range, m_k, m0)
-# L = trapezoid(L_range, m_k, m0)
-# L = cruise_fly_sim(m0, m_k, L_k)
-# print(f'Range = {L}')
-
-# print(m_k)
-# calc = Calculation(140000, il_76, 10000)
-# Vy_speeds = calc.find_Vy_speeds()
-# q_km, mach_min, V_min = calc.find_min_fuel_consumption()
-# print(max(Vy_speeds))
-# print(V_min)
-
-# mass = [170000, 150000, 140000]
-# H_calc = 9000
-
-# for i in mass:
-#    calc = Calculation(i, il_76, H_calc)
-#    Vy_speeds = calc.find_Vy_speeds()
-#    q_km, mach_min, V_min = calc.find_min_fuel_consumption()
-#    V_calc = calc.V_calc
-#    q_km_calc = calc.q_km
-#    index_min_fuel = np.where(q_km_calc == np.min(q_km_calc))
-#    label_q_min = "$q_{{км}_{min}}=%.3f$" % (q_km)
-#    text_V = "$V = %.2f$" % (V_calc[index_min_fuel])
-#    title_text = "Для высоты H= %.0f м, m = %.0f кг" % (H_calc, i)
-#
-#    plt.plot(
-#        V_calc[index_min_fuel],
-#        q_km_calc[index_min_fuel],
-#        "o",
-#        color="r",
-#        label=label_q_min,
-#    )
-#    plt.text(V_calc[index_min_fuel], q_km_calc[index_min_fuel] + 2, text_V)
-#    plt.title(title_text)
-#
-#    plt.plot(V_calc, q_km_calc, label="$q_{km}(V)$")
-#    plt.xlabel(r"$V, \frac{м}{с}$")
-#    plt.ylabel(r"$q_{km}, \frac{кг}{км}$")
-#
+#    L, H, V_array, q_km, mass_change = calulate_climb(8500, 9000, m0, il_76)
+#    plt.plot(L, V_array)
+#    plt.xlabel("L")
+#    plt.ylabel("V")
 #    plt.grid()
 #    plt.legend()
-#    plt.savefig(f"{i}_q_km_V.pgf")
+#
+#    plt.savefig("out1.png")
 #    plt.clf()
-
-# L, H, V_array, q_km, mass_change, V_q_km_min  = calulate_climb(8000, 8300, 166000, il_76)
 #
+#    plt.plot(L, H)
+#    plt.xlabel("L")
+#    plt.ylabel("H")
+#    plt.grid()
+#    plt.legend()
 #
-# plt.plot(L, V_array)
-# plt.plot(L, V_q_km_min)
-# plt.xlabel('L')
-# plt.ylabel('V')
-# plt.grid()
-# plt.legend()
+#    plt.savefig("out2.png")
+#    plt.clf()
 #
-# plt.savefig('out1.png')
-# plt.clf()
-#
-# plt.plot(L, H)
-# plt.xlabel('L')
-# plt.ylabel('H')
-# plt.grid()
-# plt.legend()
-#
-# plt.savefig('out2.png')
-# plt.clf()
-#
-
-# calc = Calculation(m0, il_76, 10)
-# Vy_speeds = calc.find_Vy_speeds()
-##print(Vy_speeds)
-# theta_angle = np.degrees(Vy_speeds/calc.V_calc)
-# Vy_max = np.max(Vy_speeds)
-# theta_climb = theta_angle[np.unique(np.where(Vy_speeds == Vy_max))[0]]
-
-
-# max_index = dh.get_index_element(theta_angle, theta_climb)
-# tangent_line_function = dh.find_linear_func([0, calc.V_calc[max_index]], [0, Vy_speeds[max_index]])
-# tangent_line_x_values = [0, calc.V_calc[max_index] + 20]
-# tangent_line_y_values = [tangent_line_function(value) for value in tangent_line_x_values]
-#
-#
-# fig, ax1 = plt.subplots()
-# color = '#5e3c99'
-# ax1.set_xlabel('$V, \\ [м/с]$')
-# ax1.set_ylabel('$V_y, \\ [м/с]$', color=color)
-# ax1.plot(calc.V_calc, Vy_speeds, color=color)
-# ax1.plot(calc.V_calc[max_index], Vy_speeds[max_index], 'ro')
-# ax1.plot(tangent_line_x_values, tangent_line_y_values, 'g')
-#
-# ax1.tick_params(axis='y', labelcolor=color)
-# ax1.set_ylim([0, max(Vy_speeds)+5])
-# ax1.set_xlim([0, max(calc.V_calc)])
-#
-# ax1.grid(which='both')
-# ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-#
-# color = '#e66101'
-# ax2.set_ylabel('$\\theta, \\ [град] $', color=color)  # we already handled the x-label with ax1
-# ax2.plot(calc.V_calc, theta_angle, color=color)
-# ax2.tick_params(axis='y', labelcolor=color)
-# ax2.set_ylim([0, max(theta_angle)+ 3])
-# fig.tight_layout()  # otherwise the right y-label is slightly clipped
-# plt.xticks(np.arange(0, max(calc.V_calc)+1, 50))
-# plt.savefig('climbing_angle.png')
-# plt.clf()
-
-
-# fig, ax1 = plt.subplots()
-# ax1.plot(calc.V_calc, Vy_speeds, color='red', label='$V_y(V)$')
-# ax2 = ax1.twinx()
-# ax2.plot(calc.V_calc, theta_angle, color='blue', label='$\\theta(V)$')
-# fig.tight_layout()
-#
-# plt.xlabel('$V, [m/s]$')
-# plt.ylabel('$V_y, [m/s]$')
-# plt.grid()
-# plt.legend()
-#
-# plt.plot(mass_array, mach_optimal, label='M_{opt}')
-# plt.xlabel('m, [kg]')
-# plt.ylabel('MACH')
-# plt.grid()
-# plt.legend()
-# plt.savefig('out1.png')
-# plt.clf()
-#
-#  plt.plot(mass_array, H_optimal, label='H_{opt}')
-# p plt.xlabel('m, [kg]')
-# plt.ylabel('H, [m]')
-# plt.grid()
-# plt.legend()
-# plt.savefig('out2.png')
-# plt.clf()
-#
-# plt.plot(mass_array, q_km_min_optimal, label='q_{km}_{min}')
-# plt.xlabel('m, [kg]')
-# plt.ylabel('q_{km}_{min}')
-# plt.grid()
-# plt.legend()
-# plt.savefig('out3.png')
-# plt.clf()
+#    print(
+#        f"main param\nTravel distance: {L[-1]/1000} km\n",
+#        f"Fuel lost: {m0-mass_change[-1]}\n",
+#        f"Avg speed: {np.average(V_array)}\n",
+#        f"q_km cons: {(m0-mass_change[-1])/(L[-1]/1000)}",
+#    )

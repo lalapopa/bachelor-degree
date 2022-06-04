@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 import numpy as np
-import os 
+import os
 import re
 
 from DataHandler import DataHandler as dh
@@ -28,12 +28,9 @@ def to_height_mach_table(H, M, q_km, V, index):
 
 def create_json_with_opt_fly_params(file_name):
     H_array = np.arange(7000, 13000, 500)
-#    H_array = np.arange(7000, 13000, 100)
-    mass_array = np.array(
-        [100, 110, 120, 130, 140, 150, 160, 170, 180, 190]
-    )*1000
-#    mass_array = np.array([140, 142, 148, 150])*1000
-
+    #    H_array = np.arange(7000, 13000, 100)
+    mass_array = np.array([100, 110, 120, 130, 140, 150, 160, 170, 180, 190]) * 1000
+    # mass_array = np.array([140, 142, 148, 150]) * 1000
 
     result_table = {}
     for mass in mass_array:
@@ -42,8 +39,6 @@ def create_json_with_opt_fly_params(file_name):
         H_fly, V_opt, M_opt, q_km_min = optimal_fly_param(
             mass, H_array, like_array=True
         )
-
-        q_km_min = np.array([9999 if i is False else i for i in q_km_min])
 
         min_fuel_index = dh.get_min_or_max(q_km_min)
 
@@ -111,7 +106,9 @@ def format_latex_table(latex_table):
 
     counter = 0
     match_H = r"^\d+"
-    formated_latex_table = "".join(latex_table.splitlines()[0:2]) + "\n" + header + header_with_H
+    formated_latex_table = (
+        "".join(latex_table.splitlines()[0:2]) + "\n" + header + header_with_H
+    )
     for i, line in enumerate(main_table):
         if re.search(match_H, line) or i > len(main_table) - 4:
             counter = 0
