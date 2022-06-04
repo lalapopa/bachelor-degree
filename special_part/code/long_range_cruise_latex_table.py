@@ -41,6 +41,7 @@ def create_json_with_opt_fly_params(file_name):
         )
 
         min_fuel_index = dh.get_min_or_max(q_km_min)
+        print(q_km_min)
 
         q_km_min = np.array(["-" if i == 999 else str(round(i, 3)) for i in q_km_min])
         H_fly = np.array(["-" if i == 999 else str(round(i, 0)) for i in H_fly])

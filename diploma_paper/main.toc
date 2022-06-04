@@ -38,7 +38,7 @@
 \contentsline {section}{\numberline {3.3.\hskip 1em}Результаты}{79}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1.\hskip 1em}Результаты расчета при постоянный высоте и оптимальной скорости полета}{79}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2.\hskip 1em}Результаты расчета при оптимальном изменении высоты и скорости полета}{80}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3.\hskip 1em}Эшелонированный полет, высота меняется ступенчато с шагом 300 м}{81}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3.\hskip 1em}Эшелонированный полет, высота меняется ступенчато с шагом 300 м.}{81}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4.\hskip 1em}Анализ результатов}{83}{subsection.3.3.4}%
 \contentsline {section}{\numberline {3.4.\hskip 1em}Вывод}{83}{section.3.4}%
 \contentsline {chapter}{Заключение}{85}{chapter*.181}%

@@ -176,8 +176,10 @@ class Calculation:
         return False
 
     @staticmethod
-    def approximate_like_polynom(target_value, x_value, x_value_int):
-        polynomial_features_target = PolynomialFeatures(degree=3, include_bias=False)
+    def approximate_like_polynom(target_value, x_value, x_value_int, degree=3):
+        polynomial_features_target = PolynomialFeatures(
+            degree=degree, include_bias=False
+        )
         linear_regression = LinearRegression()
         pipeline = Pipeline(
             [
@@ -279,11 +281,20 @@ def optimal_fly_param(m, H, like_array=False):
         else:
             break
 
+    if len(q_km_min) == 0:
+        return (999, 999, 999, 999)
+    plt.plot(H_opt, q_km_min, "--", label=f"mass={m}")
     q_km_min = Calculation.approximate_like_polynom(
-        np.array(q_km_min), np.array(H_opt), H
+        np.array(q_km_min), np.array(H_opt), H, degree=3
     )
-    M_opt = Calculation.approximate_like_polynom(np.array(M_opt), np.array(H_opt), H)
-    V_opt = Calculation.approximate_like_polynom(np.array(V_opt), np.array(H_opt), H)
+    M_opt = Calculation.approximate_like_polynom(
+        np.array(M_opt), np.array(H_opt), H, degree=3
+    )
+    V_opt = Calculation.approximate_like_polynom(
+        np.array(V_opt), np.array(H_opt), H, degree=3
+    )
+
+    plt.plot(H, q_km_min, label=f"mass={m}")
 
     for i, alt in enumerate(H):
         if alt in H_opt:
@@ -291,24 +302,21 @@ def optimal_fly_param(m, H, like_array=False):
         q_km_min[i] = 999
         M_opt[i] = 999
         V_opt[i] = 999
-
     if like_array:
         return H, V_opt, M_opt, q_km_min
-
     mfi = np.unique(np.where(q_km_min == np.min(q_km_min)))[0]
-    return H_opt[mfi], V_opt[mfi], M_opt[mfi], q_km_min[mfi]
+    return H[mfi], V_opt[mfi], M_opt[mfi], q_km_min[mfi]
 
 
 def cruise_fly_sim(m0, mk, L_k):
     time_tick = 60  # sec
     now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
-    H = np.arange(7500, 12000, 10)
-    # H = np.array([8500])
+    H = np.arange(9000, 13000, 10)
     total_range = 0
     # begin with optimal height and speed
     print(f"Hmin {min(H)}, Hmax {max(H)}")
-    H_opt, _, _, _ = paralell_optimal_fly_param(H, m0)
+    H_opt, _, _, _ = optimal_fly_param(m0, H)
     H_opt = float(H_opt)
     total_mass = m0
     while total_mass > mk and total_range < L_k:
@@ -324,11 +332,12 @@ def cruise_fly_sim(m0, mk, L_k):
         output = f"0,{H_opt},{total_range},{V},{q_km},{total_mass}"
         write_in_file(log_name, output)
 
-        finded_H_opt, _, _, finded_q_km_opt = paralell_optimal_fly_param(H, total_mass)
+        finded_H_opt, _, _, finded_q_km_opt = optimal_fly_param(total_mass, H)
         H_diff = finded_H_opt - H_opt
         fuel_remaning = total_mass - mk
+        print(finded_H_opt)
 
-        if H_diff >= 300:
+        if H_diff >= 10:
             L_array, H_array, V_array, q_array, mass_change_array = calulate_climb(
                 H_opt, finded_H_opt, total_mass, il_76
             )
@@ -407,36 +416,10 @@ if __name__ == "__main__":
     print(f"start mass = {m0}, end mass = {m_k}")
     # L = integrate.quad(L_range, m_k, m0)
     # L = trapezoid(L_range, m_k, m0)
-    # L = cruise_fly_sim(m0, m_k, L_k)
-    # print(f"Range = {L}")
-    ###################
-    #  q_min_analyze  #
-    ###################
-    # mass = np.array([145000, 149000, 150000])
-    # H = np.arange(8000, 12000, 10)
-    # q_min_ar = []
-    # V_opt_ar = []
-    # H_opt_ar = []
-    # for m in mass:
-    #    print(f"{'='*10}{m:=^8}{'='*10}")
-    #    H_fly, V_opt, M_opt, q_km_min = optimal_fly_param(m, H)
-    #    q_min_ar.append(q_km_min)
-    #    V_opt_ar.append(V_opt)
-    #    H_opt_ar.append(H_fly)
+    L = cruise_fly_sim(m0, m_k, L_k)
+    print(f"Range = {L}")
 
-    # fig, (ax1, ax2, ax3) = plt.subplots(3)
-    # ax1.plot(mass, H_opt_ar, label=f"H, m={m}")
-    # ax1.legend()
-    # ax2.plot(mass, q_min_ar, label=f"q, m={m}")
-    # ax2.legend()
-    # ax3.plot(mass, V_opt_ar, label=f"V, m={m}")
-    # ax3.legend()
-    # plt.show()
 
-#        H_new_int = np.linspace(H_new[0], H_new[-1], 250)
-#        q_int = Calculation.approximate_like_polynom(
-#            np.array(q_array_new), np.array(H_new), np.arange(8000, 12000, 500)
-#        )
 ######################
 #  Climb simulaiton  #
 ######################

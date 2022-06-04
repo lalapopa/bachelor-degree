@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 import numpy as np
-import os 
+import os
 import re
 
 from DataHandler import DataHandler as dh
@@ -27,10 +27,8 @@ def to_height_mach_table(H, M, q_km, V, index):
 
 
 def create_json_with_opt_fly_params(file_name):
-    H_array = np.array([8000, 8500, 9000, 9500,10000,10500, 11000, 11500])
-    mass_array = np.array(
-        [100, 110, 120, 130, 140, 150, 160, 170, 180, 190]
-    )*1000
+    H_array = np.arange(7000, 13000, 500)
+    mass_array = np.array([100, 110, 120, 130, 140, 150, 160, 170, 180, 190]) * 1000
 
     result_table = {}
     for mass in mass_array:
@@ -49,7 +47,9 @@ def create_json_with_opt_fly_params(file_name):
         M_opt = np.array(["-" if i == 999 else str(round(i, 3)) for i in M_opt])
         V_opt = np.array(["-" if i == 999 else str(round(i, 3)) for i in V_opt])
 
-        mass_table = to_height_mach_table(H_fly, M_opt, q_km_min, V_opt, min_fuel_index)
+        mass_table = to_height_mach_table(
+            H_fly[3:], M_opt[3:], q_km_min[3:], V_opt[3:], min_fuel_index - 3
+        )
         result_table[str(mass)] = mass_table
         print(f'{"#"*10} H={H_fly[min_fuel_index]} feet, m={mass} kg {"#"*10}')
         print("_" * 30)
@@ -108,7 +108,9 @@ def format_latex_table(latex_table):
 
     counter = 0
     match_H = r"^\d+"
-    formated_latex_table = "".join(latex_table.splitlines()[0:2]) + "\n" + header + header_with_H
+    formated_latex_table = (
+        "".join(latex_table.splitlines()[0:2]) + "\n" + header + header_with_H
+    )
     for i, line in enumerate(main_table):
         if re.search(match_H, line) or i > len(main_table) - 4:
             counter = 0
@@ -125,7 +127,7 @@ def format_latex_table(latex_table):
 json_name = "output.json"
 output_latex_name = "long_range_cruise_contorl_table.tex"
 create_json_with_opt_fly_params(json_name)
-save_path = '/home/lalapopa/Documents/uni/4_course/2_sem/diploma_work/presentation/'
+save_path = "/home/lalapopa/Documents/uni/4_course/2_sem/diploma_work/presentation/"
 
 with open(save_path + output_latex_name, "w") as f:
     latex_table = parse_json_and_return_latex_table(json_name)

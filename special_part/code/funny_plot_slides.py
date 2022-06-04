@@ -27,12 +27,12 @@ def pgf_setting():
 
 
 pgf_setting()
-H_const = 627.6
-H_300 = 40.93
+H_const = 366.7
+H_300 = 34.65
 flight_numbers = 100
 path = "/home/lalapopa/Documents/uni/4_course/2_sem/diploma_work/presentation/figures/"
 
-x_axis = np.arange(1, 100 + 1)
+x_axis = np.arange(1, flight_numbers + 1)
 fuel_lost_H_const = [H_const * i for i in x_axis]
 fuel_lost_H_300 = [H_300 * i for i in x_axis]
 
@@ -50,7 +50,7 @@ ax.spines["top"].set_color("none")
 plt.yscale("log", base=10)
 plt.xlabel("Количество полетов")
 plt.ylabel("Расход топлива, [кг]")
-plt.xlim([0, x_axis[-1]])
+plt.xlim([1, x_axis[-1]])
 plt.ylim([1, 10**5])
 for axis in [ax.xaxis, ax.yaxis]:
     axis.set_major_formatter(ScalarFormatter())

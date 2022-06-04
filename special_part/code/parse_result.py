@@ -77,12 +77,27 @@ def remove_climb_data(data, climb_state):
     mask = np.array(climb_state, dtype=bool)
     return np.delete(data, mask)
 
+
 def clear_data_for_different_flight_level_mode(data, climb_state):
-    start_climb_index = 
+    clear_data = [float(data[0])]
+    start_idxs, end_idxs = find_climb_start_end_index(climb_state)
+    all_index = sorted(start_idxs + end_idxs)
+    for i in all_index:
+        clear_data.append(data[i])
+    return clear_data
 
 
-def find_climb
-# TODO:  <04-06-22, yourname> #
+def find_climb_start_end_index(climb_state):
+    start_index = []
+    end_index = []
+    prev_value = 0
+    for i, value in enumerate(climb_state):
+        if value == 1 and prev_value == 0:
+            start_index.append(i - 1)
+        if value == 0 and prev_value == 1:
+            end_index.append(i)
+        prev_value = value
+    return start_index, end_index
 
 
 def crate_and_save_latex_table(
@@ -140,33 +155,33 @@ for i, val in enumerate(file_name):
     q_data = np.array(data.loc[:, "q_km"])
     m_data = np.array(data.loc[:, "m"])
 
-    L_data, H_data = split_data(L_data, H_data)
-    _, climb_state = split_data(L_data, climb_state)
-    _, V_data = split_data(L_data, V_data)
-    _, q_data = split_data(L_data, q_data)
-    _, m_data = split_data(L_data, m_data)
-    total_fuel_lost = get_total_fuel_burned(m0, m_data)
+    L_data_splited, H_data_splited = split_data(L_data, H_data)
+    _, climb_state_splited = split_data(L_data, climb_state)
+    _, V_data_splited = split_data(L_data, V_data)
+    _, q_data_splited = split_data(L_data, q_data)
+    _, m_data_splited = split_data(L_data, m_data)
+    total_fuel_lost = get_total_fuel_burned(m0, m_data_splited)
     crate_and_save_latex_table(
         f"{config.PATH_TABLE}{val[0:-4]}_result.tex",
-        total_fuel_lost / np.max(L_data),
-        np.max(L_data),
+        total_fuel_lost / np.max(L_data_splited),
+        np.max(L_data_splited),
         total_fuel_lost,
-        get_total_flight_time(t_0, L_data, climb_state),
+        get_total_flight_time(t_0, L_data_splited, climb_state_splited),
     )
     print("=" * 10, val, "=" * 10)
-    print(f"AVG fuel_q_km = {np.average(q_data)}")
-    print(f"Flight_range = {np.max(L_data)}")
+    print(f"AVG fuel_q_km = {np.average(q_data_splited)}")
+    print(f"Flight_range = {np.max(L_data_splited)}")
     print(
-        f"Total_fuel burned = {get_total_fuel_burned(m0, m_data)}\n"
-        f"Total Flight time = {get_total_flight_time(t_0, L_data, climb_state)}"
+        f"Total_fuel burned = {get_total_fuel_burned(m0, m_data_splited)}\n"
+        f"Total Flight time = {get_total_flight_time(t_0, L_data_splited, climb_state_splited)}"
     )
 
     if i == 1 or i == 2:
-        H_data = remove_climb_data(H_data, climb_state)
-        L_data = remove_climb_data(L_data, climb_state)
-        V_data = remove_climb_data(V_data, climb_state)
-        q_data = remove_climb_data(q_data, climb_state)
-        m_data = remove_climb_data(m_data, climb_state)
+        H_data_splited = remove_climb_data(H_data_splited, climb_state_splited)
+        L_data_splited = remove_climb_data(L_data_splited, climb_state_splited)
+        V_data_splited = remove_climb_data(V_data_splited, climb_state_splited)
+        q_data_splited = remove_climb_data(q_data_splited, climb_state_splited)
+        m_data_splited = remove_climb_data(m_data_splited, climb_state_splited)
         fig, ax1 = plt.subplots()
         ax2 = ax1.twinx()
         polynomial_features_H = PolynomialFeatures(degree=2, include_bias=False)
@@ -177,7 +192,7 @@ for i, val in enumerate(file_name):
                 ("linear_regression", linear_regression_H),
             ]
         )
-        pipeline_H.fit(L_data[:, np.newaxis], H_data)
+        pipeline_H.fit(L_data_splited[:, np.newaxis], H_data_splited)
         if i == 2:
             polynomial_features_V = PolynomialFeatures(degree=1, include_bias=False)
         else:
@@ -189,8 +204,8 @@ for i, val in enumerate(file_name):
                 ("linear_regression", linear_regression_V),
             ]
         )
-        pipeline_V.fit(L_data[:, np.newaxis], V_data)
-        L_data_int = np.linspace(L_data[0], max_range, 100)
+        pipeline_V.fit(L_data_splited[:, np.newaxis], V_data_splited)
+        L_data_int = np.linspace(L_data_splited[0], max_range, 100)
 
         ax1.plot(
             L_data_int,
@@ -206,8 +221,8 @@ for i, val in enumerate(file_name):
             label="$V(L)$",
             linewidth=2,
         )
-        ax2.set_ylim([min(V_data) - 15, max(V_data) + 5])
-        ax1.set_xlim([0, 3000])
+        ax2.set_ylim([177, 184])
+        ax1.set_xlim([0, max_range])
 
         ax1.set_xlabel("$L,\, [км]$")
         ax1.set_ylabel("$H,\, [м]$", color="g")
@@ -218,16 +233,17 @@ for i, val in enumerate(file_name):
         plt.clf()
 
     else:
-        H_data = remove_climb_data(H_data, climb_state)
-        L_data = remove_climb_data(L_data, climb_state)
-        V_data = remove_climb_data(V_data, climb_state)
+        V_clear = clear_data_for_different_flight_level_mode(V_data, climb_state)
+        H_clear = clear_data_for_different_flight_level_mode(H_data, climb_state)
+        L_clear = clear_data_for_different_flight_level_mode(L_data, climb_state)
         fig, ax1 = plt.subplots()
         ax2 = ax1.twinx()
-        ax1.plot(L_data, H_data, "g", label="$H(L)$", linewidth=2)
-        ax2.plot(L_data, V_data, "b--", label="$V(L)$", linewidth=2)
+        ax1.plot(L_clear, H_clear, "g", label="$H(L)$", linewidth=2)
+        ax2.plot(L_clear, V_clear, "b--", label="$V(L)$", linewidth=2)
         print(len(V_data))
-        ax2.set_ylim([min(V_data) - 15, max(V_data) + 5])
+        ax2.set_ylim([177, 184])
         ax1.set_xlim([0, 3000])
+        ax1.set_ylim([min(H_clear) - 300, 10300])
 
         ax1.set_xlabel("$L, [км]$")
         ax1.set_ylabel("$H,\, [м]$", color="g")
@@ -243,7 +259,7 @@ for i, val in enumerate(file_name):
     ax2.plot(L_data, q_data, "b--", label="$q(L)$", linewidth=2)
     ax2.set_ylim([min(q_data) - 1, max(q_data) + 1])
     ax1.set_ylim([100000, max(m_data) + 5000])
-    ax1.set_xlim([0, 3000])
+    ax1.set_xlim([0, max_range])
     ax1.set_xlabel("$L,\, [км]$")
     ax1.set_ylabel("$m,\, [кг]$", color="g")
     ax2.set_ylabel("$q_{km},\, [кг/км]$", color="b")

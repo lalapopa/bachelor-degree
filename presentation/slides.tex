@@ -10,76 +10,82 @@
 \begin{document}
 
 \begin{noheadline}
-\clearpage
-\thispagestyle{empty}
-\maketitle
+    \clearpage
+    \thispagestyle{empty}
+    \maketitle
 \end{noheadline}
 
 \begin{frame}
-\frametitle{Постановка задачи}
-\begin{center}
-    \begin{minipage}{0.9\textwidth}
-        \begin{block}{Задачи}
-            \begin{itemize}
-                \item Расчет основных летно-технических характеристик, взлетно-посадочных
-                    характеристик, транспортные возможности, характеристики
-                    маневренности, характеристик продольной устойчивости и
-                    управляемости 
-                \item Синтезировать систему автоматической стабилизации высоты 
-                \item Исследовать характеристики самолета при выполнении эшелонированного полета 
-            \end{itemize}
-        \end{block}
-    \end{minipage}
-\end{center}
+    \frametitle{Постановка задачи}
+    \begin{center}
+        \begin{minipage}{0.9\textwidth}
+            \begin{block}{Задачи:}
+                    \begin{block}{Общеспециальная часть}
+                        \begin{itemize}
+                            \item Расчет основных летно-технических характеристик, взлетно-посадочных
+                                характеристик, транспортные возможности, характеристики
+                                маневренности, характеристик продольной устойчивости и
+                                управляемости 
+                            \item Синтезировать систему автоматической стабилизации высоты 
+                        \end{itemize}
+                    \end{block}
+                    \begin{block}{Специальная часть}
+                        \begin{itemize}
+                            \item Исследовать характеристики самолета при выполнении эшелонированного полета 
+                        \end{itemize}
+                    \end{block}
+            \end{block}
+        \end{minipage}
+    \end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{Объект исследования}
-\begin{center}
-    Прототип транспортного самолета Ил-76
-    \vspace{60pt}
-    \begin{picture}(270, 190)
-        \put(0,0){
-        \resizebox{0.72\textwidth}{!}{
-            { \import{../course_work_flight_dynamics/report/figures}{il_76_s.pdf_tex}}
-        }
-        }
-        \put(160, 80){
-            \begin{tabular}{|c|c|}
-                \hline
-                Параметры & Величина\\
-                \hline
-                $m$ & $140000\, кг$ \\
-                \hline
-                $S$ & $300\, м^2$ \\
-                \hline
-                $b_a$ &  $6.436 м$ \\
-                \hline
-            \end{tabular}
-        }
-    \end{picture}
-\end{center}
+    \frametitle{Объект исследования}
+    \begin{center}
+        Прототип транспортного самолета Ил-76
+        \vspace{60pt}
+        \begin{picture}(270, 190)
+            \put(0,0){
+                \resizebox{0.72\textwidth}{!}{
+                    { \import{../course_work_flight_dynamics/report/figures}{il_76_s.pdf_tex}}
+                }
+            }
+            \put(160, 80){
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Параметры & Величина\\
+                    \hline
+                    $m$ & $140000\, кг$ \\
+                    \hline
+                    $S$ & $300\, м^2$ \\
+                    \hline
+                    $b_a$ &  $6.436 м$ \\
+                    \hline
+                \end{tabular}
+            }
+        \end{picture}
+    \end{center}
 
 \end{frame}
 
 \begin{frame}
     \frametitle{Расчет летно-технических характеристик}
     \begin{center}
-    Кривые потребных и располагаемых тяг
-    \resizebox{\textwidth}{!}{
-    {\input{../course_work_flight_dynamics/report/figures/P_rasp_P_potr_combine.pgf}}
-    }
+        Кривые потребных и располагаемых тяг
+        \resizebox{\textwidth}{!}{
+            {\input{../course_work_flight_dynamics/report/figures/P_rasp_P_potr_combine.pgf}}
+        }
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Расчет летно-технических характеристик}
     \begin{center}
-    Диапазон высот и скоростей полета 
-\resizebox{0.75\textwidth}{!}{
-{\input{../course_work_flight_dynamics/report/figures/H_M_flight_area.pgf}}
-}
-\end{center}
+        Диапазон высот и скоростей полета 
+        \resizebox{0.75\textwidth}{!}{
+            {\input{../course_work_flight_dynamics/report/figures/H_M_flight_area.pgf}}
+        }
+    \end{center}
 \end{frame}
 
 \begin{frame}[t]
@@ -153,11 +159,11 @@
 
 \begin{frame}[t]
     \frametitle{Характеристики продольной статической устойчивости и управляемости}
-   \begin{center}
-       Определение $\bar{S}_{го}^*$ 
+    \begin{center}
+        Определение $\bar{S}_{го}^*$ 
 
-       \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/xTP_graph.pgf}}
-   \end{center} 
+        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/xTP_graph.pgf}}
+    \end{center} 
 \end{frame}
 
 \begin{frame}[t]
@@ -179,12 +185,12 @@
 
 \begin{frame}
     \frametitle{Синтез системы автоматической стабилизации высоты}
-\begin{center}
-    Структурная схема стабилизации высоты в тангажном варианте:
-    \vspace{14pt}
+    \begin{center}
+        Структурная схема стабилизации высоты в тангажном варианте:
+        \vspace{14pt}
 
-    \resizebox{1.35\textwidth}{!}{\input{../course_work_flight_control/report/figures/fig_51.pdf_tex}}
-\end{center}
+        \resizebox{1.35\textwidth}{!}{\input{../course_work_flight_control/report/figures/fig_51.pdf_tex}}
+    \end{center}
 
 \end{frame}
 \begin{frame}[t]
@@ -211,48 +217,67 @@
 
 \begin{frame}[t]
     \frametitle{Синтез системы автоматической стабилизации высоты}
-\begin{center}
-    Выбранные коэффициенты обратных связей для контура стабилизации высоты:
-    \vspace{14pt}
+    \begin{center}
+        Выбранные коэффициенты обратных связей для контура стабилизации высоты:
+        \vspace{14pt}
 
-    \begin{minipage}{0.49\textwidth}
-        \begin{center}
-            Для регулятора $i_H$\\
-            \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/i_H_H_q.pgf}}
-        \end{center}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.49\textwidth}
-        \begin{center}
-            Для регулятора $K_H$\\
-            \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/K_H_H_q.pgf}}
-        \end{center}
-    \end{minipage}
-\end{center}
+        \begin{minipage}{0.49\textwidth}
+            \begin{center}
+                Для регулятора $i_H$\\
+                \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/i_H_H_q.pgf}}
+            \end{center}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\textwidth}
+            \begin{center}
+                Для регулятора $K_H$\\
+                \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/K_H_H_q.pgf}}
+            \end{center}
+        \end{minipage}
+    \end{center}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Синтез системы автоматической стабилизации высоты}
     \begin{center}
         Частотный анализ
-    
+
         ЛАФЧХ для разомкнутого контура стабилизации высоты при: 
 
         $q_{min} \Rightarrow M = 0.3071$, $q_{max} \Rightarrow M = 0.6119$,
         $q_{кр} \Rightarrow M=0.61$.
-        \resizebox{!}{0.7\textheight}{\input{../course_work_flight_control/report/figures/altitude_ol.pgf}}
+        \begin{picture}(290, 190)
+            \put(-30,30){
+                \adjustbox{trim=10pt 3pt 18pt 20pt,clip}{
+                    \resizebox{0.65\textwidth}{!}{\input{../course_work_flight_control/report/figures/altitude_ol.pgf}}
+            }}
+            \put(180, 137){
+                \resizebox{0.37\textwidth}{!}{
+                    \begin{tabular}{|c|c|c|c|}
+                        \hline
+                        $M$ &            0.3071 &            0.61 &            0.6119 \\
+                        \hline
+                        $\omega_{ср}$, рад/с&                  0.284 &                 0.267 &                 0.862\\ 
+                        \hline
+                        $\Delta Q$, дБ &           9.813 &          11.866 & 7.198 \\
+                        \hline
+                        $\Delta L$, град. & 35.362 & 39.075 & 28.364 \\
+                        \hline
+                    \end{tabular}
+            }}
+        \end{picture}
     \end{center}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Нелинейное, линейное моделирование системы}
-\begin{center}
-    Сравнение переходных процессов линейной и нелинейной модели.
-    \vspace{14pt}
+    \begin{center}
+        Сравнение переходных процессов линейной и нелинейной модели.
+        \vspace{14pt}
 
         \begin{minipage}{0.49\textwidth}
             \begin{center}
-            \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_Delta_H_s.pgf}}
+                \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_Delta_H_s.pgf}}
             \end{center}
         \end{minipage}
         \hfill
@@ -261,19 +286,19 @@
                 \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_delta_elevator_s.pgf}}
             \end{center}
         \end{minipage}
-\end{center}
+    \end{center}
 \end{frame}
 
 
 \begin{frame}[t]
     \frametitle{Нелинейное, линейное моделирование системы}
-\begin{center}
-    Сравнение переходных процессов линейной и нелинейной модели.
-    \vspace{14pt}
+    \begin{center}
+        Сравнение переходных процессов линейной и нелинейной модели.
+        \vspace{14pt}
 
         \begin{minipage}{0.49\textwidth}
             \begin{center}
-            \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_omega_z_s.pgf}}
+                \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_omega_z_s.pgf}}
             \end{center}
         \end{minipage}
         \hfill
@@ -282,19 +307,19 @@
                 \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_theta_s.pgf}}
             \end{center}
         \end{minipage}
-\end{center}
+    \end{center}
 \end{frame}
 
 
 \begin{frame}[t]
     \frametitle{Нелинейное, линейное моделирование системы}
-\begin{center}
-    Сравнение переходных процессов при различных скоростях отклонения привода. 
-    \vspace{14pt}
+    \begin{center}
+        Сравнение переходных процессов при различных скоростях отклонения привода. 
+        \vspace{14pt}
 
         \begin{minipage}{0.49\textwidth}
             \begin{center}
-            \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_Delta_H_s.pgf}}
+                \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_Delta_H_s.pgf}}
             \end{center}
         \end{minipage}
         \hfill
@@ -303,58 +328,58 @@
                 \resizebox{1.0\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_delta_elevator_s.pgf}}
             \end{center}
         \end{minipage}
-\end{center}
+    \end{center}
 \end{frame}
 
 
 \begin{frame}[t]
     \frametitle{Нелинейное, линейное моделирование системы}
-\begin{center}
-    Сравнение переходных процессов при различных скоростях отклонения привода. 
-    \vspace{14pt}
+    \begin{center}
+        Сравнение переходных процессов при различных скоростях отклонения привода. 
+        \vspace{14pt}
 
-    \begin{minipage}{0.49\textwidth}
-        \begin{center}
-            \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_omega_z_s.pgf}}
-        \end{center}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.49\textwidth}
-        \begin{center}
-            \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_theta_s.pgf}}
-        \end{center}
-    \end{minipage}
-\end{center}
+        \begin{minipage}{0.49\textwidth}
+            \begin{center}
+                \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_omega_z_s.pgf}}
+            \end{center}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\textwidth}
+            \begin{center}
+                \resizebox{\textwidth}{!}{\input{../course_work_flight_control/report/figures/model_DD_theta_s.pgf}}
+            \end{center}
+        \end{minipage}
+    \end{center}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Исследования характеристик при выполнении эшелонирования}
-\begin{center}
-    \begin{minipage}{0.9\textwidth}
-        \begin{block}{Рассмотрим такие варианты полета:}
-            \begin{enumerate}
-                \item При постоянной высоте и оптимальной скорости полета 
-                \item При оптимальном изменении высоты и скорости полета
-                \item Эшелонированный полет с изменением высоты с шагом 300 м.
-            \end{enumerate}
-        \end{block}
-    \end{minipage}
-\end{center}
+    \begin{center}
+        \begin{minipage}{0.9\textwidth}
+            \begin{block}{Рассмотрим такие варианты полета:}
+                \begin{enumerate}
+                    \item При постоянной высоте и оптимальной скорости полета 
+                    \item При оптимальном изменении высоты и скорости полета
+                    \item Эшелонированный полет с изменением высоты с шагом 300 м.
+                \end{enumerate}
+            \end{block}
+        \end{minipage}
+    \end{center}
 
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Исследования характеристик при выполнении эшелонирования}
-\begin{center}
-    \vspace{-0.5cm}
-    Таблица параметров крейсерского полета:
-    \begin{minipage}{\textwidth}
-        \begin{table}[H]
-            \centering
-            \resizebox{0.55\textwidth}{!}{\input{long_range_cruise_contorl_table.tex}}
-        \end{table}
-    \end{minipage}
-\end{center}
+    \begin{center}
+        \vspace{-0.5cm}
+        Таблица параметров крейсерского полета:
+        \begin{minipage}{\textwidth}
+            \begin{table}[H]
+                \centering
+                \resizebox{0.65\textwidth}{!}{\input{long_range_cruise_contorl_table.tex}}
+            \end{table}
+        \end{minipage}
+    \end{center}
 \end{frame}
 
 \begin{frame}[t]
@@ -364,12 +389,12 @@
 
         \begin{minipage}{0.49\textwidth}
             \centering
-            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_const_V_opt_L_H.pgf}}
+            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_const_V_opt_v2_step_1_L_H.pgf}}
         \end{minipage}
         \hfill
         \begin{minipage}{0.49\textwidth}
             \centering
-            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_const_V_opt_L_m.pgf}}
+            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_const_V_opt_v2_step_1_L_m.pgf}}
         \end{minipage}
     \end{center}
 \end{frame}
@@ -382,12 +407,12 @@
 
         \begin{minipage}{0.49\textwidth}
             \centering
-            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_opt_V_opt_L_H.pgf}}
+            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_opt_V_opt_v2_step_1_L_H.pgf}}
         \end{minipage}
         \hfill
         \begin{minipage}{0.49\textwidth}
             \centering
-            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_opt_V_opt_L_m.pgf}}
+            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_opt_V_opt_v2_step_1_L_m.pgf}}
         \end{minipage}
     \end{center}
 \end{frame}
@@ -399,13 +424,13 @@
 
         \begin{minipage}{0.49\textwidth}
             \centering
-            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_300_V_opt_L_H.pgf}}
+            \resizebox{1.0\textwidth}{!}{\input{../special_part/report/img/H_300_V_opt_v2_step_60_L_H.pgf}}
         \end{minipage}
         \hfill
         \begin{minipage}{0.49\textwidth}
             \centering
             \resizebox{1.0\textwidth}{!}{
-            \input{../special_part/report/img/H_300_V_opt_L_m.pgf}}
+            \input{../special_part/report/img/H_300_V_opt_v2_step_60_L_m.pgf}}
         \end{minipage}
     \end{center}
 \end{frame}
@@ -415,19 +440,20 @@
     \frametitle{Исследования характеристик при выполнении эшелонирования}
     \begin{center}
 
-    Сравнение израсходованного топлива и времени полета по сравнению с
-    оптимальной траекторией    
-\begin{tabular}{|p{0.40\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
-    \hline
-    Режим & $m_{изр}, \%$ & $T, \%$\\
-    \hline
-    Полет по оптимальной траектории & 100 & 100 \\
-    \hline
-    Полет на $H=8500\,м$ & 101.87 & 99.69\\
-    \hline
-    Полет эшелонированный полет $\Delta H =300\, м$ & 100.12 & 99.75\\
-    \hline
-\end{tabular}
+        Сравнение израсходованного топлива по сравнению с
+        оптимальной траекторией    
+
+        \begin{tabular}{|p{0.40\textwidth}|c|}
+            \hline
+            Режим & $m_{изр}, \%$ \\ 
+            \hline
+            Полет по оптимальной траектории & 100 \\ 
+            \hline
+            Полет на $H=8500\,м$ & 101.19 \\
+            \hline
+            Полет эшелонированный полет $\Delta H =300\, м$ & 100.11 \\
+            \hline
+        \end{tabular}
     \end{center}
 \end{frame}
 
@@ -447,10 +473,12 @@
             потолок, взлетно-посадочные характеристики, параметры правильного виража, 
             характеристики продольной устойчивости и управляемости.
         \item Синтезировали систему стабилизации высоты в тангажном варианте.
+            Подобрали такие коэффициенты обратной связи, которые обеспечивают
+            устойчивость на всем диапазоне полетов.
         \item Также провели исследование характеристик эшелонированного полета
             из которого следует, экономически целесообразно проводить
             эшелонированный полет. Выигрыш в топливе по сравнению с полетом на
-            постоянной высоте в нашем случае составляет порядка 1.8 \%. 
+            постоянной высоте в нашем случае составляет порядка 1.19 \%. 
     \end{itemize}
 \end{frame}
 
