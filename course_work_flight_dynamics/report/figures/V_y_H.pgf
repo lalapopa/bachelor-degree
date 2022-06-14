@@ -655,7 +655,8 @@
 \pgfpathlineto{\pgfqpoint{3.419283in}{2.104238in}}%
 \pgfpathlineto{\pgfqpoint{2.674454in}{2.640651in}}%
 \pgfpathlineto{\pgfqpoint{1.778515in}{3.177064in}}%
-\pgfpathlineto{\pgfqpoint{0.868818in}{3.594933in}}%
+\pgfpathlineto{\pgfqpoint{1.221301in}{3.445270in}}%
+\pgfpathlineto{\pgfqpoint{0.750001in}{3.645000in}}%
 \pgfpathlineto{\pgfqpoint{0.750000in}{3.645000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%

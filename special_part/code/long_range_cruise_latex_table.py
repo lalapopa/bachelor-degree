@@ -33,7 +33,7 @@ def create_json_with_opt_fly_params(file_name):
     # mass_array = np.array([140, 142, 148, 150]) * 1000
 
     result_table = {}
-    for mass in mass_array:
+    for mass in mass_array[::-1]:
         mass_table = {}
 
         H_fly, V_opt, M_opt, q_km_min = optimal_fly_param(

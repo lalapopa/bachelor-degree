@@ -27,7 +27,7 @@ def pgf_setting():
 
 
 pgf_setting()
-H_const = 366.7
+H_const = 346.5
 H_300 = 34.65
 flight_numbers = 100
 path = "/home/lalapopa/Documents/uni/4_course/2_sem/diploma_work/presentation/figures/"

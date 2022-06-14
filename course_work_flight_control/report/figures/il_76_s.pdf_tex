@@ -54,15 +54,5 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{il_76_s.pdf}}%
-    \put(0.22870337,0.71665724){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}46600\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{il_76_s.pdf}}%
-    \put(0.09382667,0.10831872){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}18141\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{il_76_s.pdf}}%
-    \put(0.21450967,0.2272522){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}6436\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{il_76_s.pdf}}%
-    \put(0.99346024,0.59519954){\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}14760\\\end{tabular}}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{il_76_s.pdf}}%
-    \put(0.52491883,0.220198){\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50500\end{tabular}}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{il_76_s.pdf}}%
   \end{picture}%
 \endgroup%

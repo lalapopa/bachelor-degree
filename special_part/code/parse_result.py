@@ -106,7 +106,7 @@ def crate_and_save_latex_table(
     text_column = np.array(
         [
             r"$q_{км\, ср},\, \frac{кг}{км}$",
-            r"$L,\, м$",
+            r"$L,\, км$",
             r"$m_{изр},\, кг$",
             r"$t_{кр},\, мин$",
         ]

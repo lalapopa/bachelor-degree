@@ -280,10 +280,8 @@ def optimal_fly_param(m, H, like_array=False):
             M_opt.append(mach)
         else:
             break
-
     if len(q_km_min) == 0:
         return (999, 999, 999, 999)
-    plt.plot(H_opt, q_km_min, "--", label=f"mass={m}")
     q_km_min = Calculation.approximate_like_polynom(
         np.array(q_km_min), np.array(H_opt), H, degree=3
     )
@@ -293,9 +291,6 @@ def optimal_fly_param(m, H, like_array=False):
     V_opt = Calculation.approximate_like_polynom(
         np.array(V_opt), np.array(H_opt), H, degree=3
     )
-
-    plt.plot(H, q_km_min, label=f"mass={m}")
-
     for i, alt in enumerate(H):
         if alt in H_opt:
             continue
@@ -312,7 +307,7 @@ def cruise_fly_sim(m0, mk, L_k):
     time_tick = 60  # sec
     now_date = datetime.now().strftime("%Y%m%d%H%M%S")
     log_name = f"{now_date}_sim_with_t_t_{str(time_tick)}.txt"
-    H = np.arange(9000, 13000, 10)
+    H = np.arange(7000, 13000, 500)
     total_range = 0
     # begin with optimal height and speed
     print(f"Hmin {min(H)}, Hmax {max(H)}")
@@ -332,21 +327,21 @@ def cruise_fly_sim(m0, mk, L_k):
         output = f"0,{H_opt},{total_range},{V},{q_km},{total_mass}"
         write_in_file(log_name, output)
 
-        finded_H_opt, _, _, finded_q_km_opt = optimal_fly_param(total_mass, H)
-        H_diff = finded_H_opt - H_opt
+        # finded_H_opt, _, _, finded_q_km_opt = optimal_fly_param(total_mass, H)
+        # H_diff = finded_H_opt - H_opt
         fuel_remaning = total_mass - mk
-        print(finded_H_opt)
+        # print(finded_H_opt)
 
-        if H_diff >= 10:
-            L_array, H_array, V_array, q_array, mass_change_array = calulate_climb(
-                H_opt, finded_H_opt, total_mass, il_76
-            )
-            H_opt = finded_H_opt
-            for i, value in enumerate(L_array):
-                output = f"1,{H_array[i]},{total_range+(L_array[i]/1000)},{V_array[i]},{q_array[i]},{mass_change_array[i]}"
-                write_in_file(log_name, output)
-            total_mass = mass_change_array[-1]
-            total_range += L_array[-1] / 1000
+        # if H_diff >= 10:
+        #    L_array, H_array, V_array, q_array, mass_change_array = calulate_climb(
+        #        H_opt, finded_H_opt, total_mass, il_76
+        #    )
+        #    H_opt = finded_H_opt
+        #    for i, value in enumerate(L_array):
+        #        output = f"1,{H_array[i]},{total_range+(L_array[i]/1000)},{V_array[i]},{q_array[i]},{mass_change_array[i]}"
+        #        write_in_file(log_name, output)
+        #    total_mass = mass_change_array[-1]
+        #    total_range += L_array[-1] / 1000
         print(
             f"fuel_remaning= {fuel_remaning} kg, total_range = {total_range}, height = {H_opt}, speed = {V}"
         )

@@ -5,7 +5,8 @@ compose:
 	cp main.pdf -t ./compose;
 	cp ../special_part/forms/form.pdf -t ./compose; 
 	cp ../presentation/slides.pdf ./compose/Слайды-ВКР-Москвитин-А.pdf;
-	qpdf ./compose/form.pdf --pages . 1-5 -- ./compose/Формы-Москвитин.pdf;
+	qpdf ./compose/form.pdf --pages . 4,5 -- ./compose/Формы-Москвитин.pdf;
+	qpdf ./compose/form.pdf --pages . 1,2 -- ./compose/Двухсторонняя.pdf;
 	qpdf ./compose/form.pdf --pages . 3 ./compose/main.pdf -- ./compose/ВКР-Москвитин-А.pdf;
 	rm ./compose/{main,form}.pdf;
 
