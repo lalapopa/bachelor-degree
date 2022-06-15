@@ -24,7 +24,7 @@ def pgf_setting():
             "pgf.texsystem": "pdflatex",
             "font.family": "sans-serif",
             "text.usetex": True,
-            "font.size": 11,
+            "font.size": 14,
             "xtick.labelsize": 14,
             "ytick.labelsize": 14,
             "axes.labelsize": 14,
@@ -227,9 +227,9 @@ for i, val in enumerate(file_name):
         ax1.set_xlabel("$L,\, [км]$")
         ax1.set_ylabel("$H,\, [м]$", color="g")
         ax2.set_ylabel("$V,\, [м/с]$", color="b")
-        fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+        fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.70, 0.10))
         ax1.grid()
-        plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf")
+        fig.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf", bbox_inches="tight")
         plt.clf()
 
     else:
@@ -248,9 +248,9 @@ for i, val in enumerate(file_name):
         ax1.set_xlabel("$L, [км]$")
         ax1.set_ylabel("$H,\, [м]$", color="g")
         ax2.set_ylabel("$V,\, [м/с]$", color="b")
-        fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+        fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.70, 0.10))
         ax1.grid()
-        plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf")
+        fig.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_H.pgf", bbox_inches="tight")
         plt.clf()
 
     fig, ax1 = plt.subplots()
@@ -263,10 +263,10 @@ for i, val in enumerate(file_name):
     ax1.set_xlabel("$L,\, [км]$")
     ax1.set_ylabel("$m,\, [кг]$", color="g")
     ax2.set_ylabel("$q_{km},\, [кг/км]$", color="b")
-    fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.75, 0.10))
+    fig.legend(loc=3, frameon=True, bbox_to_anchor=(0.70, 0.10))
     ax1.ticklabel_format(axis="y", style="sci", scilimits=(0, 0))
     ax1.grid()
-    plt.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_m.pgf")
+    fig.savefig(f"{config.PATH_FIGURES}{val[0:-4]}_L_m.pgf", bbox_inches="tight")
     plt.clf()
 
 
@@ -282,7 +282,7 @@ for i, val in enumerate(file_name):
 #        plt.plot(L_int, V_regre, label='Регрессионная модель оптимальной скорости')
 #    else:
 #    plt.plot(L_data, H_data)
-##    plt.legend()
+##    plt.legend(loc='lower right')
 ##plt.plot(L_data, H_data, '--', label='Original')
 #    plt.grid()
 #    plt.xlabel('L, [km]')
@@ -291,7 +291,7 @@ for i, val in enumerate(file_name):
 #    plt.clf()
 #
 #    plt.plot(L_data, V_data)
-##    plt.legend()
+##    plt.legend(loc='lower right')
 ##plt.plot(L_data, H_data, '--', label='Original')
 #    plt.grid()
 #    plt.xlabel('L, [km]')

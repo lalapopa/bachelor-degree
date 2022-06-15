@@ -28,7 +28,7 @@
 \contentsline {subsection}{\numberline {2.4.1.\hskip 1em}Сравнение для разных максимальных скоростей отклонения руля высоты}{73}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2.\hskip 1em}Сравнение линейной и нелинейной модели}{75}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3.\hskip 1em}Вывод}{76}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5.\hskip 1em}Вывод по разделу}{77}{section.2.5}%
+\contentsline {section}{\numberline {2.5.\hskip 1em}Вывод по разделу}{76}{section.2.5}%
 \contentsline {chapter}{3.\hskip 1em Специальная часть}{78}{chapter.3}%
 \contentsline {section}{\numberline {3.1.\hskip 1em}Исследование характеристик транспортного самолета при выполнении эшелонирования}{78}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1.\hskip 1em}Постановка задачи}{78}{subsection.3.1.1}%

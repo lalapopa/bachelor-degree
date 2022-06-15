@@ -73,7 +73,7 @@
     \begin{center}
         Кривые потребных и располагаемых тяг
         \resizebox{\textwidth}{!}{
-            {\input{../course_work_flight_dynamics/report/figures/P_rasp_P_potr_combine.pgf}}
+            {\input{../course_work_flight_dynamics/code_output/PLOTS_PGF/P_rasp_P_potr_combine.pgf}}
         }
     \end{center}
 \end{frame}
@@ -83,7 +83,7 @@
     \begin{center}
         Диапазон высот и скоростей полета 
         \resizebox{0.75\textwidth}{!}{
-            {\input{../course_work_flight_dynamics/report/figures/H_M_flight_area.pgf}}
+            {\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/H_M_flight_area.pgf}}
         }
     \end{center}
 \end{frame}
@@ -92,14 +92,14 @@
     \frametitle{Расчет летно-технических характеристик}
     \begin{center}
         Значения статического и практического потолка
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report//figures/V_y_H.pgf}}
+        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/V_y_H.pgf}}
     \end{center}
 \end{frame}
 \begin{frame}[t]
     \frametitle{Расчет летно-технических характеристик}
     \begin{center}
         Значения километрового и часового расхода для \textbf{массы 140 т.}
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/q_km_q_ch.pgf}}
+        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/q_km_q_ch.pgf}}
     \end{center}
 \end{frame}
 \begin{frame}[t]
@@ -126,7 +126,7 @@
     \begin{center}
         Профиль полета:
 
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/H_L_graph.pgf}}
+        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/H_L_graph.pgf}}
     \end{center}
 \end{frame}
 
@@ -134,8 +134,27 @@
     \frametitle{Транспортные возможности}
     \begin{center}
         Диаграмма транспортных возможностей
+        \begin{picture}(290, 190)
+            \put(-30,0){
+            \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/m_L_graph.pgf}}}
+            \put(212, 137){
+                \resizebox{0.31\textwidth}{!}{
+                    \begin{tabular}{|l|c|c|c|}
+                        \hline
+                        Р & $L$ & $m_{цн}$ & $m_{топл}$ \\ 
+                        \hline
+                        № & км & кг & кг\\ 
+                        \hline
+                        1 & 3522 & 46998 & 57002\\ 
+                        \hline
+                        2 & 6486 & 20000 & 84000 \\ 
+                        \hline
+                        3 & 7455 & 0 & 84000\\ 
+                        \hline
+                    \end{tabular}
 
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/m_L_graph.pgf}}
+            }}
+        \end{picture}
     \end{center}
 \end{frame}
 
@@ -153,7 +172,7 @@
     \frametitle{Расчет правильного виража}
     \begin{center}
         Зависимость различных параметров виража
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/turn_graph.pgf}}
+        \resizebox{.90\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/turn_graph.pgf}}
     \end{center}
 \end{frame}
 
@@ -161,8 +180,7 @@
     \frametitle{Характеристики продольной статической устойчивости и управляемости}
     \begin{center}
         Определение $\bar{S}_{го}^*$ 
-
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/xTP_graph.pgf}}
+        \resizebox{.90\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/xTP_graph.pgf}}
     \end{center} 
 \end{frame}
 
@@ -170,7 +188,7 @@
     \frametitle{Характеристики продольной статической устойчивости и управляемости}
     \begin{center}
         Балансировочная диаграмма в полетной конфигурации 
-        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/report/figures/phi_bal_graph.pgf}}
+        \resizebox{.70\linewidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/phi_bal_graph.pgf}}
     \end{center}
 \end{frame}
 
@@ -179,7 +197,7 @@
     \begin{center}
         $\delta_{в}^{n_y}$ при $\bar{x} = 0.25$
 
-        \resizebox{0.70\textwidth}{!}{\input{../course_work_flight_dynamics/report/figures/phi_n_graph.pgf}}
+        \resizebox{0.70\textwidth}{!}{\input{../course_work_flight_dynamics/code_output/PLOTS_PGF_SLIDES/phi_n_graph.pgf}}
     \end{center}
 \end{frame}
 
@@ -191,7 +209,6 @@
 
         \resizebox{1.35\textwidth}{!}{\input{../course_work_flight_control/report/figures/fig_51.pdf_tex}}
     \end{center}
-
 \end{frame}
 \begin{frame}[t]
     \frametitle{Синтез системы автоматической стабилизации высоты}
@@ -248,10 +265,10 @@
         $q_{кр} \Rightarrow M=0.61$.
         \begin{picture}(290, 190)
             \put(-30,30){
-                \adjustbox{trim=10pt 3pt 18pt 20pt,clip}{
+                \adjustbox{trim=0pt 0pt 18pt 20pt,clip}{
                     \resizebox{0.65\textwidth}{!}{\input{../course_work_flight_control/report/figures/altitude_ol.pgf}}
             }}
-            \put(180, 137){
+            \put(190, 137){
                 \resizebox{0.37\textwidth}{!}{
                     \begin{tabular}{|c|c|c|c|}
                         \hline
@@ -461,22 +478,25 @@
     \frametitle{Исследования характеристик при выполнении эшелонирования}
     \begin{center}
         Зависимость расхода топлива от количества полетов 
-        \resizebox{0.7\textwidth}{!}{\input{./figures/funny_plot.pgf}}
+        \resizebox{0.65\textwidth}{!}{\input{./figures/funny_plot.pgf}}
     \end{center}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Заключение}
     \begin{itemize}
-        \item В данной работе были определены основные летно-технические характеристики,
-            область располагаемых высот и скоростей полета, практический и статические
-            потолок, взлетно-посадочные характеристики, параметры правильного виража, 
-            характеристики продольной устойчивости и управляемости.
+        \item В данной работе были определены основные летно-технические характеристики:
+            \begin{itemize}
+                \item Область высот и скоростей полета;
+                \item $H_{пр}=11.56 \,км$, $H_{ст} = 11.74 \,км$;
+                \item $V_{отр}=90 \,\frac{м}{с}$, $V_{кас}=64 \,\frac{м}{с}$;
+                \item $r_{вир \,пр}= 1620 \, м$
+            \end{itemize}
         \item Синтезирована система стабилизации высоты в тангажном варианте.
-            Подобраны такие коэффициенты обратной связи, которые обеспечивают
-            устойчивость на всем диапазоне полетов.
+            Подобраны такие значения коэффициентов регуляторов, которые обеспечивают
+            устойчивость на всем диапазоне $q$.
         \item Также проведено исследование характеристик эшелонированного полета
-            из которого следует, экономически целесообразно проводить
+            из которого следует, что экономически целесообразно проводить
             эшелонированный полет. Выигрыш в топливе по сравнению с полетом на
             постоянной высоте в нашем случае составляет порядка 0.71 \%. 
     \end{itemize}

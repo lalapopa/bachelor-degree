@@ -12,7 +12,10 @@ def pgf_setting():
             "pgf.texsystem": "pdflatex",
             "font.family": "sans-serif",
             "text.usetex": True,
-            "font.size": 12,
+            "font.size": 18,
+            "xtick.labelsize": 18,
+            "ytick.labelsize": 18,
+            "axes.labelsize": 18,
             "pgf.rcfonts": False,
             "pgf.preamble": "\n".join(
                 [
@@ -40,7 +43,7 @@ fig, ax = plt.subplots()
 
 plt.plot(x_axis, fuel_lost_H_const, linewidth=2, label="Полет на постоянной высоте")
 plt.plot(x_axis, fuel_lost_H_300, linewidth=2, label="Эшелонированный полет")
-ax.legend(ncol=4, loc=3, bbox_to_anchor=(0, 1), frameon=False)
+ax.legend(ncol=1, loc=3, bbox_to_anchor=(0, 1), frameon=False)
 ax.xaxis.set_minor_locator(matplotlib.ticker.MaxNLocator(25))
 ax.grid(color="gray", which="major", axis="x", linestyle="--", linewidth=0.5)
 ax.grid(color="gray", which="major", axis="y", linestyle="--", linewidth=0.5)
@@ -54,4 +57,4 @@ plt.xlim([1, x_axis[-1]])
 plt.ylim([1, 10**5])
 for axis in [ax.xaxis, ax.yaxis]:
     axis.set_major_formatter(ScalarFormatter())
-plt.savefig(path + "funny_plot.pgf")
+plt.savefig(path + "funny_plot.pgf", bbox_inches="tight")
